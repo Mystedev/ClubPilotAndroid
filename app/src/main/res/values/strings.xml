@@ -1,3 +1,15 @@
 <resources>
+    <!--Pantalla de seleccio de idioma-->
     <string name="app_name">ClubPilot</string>
+    <string name="seleccio_idioma">Choose a language</string>
+    <string name="inicio">Get started</string>
+    <!--Pantalla de inici de sessio-->
+    <string name="tipo_usuari">Select user type</string>
+    <string name="jugador_titol">Player</string>
+    <string name="aficionat_titol">Fan</string>
+    <string name="login">Login</string>
+    <!--Idiomes-->
+    <string name="spanish">Spanish</string>
+    <string name="catalan">Catalan</string>
+    <string name="english">English</string>
 </resources>

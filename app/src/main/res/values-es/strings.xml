@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ClubPilot</string>
+    <string name="seleccio_idioma">Selecciona un idiomoa</string>
+    <string name="inicio">Iniciar</string>
+    <string name="tipo_usuari">Selecciona un tipo de usuario</string>
+    <string name="jugador_titol">Jugador</string>
+    <string name="aficionat_titol">Aficionado</string>
+    <string name="login">Iniciar sesión</string>
+    <string name="spanish">Español</string>
+    <string name="catalan">Catalán</string>
+    <string name="english">Inglés</string>
+</resources>

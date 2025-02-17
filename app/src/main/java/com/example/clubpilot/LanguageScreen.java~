@@ -14,7 +14,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class LanguageScreen extends AppCompatActivity implements View.OnClickListener {
     Button buttonStart;
-
+    
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
