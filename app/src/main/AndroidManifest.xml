@@ -13,7 +13,7 @@
         android:theme="@style/Theme.ClubPilot"
         tools:targetApi="31" >
         <activity
-            android:name=".IniciSessio"
+            android:name=".Login"
             android:exported="false" />
         <activity
             android:name=".LanguageScreen"
