@@ -107,12 +107,14 @@
         android:layout_height="28dp"
         android:layout_marginBottom="40dp"
         android:text="@string/recover_password"
+        android:textAlignment="center"
         android:textColor="#187ECD"
         android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/buttonLogin"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.56"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/inputPassword"
-        app:layout_constraintVertical_bias="0.75" />
+        app:layout_constraintVertical_bias="0.777" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
