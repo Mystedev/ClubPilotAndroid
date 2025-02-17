@@ -3,7 +3,6 @@
     <string name="theme">Modo oscuro</string>
     <string name="themeLight">Modo claro</string>
     <string name="button_tornar">Atrás</string>
-    <string name="logout">Cerrar sesión</string>
     <string name="app_name">ClubPilot</string>
     <string name="seleccio_idioma">Selecciona un idiomoa</string>
     <string name="inicio">Iniciar</string>

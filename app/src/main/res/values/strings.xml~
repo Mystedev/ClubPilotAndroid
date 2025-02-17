@@ -3,7 +3,6 @@
     <string name="themeDark">Dark Mode</string>
     <string name="themeLight">Light Mode</string>
     <string name="button_tornar">Back</string>
-    <string name="logout">Logout</string>
     <!--Pantalla de seleccio de idioma-->
     <string name="app_name">ClubPilot</string>
     <string name="seleccio_idioma">Choose a language</string>

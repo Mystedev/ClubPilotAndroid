@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="theme">Mode fosc</string>
+    <string name="themeLight">Mode clar</string>
+    <string name="button_tornar">Tornar enrere</string>
+    <string name="logout">Tancar sessió</string>
     <string name="app_name">ClubPilot</string>
     <string name="seleccio_idioma">Selecciona un idioma</string>
     <string name="inicio">Inicia</string>
@@ -10,6 +14,13 @@
     <string name="login">Iniciar sessió</string>
     <string name="catalan">Catalá</string>
     <string name="english">Anglés</string>
+    <string name="recover_password">Has oblidat la teva contrasenya?</string>
     <string name="spanish">Castellá</string>
     <string name="user">Usuari</string>
+    <string name="noticies">Noticies</string>
+    <string name="config">Configuracio</string>
+    <string name="config_fan">Configuració</string>
+    <string name="themeDark">Mode fosc</string>
+    <string name="contact_admin">Contactar amb l\'administrador</string>
+    <string name="language">Idioma</string>
 </resources>

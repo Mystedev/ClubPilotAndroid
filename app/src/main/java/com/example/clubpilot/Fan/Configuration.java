@@ -1,4 +1,4 @@
-package com.example.clubpilot;
+package com.example.clubpilot.Fan;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,26 +15,28 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.example.clubpilot.Fan.News;
+import com.example.clubpilot.Login;
+import com.example.clubpilot.R;
 
 import java.util.ArrayList;
 
-public class Login extends AppCompatActivity implements View.OnClickListener {
-    Button buttonlogin;
+public class Configuration extends AppCompatActivity implements View.OnClickListener {
+    Button buttonBack;
     Spinner spinner;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_inici_sessio2);
+        setContentView(R.layout.activity_fan_configuration);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        buttonlogin = findViewById(R.id.buttonLogin);
-        buttonlogin.setOnClickListener(this);
-        spinner = findViewById(R.id.spinner);
+        buttonBack = findViewById(R.id.buttonBack);
+        buttonBack.setOnClickListener(this);
+
+        spinner = findViewById(R.id.spinnerIdiomes);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
@@ -43,13 +45,13 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
-                Toast.makeText(Login.this, "Selecciona un tipus d'usuari", Toast.LENGTH_SHORT).show();
+                Toast.makeText(Configuration.this, "Selecciona un tipus d'usuari", Toast.LENGTH_SHORT).show();
             }
         });
-
         ArrayList<String> items = new ArrayList<>();
-        items.add("Jugador");
-        items.add("Aficionat");
+        items.add("English");
+        items.add("Spanish");
+        items.add("Catalan");
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, items);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
@@ -57,11 +59,10 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
-        if (view.getId() == R.id.buttonLogin){
+        if (view.getId() == R.id.buttonBack){
             Intent intent = new Intent(this, News.class);
+            Toast.makeText(this, "Configuracio guardada", Toast.LENGTH_SHORT).show();
             startActivity(intent);
         }
     }
-
-
 }

@@ -76,7 +76,7 @@
         app:layout_constraintVertical_bias="0.284" />
 
     <Button
-        android:id="@+id/buttonLogin"
+        android:id="@+id/button3"
         android:layout_width="237dp"
         android:layout_height="66dp"
         android:layout_marginTop="76dp"
@@ -109,7 +109,7 @@
         android:text="@string/recover_password"
         android:textColor="#187ECD"
         android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/buttonLogin"
+        app:layout_constraintBottom_toTopOf="@+id/button3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/inputPassword"
