@@ -6,8 +6,10 @@
     <string name="tipo_usuari">Selecciona un tipo de usuario</string>
     <string name="jugador_titol">Jugador</string>
     <string name="aficionat_titol">Aficionado</string>
+    <string name="password">Contraseña</string>
     <string name="login">Iniciar sesión</string>
     <string name="spanish">Español</string>
     <string name="catalan">Catalán</string>
     <string name="english">Inglés</string>
+    <string name="user">Usuario</string>
 </resources>

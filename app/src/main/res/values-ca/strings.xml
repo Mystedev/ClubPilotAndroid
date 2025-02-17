@@ -6,8 +6,10 @@
     <string name="tipo_usuari">Selecciona tipus d\'usuari</string>
     <string name="jugador_titol">Jugador</string>
     <string name="aficionat_titol">Aficionat</string>
+    <string name="password">Contrasenya</string>
     <string name="login">Iniciar sessió</string>
     <string name="catalan">Catalá</string>
     <string name="english">Anglés</string>
     <string name="spanish">Castellá</string>
+    <string name="user">Usuari</string>
 </resources>

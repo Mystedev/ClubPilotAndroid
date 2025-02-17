@@ -7,6 +7,8 @@
     <string name="tipo_usuari">Select user type</string>
     <string name="jugador_titol">Player</string>
     <string name="aficionat_titol">Fan</string>
+    <string name="user">Username</string>
+    <string name="password">Password</string>
     <string name="login">Login</string>
     <!--Idiomes-->
     <string name="spanish">Spanish</string>

@@ -7,4 +7,7 @@
     <string name="jugador_titol">Jugador</string>
     <string name="aficionat_titol">Aficionat</string>
     <string name="login">Iniciar sessió</string>
+    <string name="catalan">Catalá</string>
+    <string name="english">Anglés</string>
+    <string name="spanish">Castellá</string>
 </resources>
