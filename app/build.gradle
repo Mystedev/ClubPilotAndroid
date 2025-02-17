@@ -4,12 +4,12 @@ plugins {
 
 android {
     namespace 'com.example.clubpilot'
-    compileSdk 30
+    compileSdk 35  // <-- Actualiza esto
 
     defaultConfig {
         applicationId "com.example.clubpilot"
         minSdk 28
-        targetSdk 30
+        targetSdk 34
         versionCode 1
         versionName "1.0"
 
@@ -27,6 +27,7 @@ android {
         targetCompatibility JavaVersion.VERSION_11
     }
 }
+
 
 dependencies {
 
