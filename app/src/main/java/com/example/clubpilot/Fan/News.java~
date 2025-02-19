@@ -41,11 +41,11 @@ public class News extends AppCompatActivity{
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         listNews = new ArrayList<CardNew>();
-        listNews.add(new CardNew("Partido vs FCB", "Partido contra el FCB", R.drawable.fcbarcelona));
-        listNews.add(new CardNew("Partido vs RM", "Description2", R.drawable.realmadrid));
-        listNews.add(new CardNew("Evento bienvenida", "Description3", R.drawable.evento));
-        listNews.add(new CardNew("Evento debut ??", "Description4", R.drawable.debut));
-        listNews.add(new CardNew("Entreno liga", "Description5", R.drawable.liga));
+        listNews.add(new CardNew("Partido vs FCB", "Partido contra el FCB", R.drawable.ic_launcher_foreground));
+        listNews.add(new CardNew("Partido vs RM", "Description2", R.drawable.ic_launcher_background));
+        listNews.add(new CardNew("Evento bienvenida", "Description3", R.drawable.ic_launcher_background));
+        listNews.add(new CardNew("Evento debut ??", "Description4", R.drawable.ic_launcher_background));
+        listNews.add(new CardNew("Entreno liga", "Description5", R.drawable.ic_launcher_foreground));
 
         Adapter adapter = new Adapter(listNews);
         recyclerView.setAdapter(adapter);
