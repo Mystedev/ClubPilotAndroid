@@ -1,6 +1,5 @@
 package com.example.clubpilot.Fan;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,8 +8,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.bumptech.glide.Glide;
 import com.example.clubpilot.R;
 
 import java.util.ArrayList;
@@ -37,6 +34,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
         holder.title.setText(news.getTitle());
         holder.description.setText(news.getDescription());
         holder.image.setImageResource(news.getImage());
+        holder.data.setText(news.getDate().toString());
     }
 
     @Override
@@ -45,7 +43,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView title, description;
+        TextView title, description, data;
         ImageView image;
 
         public ViewHolder(@NonNull View itemView) {
@@ -53,6 +51,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
             title = itemView.findViewById(R.id.titleNew);
             description = itemView.findViewById(R.id.descriptionNew);
             image = itemView.findViewById(R.id.imageNew);
+            data = itemView.findViewById(R.id.data);
         }
     }
 }

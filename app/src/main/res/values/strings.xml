@@ -29,7 +29,7 @@
     <string name="language">Language</string>
     <string name="account">Account</string>
     <string name="mail">Mail address</string>
-    <!--Configuracio Jugador-->
-
+    <!--Pnatalla de Jugadors-->
+    <string name="dashboard">Dashboard</string>
 
 </resources>

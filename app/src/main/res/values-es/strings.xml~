@@ -25,5 +25,4 @@
     <string name="language">Idioma</string>
     <string name="account">Cuenta</string>
     <string name="mail">Direccion de correo electronico</string>
-    <string name="dashboard">Panel</string>
 </resources>

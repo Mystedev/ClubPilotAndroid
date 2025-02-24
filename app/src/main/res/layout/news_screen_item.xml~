@@ -6,13 +6,13 @@
     android:layout_height="wrap_content">
 
     <androidx.cardview.widget.CardView
-        android:layout_width="395dp"
-        android:layout_height="190dp"
+        android:layout_width="401dp"
+        android:layout_height="191dp"
         android:layout_margin="5dp"
-        android:paddingHorizontal="8dp"
-        android:paddingVertical="10dp"
-        app:cardBackgroundColor="#032936"
-        app:cardCornerRadius="0dp"
+        android:paddingHorizontal="5dp"
+        android:paddingVertical="5dp"
+        app:cardBackgroundColor="#F8FDFF"
+        app:cardCornerRadius="10dp"
         app:cardElevation="3dp"
         app:contentPadding="18dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -21,8 +21,8 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
-            android:layout_width="382dp"
-            android:layout_height="163dp"
+            android:layout_width="374dp"
+            android:layout_height="162dp"
             android:orientation="horizontal">
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -31,32 +31,47 @@
                 android:layout_weight="1">
 
                 <TextView
+                    android:id="@+id/data"
+                    android:layout_width="113dp"
+                    android:layout_height="24dp"
+                    android:text="TextView"
+                    android:textAlignment="viewEnd"
+                    android:textColor="#070707"
+                    android:textSize="16dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.991"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/descriptionNew"
+                    app:layout_constraintVertical_bias="0.772" />
+
+                <TextView
                     android:id="@+id/titleNew"
-                    android:layout_width="209dp"
+                    android:layout_width="232dp"
                     android:layout_height="32dp"
                     android:text="TextView"
-                    android:textColor="#FFFFFF"
-                    android:textSize="24sp"
+                    android:textColor="#0D0C0C"
+                    android:textSize="20sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toTopOf="@+id/descriptionNew"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.217"
+                    app:layout_constraintHorizontal_bias="0.666"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.12" />
+                    app:layout_constraintVertical_bias="0.0" />
 
                 <TextView
                     android:id="@+id/descriptionNew"
-                    android:layout_width="226dp"
-                    android:layout_height="117dp"
+                    android:layout_width="227dp"
+                    android:layout_height="84dp"
                     android:text="TextView"
-                    android:textColor="#B2AFAF"
+                    android:textColor="#6C6B6B"
                     android:textSize="16sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.975" />
+                    app:layout_constraintVertical_bias="0.41" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <ImageView

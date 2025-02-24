@@ -9,8 +9,8 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/listNews"
-        android:layout_width="402dp"
-        android:layout_height="724dp"
+        android:layout_width="399dp"
+        android:layout_height="713dp"
         android:layout_marginStart="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
