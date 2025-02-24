@@ -23,4 +23,6 @@
     <string name="themeDark">Modo oscuro</string>
     <string name="contact_admin">Contactar con el administrador</string>
     <string name="language">Idioma</string>
+    <string name="account">Cuenta</string>
+    <string name="mail">Direccion de correo electronico</string>
 </resources>

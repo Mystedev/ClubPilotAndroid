@@ -20,7 +20,7 @@ import com.example.clubpilot.R;
 
 import java.util.ArrayList;
 
-public class Player_Config extends AppCompatActivity implements View.OnClickListener {
+public class Player_Configuration extends AppCompatActivity implements View.OnClickListener {
     Button buttonBack;
     Spinner spinner;
     @Override
@@ -45,7 +45,7 @@ public class Player_Config extends AppCompatActivity implements View.OnClickList
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
-                Toast.makeText(Player_Config.this, "Selecciona un tipus d'usuari", Toast.LENGTH_SHORT).show();
+                Toast.makeText(Player_Configuration.this, "Selecciona un tipus d'usuari", Toast.LENGTH_SHORT).show();
             }
         });
         ArrayList<String> items = new ArrayList<>();

@@ -27,4 +27,10 @@
     <string name="theme">Dark Mode</string>
     <string name="contact_admin">Contact with admin</string>
     <string name="language">Language</string>
+    <string name="account">Account</string>
+    <string name="mail">Mail address</string>
+
+    <!--Configuracio Jugador-->
+
+
 </resources>
