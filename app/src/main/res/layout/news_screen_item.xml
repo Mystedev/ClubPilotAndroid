@@ -6,21 +6,23 @@
     android:layout_height="wrap_content">
 
     <androidx.cardview.widget.CardView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="-45dp"
-        android:paddingHorizontal="3dp"
-        android:paddingVertical="4dp"
-        app:cardBackgroundColor="#FDFDFD"
-        app:cardCornerRadius="0dp"
+        android:layout_width="401dp"
+        android:layout_height="191dp"
+        android:layout_margin="5dp"
+        android:paddingHorizontal="8dp"
+        android:paddingVertical="10dp"
+        app:cardBackgroundColor="#F8FDFF"
+        app:cardCornerRadius="10dp"
         app:cardElevation="3dp"
+        app:contentPadding="18dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="382dp"
+            android:layout_height="163dp"
             android:orientation="horizontal">
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -30,10 +32,10 @@
 
                 <TextView
                     android:id="@+id/titleNew"
-                    android:layout_width="217dp"
-                    android:layout_height="31dp"
+                    android:layout_width="209dp"
+                    android:layout_height="32dp"
                     android:text="TextView"
-                    android:textColor="#090909"
+                    android:textColor="#0D0C0C"
                     android:textSize="24sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toTopOf="@+id/descriptionNew"
@@ -45,8 +47,8 @@
 
                 <TextView
                     android:id="@+id/descriptionNew"
-                    android:layout_width="229dp"
-                    android:layout_height="138dp"
+                    android:layout_width="226dp"
+                    android:layout_height="117dp"
                     android:text="TextView"
                     android:textColor="#6C6B6B"
                     android:textSize="16sp"
@@ -59,8 +61,8 @@
 
             <ImageView
                 android:id="@+id/imageNew"
-                android:layout_width="164dp"
-                android:layout_height="179dp"
+                android:layout_width="156dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:scaleType="center"
                 tools:srcCompat="@tools:sample/avatars" />
