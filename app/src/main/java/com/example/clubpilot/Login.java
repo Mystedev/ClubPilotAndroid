@@ -16,6 +16,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.clubpilot.Fan.News;
+import com.example.clubpilot.Player.Dashboard;
 
 import java.util.ArrayList;
 
@@ -35,6 +36,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         buttonlogin = findViewById(R.id.buttonLogin);
         buttonlogin.setOnClickListener(this);
         spinner = findViewById(R.id.spinner);
+        // Afegir un itemSelectedListener en el Spinner per obtenir el tipus d'usuari seleccionat
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
@@ -48,6 +50,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         });
 
         ArrayList<String> items = new ArrayList<>();
+        items.add("Selecciona un tipus d'usuari");
         items.add("Jugador");
         items.add("Aficionat");
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, items);
@@ -58,8 +61,15 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     @Override
     public void onClick(View view) {
         if (view.getId() == R.id.buttonLogin){
-            Intent intent = new Intent(this, News.class);
-            startActivity(intent);
+            if(spinner.getSelectedItem().toString().equals("Selecciona un tipus d'usuari")){
+                Toast.makeText(this, "Selecciona un tipus d'usuari per poder accedir", Toast.LENGTH_SHORT).show();
+            } else if (spinner.getSelectedItem().toString().equals("Aficionat")){
+                Intent intent = new Intent(this, News.class);
+                startActivity(intent);
+            } else if (spinner.getSelectedItem().toString().equals("Jugador")){
+                Intent intent = new Intent(this, Dashboard.class);
+                startActivity(intent);
+            }
         }
     }
 

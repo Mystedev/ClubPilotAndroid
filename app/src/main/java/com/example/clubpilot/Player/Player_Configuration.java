@@ -16,6 +16,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.clubpilot.Fan.News;
+import com.example.clubpilot.Login;
 import com.example.clubpilot.R;
 
 import java.util.ArrayList;
@@ -27,7 +28,7 @@ public class Player_Configuration extends AppCompatActivity implements View.OnCl
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_fan_configuration);
+        setContentView(R.layout.activity_player_config);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -49,6 +50,7 @@ public class Player_Configuration extends AppCompatActivity implements View.OnCl
             }
         });
         ArrayList<String> items = new ArrayList<>();
+        items.add("Selecciona un tipus d'usuari");
         items.add("English");
         items.add("Spanish");
         items.add("Catalan");
@@ -60,7 +62,7 @@ public class Player_Configuration extends AppCompatActivity implements View.OnCl
     @Override
     public void onClick(View view) {
         if (view.getId() == R.id.buttonBack){
-            Intent intent = new Intent(this, News.class);
+            Intent intent = new Intent(this, Dashboard.class);
             Toast.makeText(this, "Configuracio guardada", Toast.LENGTH_SHORT).show();
             startActivity(intent);
         }
