@@ -18,6 +18,9 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.clubpilot.Fan.CardNew;
+import com.example.clubpilot.Fan.Fan_Configuration;
+import com.example.clubpilot.Fan.News;
 import com.example.clubpilot.Login;
 import com.example.clubpilot.R;
 
@@ -25,7 +28,7 @@ import java.util.ArrayList;
 
 public class Dashboard extends AppCompatActivity {
     RecyclerView recyclerView;
-    ArrayList<Event> listEvents;
+    ArrayList<CardNew> listEvents;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -41,13 +44,8 @@ public class Dashboard extends AppCompatActivity {
         recyclerView = findViewById(R.id.listEvents);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        listEvents = new ArrayList<Event>();
+        listEvents = new ArrayList<CardNew>();
         listEvents.add(new Event("Partido vs FCB"));
-        listEvents.add(new Event("Partido vs RM"));
-        listEvents.add(new Event("Evento bienvenida"));
-        listEvents.add(new Event("Evento debut ??"));
-        listEvents.add(new Event("Entreno liga"));
-
         Adapter adapter = new Adapter(listEvents);
         recyclerView.setAdapter(adapter);
 

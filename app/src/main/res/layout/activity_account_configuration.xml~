@@ -9,8 +9,8 @@
 
     <TextView
         android:id="@+id/textView4"
-        android:layout_width="332dp"
-        android:layout_height="25dp"
+        android:layout_width="324dp"
+        android:layout_height="33dp"
         android:text="@string/mail"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
