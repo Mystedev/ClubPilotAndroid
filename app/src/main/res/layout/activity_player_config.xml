@@ -24,8 +24,8 @@
 
     <Spinner
         android:id="@+id/spinnerIdiomes"
-        android:layout_width="229dp"
-        android:layout_height="37dp"
+        android:layout_width="199dp"
+        android:layout_height="41dp"
         android:layout_marginTop="20dp"
         android:textAlignment="textStart"
         app:layout_constraintEnd_toEndOf="@+id/themeChange"
@@ -34,9 +34,9 @@
         app:layout_constraintTop_toBottomOf="@+id/themeChange" />
 
     <TextView
-        android:id="@+id/textView5"
-        android:layout_width="312dp"
-        android:layout_height="31dp"
+        android:id="@+id/textAccount"
+        android:layout_width="316dp"
+        android:layout_height="38dp"
         android:layout_marginTop="28dp"
         android:text="@string/account"
         android:textColor="#2D667C"
@@ -55,8 +55,8 @@
         android:text="@string/button_tornar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.943"
+        app:layout_constraintHorizontal_bias="0.937"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.976" />
+        app:layout_constraintVertical_bias="0.956" />
 </androidx.constraintlayout.widget.ConstraintLayout>

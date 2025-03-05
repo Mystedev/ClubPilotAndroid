@@ -7,6 +7,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -24,6 +25,7 @@ import java.util.ArrayList;
 public class Player_Configuration extends AppCompatActivity implements View.OnClickListener {
     Button buttonBack;
     Spinner spinner;
+    TextView account;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +38,8 @@ public class Player_Configuration extends AppCompatActivity implements View.OnCl
         });
         buttonBack = findViewById(R.id.buttonBack);
         buttonBack.setOnClickListener(this);
+        account = findViewById(R.id.textAccount);
+        account.setOnClickListener(this);
 
         spinner = findViewById(R.id.spinnerIdiomes);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -64,6 +68,10 @@ public class Player_Configuration extends AppCompatActivity implements View.OnCl
         if (view.getId() == R.id.buttonBack){
             Intent intent = new Intent(this, Dashboard.class);
             Toast.makeText(this, "Configuracio guardada", Toast.LENGTH_SHORT).show();
+            startActivity(intent);
+        }
+        if (view.getId() == R.id.textAccount){
+            Intent intent = new Intent(this, Account_Configuration.class);
             startActivity(intent);
         }
     }
