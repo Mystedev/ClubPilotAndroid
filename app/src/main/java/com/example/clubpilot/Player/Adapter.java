@@ -3,7 +3,6 @@ package com.example.clubpilot.Player;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -15,7 +14,7 @@ import java.util.ArrayList;
 
 public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     ArrayList<Event> listEvents;
-    Event events;
+    Event events = new Event("");
 
     public Adapter(ArrayList<Event> listEvents) {
         this.listEvents = listEvents;
@@ -30,14 +29,14 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        events = listEvents.get(position);
-        holder.description.setText(events.getDescription());
-        holder.data.setText(events.getDate().toString());
+       // events = listEvents.get(position);
+        holder.description.setText(listEvents.get(position).getDescription());
+        holder.data.setText(listEvents.get(position).getDate().toString());
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return listEvents.size();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -45,8 +44,8 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            description = itemView.findViewById(R.id.descriptionNew);
-            data = itemView.findViewById(R.id.data);
+            description = itemView.findViewById(R.id.description);
+            data = itemView.findViewById(R.id.date);
         }
     }
 }
