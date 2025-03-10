@@ -11,8 +11,8 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/listNews"
-        android:layout_width="401dp"
-        android:layout_height="565dp"
+        android:layout_width="392dp"
+        android:layout_height="847dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

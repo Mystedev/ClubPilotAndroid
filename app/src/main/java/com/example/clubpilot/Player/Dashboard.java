@@ -47,6 +47,10 @@ public class Dashboard extends AppCompatActivity {
         listEvents.add(new Event("Evento bienvenida"));
         listEvents.add(new Event("Evento debut ??"));
         listEvents.add(new Event("Entreno liga"));
+        listEvents.add(new Event("Partido vs PSG"));
+        listEvents.add(new Event("Evento debut ??"));
+        listEvents.add(new Event("Partido preparación"));
+        listEvents.add(new Event("Entrenamiento publico"));
 
         Adapter adapter = new Adapter(listEvents);
         recyclerView.setAdapter(adapter);

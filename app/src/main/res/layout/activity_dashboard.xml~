@@ -5,25 +5,23 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="6dp"
+    android:padding="7dp"
     tools:context=".Player.Dashboard">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
-        android:layout_width="366dp"
-        android:layout_height="144dp"
+        android:layout_width="398dp"
+        android:layout_height="157dp"
+        android:backgroundTint="#FFFFFF"
         app:cardElevation="0dp"
         app:contentPadding="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.444"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintEnd_toEndOf="@+id/listEvents"
+        app:layout_constraintStart_toStartOf="@+id/listEvents"
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
-            android:layout_width="350dp"
-            android:layout_height="125dp"
+            android:layout_width="361dp"
+            android:layout_height="119dp"
             android:orientation="vertical">
 
             <TextView
@@ -31,12 +29,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Bienvenido Jugador 1, Dorsal 11"
+                android:textColor="#0B0B0B"
                 android:textSize="30sp" />
 
             <Switch
                 android:id="@+id/switch1"
-                android:layout_width="171dp"
-                android:layout_height="57dp"
+                android:layout_width="158dp"
+                android:layout_height="49dp"
                 android:text="Available"
                 android:textSize="20sp" />
         </LinearLayout>
@@ -44,9 +43,10 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/listEvents"
-        android:layout_width="383dp"
-        android:layout_height="556dp"
+        android:layout_width="389dp"
+        android:layout_height="693dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardView" />
 </androidx.constraintlayout.widget.ConstraintLayout>
