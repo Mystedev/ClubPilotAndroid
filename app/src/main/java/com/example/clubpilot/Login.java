@@ -1,5 +1,6 @@
 package com.example.clubpilot;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -7,6 +8,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -18,11 +20,16 @@ import androidx.core.view.WindowInsetsCompat;
 import com.example.clubpilot.Fan.News;
 import com.example.clubpilot.Player.Dashboard;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 
 public class Login extends AppCompatActivity implements View.OnClickListener {
     Button buttonlogin;
+    TextView forgotPassword;
+    //Button buttonforgotpassword;
     Spinner spinner;
+    @SuppressLint({"MissingInflatedId", "WrongViewCast"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,8 +40,13 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        // Boto de login
         buttonlogin = findViewById(R.id.buttonLogin);
         buttonlogin.setOnClickListener(this);
+        // Boto de recuperar contrasenya
+        forgotPassword = findViewById(R.id.forgotPassowrd);
+        forgotPassword.setOnClickListener(this);
+        // Spinner per seleccionar el tipus d'usuari
         spinner = findViewById(R.id.spinner);
         // Afegir un itemSelectedListener en el Spinner per obtenir el tipus d'usuari seleccionat
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -71,7 +83,9 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                 startActivity(intent);
             }
         }
+        if (view.getId() == R.id.forgotPassowrd){
+            Intent intent = new Intent(this, ForgotPassword.class);
+            startActivity(intent);
+        }
     }
-
-
 }

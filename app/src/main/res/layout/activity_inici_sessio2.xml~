@@ -102,7 +102,7 @@
         app:layout_constraintVertical_bias="0.238" />
 
     <TextView
-        android:id="@+id/forgotPassowrd"
+        android:id="@+id/passwordSave"
         android:layout_width="254dp"
         android:layout_height="28dp"
         android:layout_marginBottom="40dp"

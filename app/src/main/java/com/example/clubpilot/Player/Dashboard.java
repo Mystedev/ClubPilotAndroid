@@ -54,7 +54,6 @@ public class Dashboard extends AppCompatActivity {
 
         Adapter adapter = new Adapter(listEvents);
         recyclerView.setAdapter(adapter);
-
     }
 
     @Override

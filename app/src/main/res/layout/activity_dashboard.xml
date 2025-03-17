@@ -1,27 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="7dp"
+    android:orientation="vertical"
+    android:padding="0dp"
     tools:context=".Player.Dashboard">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
-        android:layout_width="398dp"
-        android:layout_height="157dp"
+        android:layout_width="348dp"
+        android:layout_height="131dp"
         android:backgroundTint="#FFFFFF"
         app:cardElevation="0dp"
-        app:contentPadding="10dp"
-        app:layout_constraintEnd_toEndOf="@+id/listEvents"
-        app:layout_constraintStart_toStartOf="@+id/listEvents"
-        app:layout_constraintTop_toTopOf="parent">
+        app:contentPadding="10dp">
 
         <LinearLayout
-            android:layout_width="361dp"
-            android:layout_height="119dp"
+            android:layout_width="328dp"
+            android:layout_height="112dp"
             android:orientation="vertical">
 
             <TextView
@@ -34,8 +32,8 @@
 
             <Switch
                 android:id="@+id/switch1"
-                android:layout_width="158dp"
-                android:layout_height="49dp"
+                android:layout_width="169dp"
+                android:layout_height="39dp"
                 android:text="Available"
                 android:textSize="20sp" />
         </LinearLayout>
@@ -43,10 +41,7 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/listEvents"
-        android:layout_width="match_parent"
-        android:layout_height="693dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_width="344dp"
+        android:layout_height="match_parent"
+        android:paddingHorizontal="0dp" />
+</LinearLayout>

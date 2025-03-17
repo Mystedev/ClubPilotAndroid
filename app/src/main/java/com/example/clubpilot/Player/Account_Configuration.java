@@ -36,7 +36,6 @@ public class Account_Configuration extends AppCompatActivity implements View.OnC
     public void onClick(View view) {
         if (view.getId() == R.id.button){
             Intent intent = new Intent(this, Player_Configuration.class);
-            Toast.makeText(this, "Configuracio guardada", Toast.LENGTH_SHORT).show();
             startActivity(intent);
         }
     }

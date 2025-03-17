@@ -21,6 +21,7 @@ import java.util.ArrayList;
 
 public class Fan_Configuration extends AppCompatActivity implements View.OnClickListener {
     Button buttonBack;
+
     Spinner spinner;
     @Override
     protected void onCreate(Bundle savedInstanceState) {

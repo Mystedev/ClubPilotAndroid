@@ -25,5 +25,13 @@
     <string name="language">Idioma</string>
     <string name="account">Cuenta</string>
     <string name="mail">Direccion de correo electronico</string>
+    <string name="cancel">Cancelar</string>
+    <string name="new_password">Nueva contraseña</string>
+    <string name="password_recover">Recuperar contraseña</string>
+    <string name="new_email">Nueo correo</string>
+    <string name="confirm_email">Confirmar correo</string>
     <string name="dashboard">Panel</string>
+    <string name="last_password">Contraseña anterior</string>
+    <string name="latest_email">Correo anterior</string>
+    <string name="confirm_password">Confirmar contraseña</string>
 </resources>
