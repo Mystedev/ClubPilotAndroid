@@ -40,10 +40,10 @@ public class CardNew {
         this.image = image;
     }
 
-    public void setDate(String date) {
+    public void setDate(Date date) {
         this.date = date;
     }
-    public String getDate() {
+    public Date getDate() {
         return date;
     }
 }

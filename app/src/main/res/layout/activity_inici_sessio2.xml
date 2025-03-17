@@ -12,7 +12,6 @@
         android:layout_width="85dp"
         android:layout_height="46dp"
         android:text="@string/login"
-        android:textColor="#0B0B0B"
         android:textSize="34sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

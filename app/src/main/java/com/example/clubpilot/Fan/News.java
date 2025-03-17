@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.clubpilot.Login;
 import com.example.clubpilot.R;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 public class News extends AppCompatActivity{
@@ -49,7 +50,6 @@ public class News extends AppCompatActivity{
 
         Adapter adapter = new Adapter(listNews);
         recyclerView.setAdapter(adapter);
-
     }
 
 
