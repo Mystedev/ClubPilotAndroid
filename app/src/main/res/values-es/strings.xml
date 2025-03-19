@@ -33,5 +33,6 @@
     <string name="dashboard">Panel</string>
     <string name="last_password">Contraseña anterior</string>
     <string name="latest_email">Correo anterior</string>
-    <string name="confirm_password">Confirmar contraseña</string>
+    <string name="confirm_password">Confirmar</string>
+    <string name="available">Disponibilidad</string>
 </resources>

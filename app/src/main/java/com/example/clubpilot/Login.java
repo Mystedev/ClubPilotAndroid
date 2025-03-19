@@ -20,8 +20,6 @@ import androidx.core.view.WindowInsetsCompat;
 import com.example.clubpilot.Fan.News;
 import com.example.clubpilot.Player.Dashboard;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 
 public class Login extends AppCompatActivity implements View.OnClickListener {
@@ -34,7 +32,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_inici_sessio2);
+        setContentView(R.layout.activity_login);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);

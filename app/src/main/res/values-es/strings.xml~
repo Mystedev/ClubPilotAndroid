@@ -5,7 +5,7 @@
     <string name="button_tornar">Atrás</string>
     <string name="logout">Cerrar sesión</string>
     <string name="app_name">ClubPilot</string>
-    <string name="seleccio_idioma">Selecciona un idiomoa</string>
+    <string name="seleccio_idioma">Selecciona un idioma</string>
     <string name="inicio">Iniciar</string>
     <string name="tipo_usuari">Selecciona un tipo de usuario</string>
     <string name="jugador_titol">Jugador</string>
@@ -34,4 +34,5 @@
     <string name="last_password">Contraseña anterior</string>
     <string name="latest_email">Correo anterior</string>
     <string name="confirm_password">Confirmar contraseña</string>
+    <string name="available">Disponibilidad</string>
 </resources>

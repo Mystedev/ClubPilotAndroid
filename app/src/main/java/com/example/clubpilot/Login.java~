@@ -8,6 +8,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -19,10 +20,13 @@ import androidx.core.view.WindowInsetsCompat;
 import com.example.clubpilot.Fan.News;
 import com.example.clubpilot.Player.Dashboard;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 
 public class Login extends AppCompatActivity implements View.OnClickListener {
-    Button buttonlogin, forgotPassword;
+    Button buttonlogin;
+    TextView forgotPassword;
     //Button buttonforgotpassword;
     Spinner spinner;
     @SuppressLint({"MissingInflatedId", "WrongViewCast"})
@@ -78,6 +82,10 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                 Intent intent = new Intent(this, Dashboard.class);
                 startActivity(intent);
             }
+        }
+        if (view.getId() == R.id.forgotPassowrd){
+            Intent intent = new Intent(this, ForgotPassword.class);
+            startActivity(intent);
         }
     }
 }

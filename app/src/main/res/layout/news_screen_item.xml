@@ -37,8 +37,8 @@
 
         <ImageView
             android:id="@+id/imageNew"
-            android:layout_width="117dp"
-            android:layout_height="110dp"
+            android:layout_width="115dp"
+            android:layout_height="113dp"
             android:scaleType="fitCenter"
             tools:srcCompat="@tools:sample/avatars" />
 
@@ -65,8 +65,8 @@
 
         <TextView
             android:id="@+id/descriptionNew"
-            android:layout_width="273dp"
-            android:layout_height="95dp"
+            android:layout_width="224dp"
+            android:layout_height="90dp"
             android:text="Descripción larga de la noticia que debe ajustarse automáticamente sin cortar el texto."
             android:textAlignment="viewStart"
             android:textColor="#6C6B6B"
