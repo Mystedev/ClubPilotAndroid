@@ -44,5 +44,6 @@
     <string name="welcome">Welcome</string>
     <string name="sent">Sent</string>
     <string name="message">Message</string>
+    <string name="seleccionaClub">Select a team</string>
 
 </resources>

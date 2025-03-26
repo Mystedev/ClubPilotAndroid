@@ -39,4 +39,5 @@
     <string name="welcome">Bienvenido</string>
     <string name="sent">Enviar</string>
     <string name="message">Mensaje</string>
+    <string name="seleccionaClub">Selecciona un club</string>
 </resources>

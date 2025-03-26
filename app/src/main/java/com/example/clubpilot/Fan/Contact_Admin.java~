@@ -65,8 +65,11 @@ public class Contact_Admin extends AppCompatActivity implements View.OnClickList
                 CreateEmailOptions params = CreateEmailOptions.builder()
                         .from("Me <dennys@resend.dev>")
                         .to("moyadeni267@gmail.com", "c.albinya@insjoanbrudieu.cat")
+                        .cc("carbon@example.com", "copy@example.com")
+                        .bcc("blind@example.com", "carbon.copy@example.com")
+                        .replyTo("reply@example.com", "to@example.com")
                         .text(message)
-                        .subject("Mensaje de Resend")
+                        .subject("Hello from Java!")
                         .build();
                 Log.d("TAG", "sendMessage: " + params);
 

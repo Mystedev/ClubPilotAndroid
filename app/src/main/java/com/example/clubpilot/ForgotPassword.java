@@ -32,7 +32,6 @@ public class ForgotPassword extends AppCompatActivity implements  View.OnClickLi
         });
         back = findViewById(R.id.back);
         back.setOnClickListener(this);
-
     }
 
     @Override

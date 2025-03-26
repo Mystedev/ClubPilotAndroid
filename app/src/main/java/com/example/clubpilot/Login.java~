@@ -20,21 +20,20 @@ import androidx.core.view.WindowInsetsCompat;
 import com.example.clubpilot.Fan.News;
 import com.example.clubpilot.Player.Dashboard;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 
 public class Login extends AppCompatActivity implements View.OnClickListener {
     Button buttonlogin;
     TextView forgotPassword;
     //Button buttonforgotpassword;
-    Spinner spinner;
+    Spinner user;
+    Spinner clubs;
     @SuppressLint({"MissingInflatedId", "WrongViewCast"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_inici_sessio2);
+        setContentView(R.layout.activity_login);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -46,10 +45,11 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         // Boto de recuperar contrasenya
         forgotPassword = findViewById(R.id.forgotPassowrd);
         forgotPassword.setOnClickListener(this);
+        // Seleccionar opcions de Usuari i Clubs
         // Spinner per seleccionar el tipus d'usuari
-        spinner = findViewById(R.id.spinner);
+        user = findViewById(R.id.spinner);
         // Afegir un itemSelectedListener en el Spinner per obtenir el tipus d'usuari seleccionat
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        user.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
                 String tipo_usuari = adapterView.getItemAtPosition(position).toString();
@@ -67,18 +67,38 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         items.add("Aficionat");
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, items);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
+        user.setAdapter(adapter);
+        // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+        clubs = findViewById(R.id.clubs);
+        clubs.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
+                String club = adapterView.getItemAtPosition(position).toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+                Toast.makeText(Login.this, "Selecciona un club", Toast.LENGTH_SHORT).show();
+            }
+        });
+        ArrayList<String> clubs = new ArrayList<>();
+        items.add("Selecciona un club");
+        items.add("Club 1");
+        items.add("Club 2");
+        ArrayAdapter<String> adapterClub = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, items);
+        adapterClub.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        user.setAdapter(adapterClub);
     }
 
     @Override
     public void onClick(View view) {
         if (view.getId() == R.id.buttonLogin){
-            if(spinner.getSelectedItem().toString().equals("Selecciona un tipus d'usuari")){
+            if(user.getSelectedItem().toString().equals("Selecciona un tipus d'usuari")){
                 Toast.makeText(this, "Selecciona un tipus d'usuari per poder accedir", Toast.LENGTH_SHORT).show();
-            } else if (spinner.getSelectedItem().toString().equals("Aficionat")){
+            } else if (user.getSelectedItem().toString().equals("Aficionat")){
                 Intent intent = new Intent(this, News.class);
                 startActivity(intent);
-            } else if (spinner.getSelectedItem().toString().equals("Jugador")){
+            } else if (user.getSelectedItem().toString().equals("Jugador")){
                 Intent intent = new Intent(this, Dashboard.class);
                 startActivity(intent);
             }
