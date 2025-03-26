@@ -59,7 +59,7 @@
                 android:background="@drawable/custom_edittext"
                 android:drawableLeft="@drawable/baseline_assignment_ind_24"
                 android:drawablePadding="8dp"
-                android:hint="Username"
+                android:hint="@string/user"
                 android:inputType="text"
                 android:padding="8dp"
                 android:textColor="@color/black" />
@@ -75,7 +75,7 @@
                 android:background="@drawable/custom_edittext"
                 android:drawableLeft="@drawable/lock_24"
                 android:drawablePadding="8dp"
-                android:hint="Password"
+                android:hint="@string/password"
                 android:inputType="text"
                 android:padding="8dp"
                 android:textColor="@color/black" />

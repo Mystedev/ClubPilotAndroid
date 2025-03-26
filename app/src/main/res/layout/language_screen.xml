@@ -11,11 +11,12 @@
     <Button
         android:id="@+id/buttonStart"
         android:layout_width="match_parent"
-        android:layout_height="59dp"
+        android:layout_height="70dp"
         android:layout_marginBottom="24dp"
         android:layout_marginRight="30dp"
         android:layout_marginLeft="30dp"
         android:text="@string/inicio"
+        android:textSize="20sp"
         app:cornerRadius="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/radioGroup"

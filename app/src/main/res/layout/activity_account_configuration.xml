@@ -5,14 +5,14 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/purple_500"
+    android:background="@drawable/gradient_blue"
     tools:context=".Player.Account_Configuration">
 
     <TextView
         android:id="@+id/textView8"
         android:layout_width="301dp"
         android:layout_height="97dp"
-        android:layout_marginBottom="568dp"
+        android:layout_marginBottom="516dp"
         android:text="@string/recover_password"
         android:textAlignment="center"
         android:textColor="@color/white"
@@ -20,6 +20,7 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.508"
         app:layout_constraintStart_toStartOf="parent" />
 
     <LinearLayout
@@ -64,11 +65,11 @@
                 android:layout_marginTop="16dp"
                 android:background="@drawable/custom_edittext"
                 android:drawableLeft="@drawable/baseline_email_24"
-                android:hint="Correo"
+                android:hint="@string/mail"
                 android:inputType="textEmailAddress"
                 android:padding="12dp"
                 android:textAlignment="viewStart"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -80,7 +81,7 @@
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
                 android:layout_marginBottom="116dp"
-                android:text="Enviar"
+                android:text="@string/sent"
                 android:textSize="20sp"
                 app:cornerRadius="30dp"
                 app:layout_constraintBottom_toBottomOf="parent"

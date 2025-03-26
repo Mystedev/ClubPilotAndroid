@@ -41,5 +41,8 @@
     <!--Pnatalla de Jugadors-->
     <string name="dashboard">Dashboard</string>
     <string name="available">Available</string>
+    <string name="welcome">Welcome</string>
+    <string name="sent">Sent</string>
+    <string name="message">Message</string>
 
 </resources>

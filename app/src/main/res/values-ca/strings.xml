@@ -36,4 +36,7 @@
     <string name="latest_email">Correu anterior</string>
     <string name="confirm_password">Confirmar</string>
     <string name="available">Disponibilitat</string>
+    <string name="welcome">Benvingut</string>
+    <string name="sent">Enviar</string>
+    <string name="message">Missatge</string>
 </resources>
