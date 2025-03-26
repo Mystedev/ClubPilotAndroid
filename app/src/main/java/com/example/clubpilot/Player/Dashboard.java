@@ -6,6 +6,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.view.animation.LayoutAnimationController;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -53,6 +56,14 @@ public class Dashboard extends AppCompatActivity {
         listEvents.add(new Event("Entrenamiento publico"));
 
         Adapter adapter = new Adapter(listEvents);
+        // Iniciar animacio de la llista
+        Animation animation = AnimationUtils.loadAnimation(this, R.anim.fade_in);
+        recyclerView.startAnimation(animation);
+
+        LayoutAnimationController controller = AnimationUtils.loadLayoutAnimation(this, R.anim.layout_animation);
+        recyclerView.setLayoutAnimation(controller);
+        recyclerView.scheduleLayoutAnimation();
+        // Iniciar adapter
         recyclerView.setAdapter(adapter);
     }
 
@@ -70,35 +81,9 @@ public class Dashboard extends AppCompatActivity {
             Intent intent = new Intent(this, Player_Configuration.class);
             startActivity(intent);
             return true;
-        } else if (item.getItemId() == R.id.logout) {
-            showDialogo();
-            return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
-    public void showDialogo() {
-        // Aquest array conte les opcions que es poden seleccionar
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setPositiveButton("Logout", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int id) {
-                Intent intent = new Intent(Dashboard.this, Login.class);
-                startActivity(intent);
-                dialog.dismiss();
-                Toast.makeText(Dashboard.this, "Has tancat sessió", Toast.LENGTH_SHORT).show();
-            }
-        });
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int id) {
-                dialog.dismiss();
-            }
-        });
 
-        builder.setTitle("Alert!");
-        builder.setMessage("You're about to logout the session");
-        AlertDialog dialog = builder.create();
-        dialog.show();
-    }
 }

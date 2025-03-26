@@ -28,15 +28,15 @@ public class Account_Configuration extends AppCompatActivity implements View.OnC
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        button = findViewById(R.id.button);
-        button.setOnClickListener(this);
+        //button = findViewById(R.id.button);
+        //button.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View view) {
-        if (view.getId() == R.id.button){
+        /*if (view.getId() == R.id.button){
             Intent intent = new Intent(this, Player_Configuration.class);
             startActivity(intent);
-        }
+        }*/
     }
 }

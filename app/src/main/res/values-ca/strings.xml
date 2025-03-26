@@ -32,6 +32,7 @@
     <string name="confirm_email">Confirmar correu</string>
     <string name="dashboard">Activitats</string>
     <string name="last_password">Contrasenya anterior</string>
+    <string name="save_password">Confirmar contrasenya</string>
     <string name="latest_email">Correu anterior</string>
     <string name="confirm_password">Confirmar</string>
     <string name="available">Disponibilitat</string>
