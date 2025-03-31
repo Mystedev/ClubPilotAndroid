@@ -1,11 +1,8 @@
-package com.example.clubpilot;
+package com.example.clubpilot.Fan;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 
 import androidx.activity.EdgeToEdge;
@@ -14,29 +11,29 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import java.text.SimpleDateFormat;
+import com.example.clubpilot.Login;
+import com.example.clubpilot.R;
 
-public class ForgotPassword extends AppCompatActivity implements  View.OnClickListener {
-    ImageView back;
-
-    @SuppressLint("WrongViewCast")
+public class RegisterFan extends AppCompatActivity implements View.OnClickListener{
+    ImageView backArrow;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_forgot_password);
+        setContentView(R.layout.activity_register_fan);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        back = findViewById(R.id.back);
-        back.setOnClickListener(this);
+
+        backArrow = findViewById(R.id.backArrow);
+        backArrow.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View view) {
-        if(view.getId() == R.id.back){
+        if(view.getId() == R.id.backArrow){
             Intent intent = new Intent(this, Login.class);
             startActivity(intent);
         }

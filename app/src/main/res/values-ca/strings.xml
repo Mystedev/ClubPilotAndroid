@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="theme">Mode fosc</string>
     <string name="themeLight">Mode clar</string>
     <string name="button_tornar">Tornar enrere</string>
@@ -7,10 +7,7 @@
     <string name="fan">Aficionat</string>
     <string name="app_name">ClubPilot</string>
     <string name="seleccio_idioma">Selecciona un idioma</string>
-    <string name="inicio">Inicia</string>
-    <string name="tipo_usuari">Selecciona tipus d\'usuari</string>
-    <string name="jugador_titol">Jugador</string>
-    <string name="aficionat_titol">Aficionat</string>
+    <string name="inicio">Inciar</string>
     <string name="password">Contrasenya</string>
     <string name="login">Iniciar sessió</string>
     <string name="catalan">Catalá</string>
@@ -32,6 +29,8 @@
     <string name="password_recover">Recuperar contrasenya</string>
     <string name="new_email">Nou correu</string>
     <string name="confirm_email">Confirmar correu</string>
+    <string name="registerFan">Registrar-se</string>
+    <string name="passwordFan">Contrasenya</string>
     <string name="dashboard">Activitats</string>
     <string name="last_password">Contrasenya anterior</string>
     <string name="save_password">Confirmar contrasenya</string>
@@ -47,4 +46,9 @@
     <string name="hasLogout">Has sortit</string>
     <string name="alert">Ves amb compte</string>
     <string name="loginOut">Vas a tancar sessio</string>
+    <string name="username">Nom usuari</string>
+    <string name="name">Nom</string>
+    <string name="firstName">Cognoms</string>
+    <string name="emailFan">Correu electronic</string>
+    <string name="tipo_usuari">Selecciona un tipus d\'usuari</string>
 </resources>

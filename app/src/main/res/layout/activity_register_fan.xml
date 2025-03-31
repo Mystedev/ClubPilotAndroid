@@ -8,11 +8,25 @@
     android:layout_centerHorizontal="true"
     android:background="@drawable/bluelight_background"
     android:layout_gravity="center|center_horizontal|center_vertical"
-    tools:context=".ForgotPassword">
+    tools:context=".Fan.RegisterFan">
+
+    <ImageView
+        android:id="@+id/backArrow"
+        android:layout_width="43dp"
+        android:layout_height="36dp"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop"
+        android:src="@drawable/back_arrow"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.018"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.011" />
 
     <androidx.cardview.widget.CardView
-        android:layout_width="302dp"
-        android:layout_height="440dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_margin="30dp"
         android:animateLayoutChanges="true"
         android:background="@drawable/custom_edittext"
@@ -25,8 +39,8 @@
         tools:ignore="MissingConstraints">
 
         <LinearLayout
-            android:layout_width="338dp"
-            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:orientation="vertical"
             android:padding="30dp">
@@ -36,7 +50,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
-                android:text="@string/password_recover"
+                android:text="@string/registerFan"
                 android:textAlignment="center"
                 android:textColor="@color/black"
                 android:textSize="36sp"
@@ -48,9 +62,9 @@
                 android:layout_height="50dp"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/custom_edittext"
-                android:drawableLeft="@drawable/lock_24"
+                android:drawableLeft="@drawable/account_circle_24"
                 android:ems="10"
-                android:hint="@string/latest_email"
+                android:hint="@string/username"
                 android:inputType="text"
                 android:padding="8dp"
                 android:textColor="#837D7D"
@@ -59,15 +73,29 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <EditText
+                android:id="@+id/nameFan"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/custom_edittext"
+                android:drawableLeft="@drawable/account_circle_24"
+                android:ems="10"
+                android:hint="@string/name"
+                android:inputType="text"
+                android:padding="8dp"
+                android:textColor="#837D7D"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintHorizontal_bias="0.0" />
+
+            <EditText
                 android:id="@+id/editTextText2"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="20dp"
+                android:layout_marginTop="10dp"
                 android:background="@drawable/custom_edittext"
-                android:drawableLeft="@drawable/lock_24"
+                android:drawableLeft="@drawable/account_circle_24"
                 android:ems="10"
-                android:hint="@string/new_password"
+                android:hint="@string/firstName"
                 android:inputType="text"
                 android:padding="8dp"
                 android:textColor="#837D7D"
@@ -77,11 +105,26 @@
             <EditText
                 android:id="@+id/editTextText3"
                 android:layout_width="match_parent"
+                android:layout_marginTop="10dp"
                 android:layout_height="50dp"
                 android:background="@drawable/custom_edittext"
                 android:drawableLeft="@drawable/lock_24"
                 android:ems="10"
-                android:hint="@string/confirm_password"
+                android:hint="@string/emailFan"
+                android:inputType="text"
+                android:padding="8dp"
+                android:textColor="#837D7D"
+                app:layout_constraintEnd_toEndOf="@+id/editTextText2" />
+
+            <EditText
+                android:id="@+id/passwordFan"
+                android:layout_width="match_parent"
+                android:layout_marginTop="10dp"
+                android:layout_height="50dp"
+                android:background="@drawable/custom_edittext"
+                android:drawableLeft="@drawable/lock_24"
+                android:ems="10"
+                android:hint="@string/passwordFan"
                 android:inputType="text"
                 android:padding="8dp"
                 android:textColor="#837D7D"
@@ -90,13 +133,13 @@
             <Button
                 android:id="@+id/buttonLogin"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="60dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginRight="10dp"
-                android:layout_marginBottom="20dp"
                 android:elevation="4dp"
                 android:text="@string/save_password"
+                android:textSize="15sp"
                 app:cornerRadius="30dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 tools:layout_editor_absoluteX="62dp" />
@@ -104,18 +147,5 @@
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>
-
-    <Button
-        android:id="@+id/back"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:layout_marginBottom="16dp"
-        android:text="@string/cancel"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:cornerRadius="30dp"
-        app:layout_constraintHorizontal_bias="0.94"
-        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

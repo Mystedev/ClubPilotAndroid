@@ -10,7 +10,6 @@
     <string name="inicio">Iniciar</string>
     <string name="tipo_usuari">Selecciona un tipo de usuario</string>
     <string name="jugador_titol">Jugador</string>
-    <string name="aficionat_titol">Aficionado</string>
     <string name="password">Contraseña</string>
     <string name="login">Iniciar sesión</string>
     <string name="club">Club</string>
@@ -32,6 +31,8 @@
     <string name="password_recover">Recuperar contraseña</string>
     <string name="new_email">Nueo correo</string>
     <string name="confirm_email">Confirmar correo</string>
+    <string name="registerFan">Registrarse</string>
+    <string name="passwordFan">Contraseña</string>
     <string name="dashboard">Panel</string>
     <string name="last_password">Contraseña anterior</string>
     <string name="save_password">Confirmar contraseña</string>
@@ -47,4 +48,8 @@
     <string name="hasLogout">Has cerrado sesion</string>
     <string name="alert">Cuidado</string>
     <string name="loginOut">Vas a cerrar sesion</string>
+    <string name="username">Nombre de usuario</string>
+    <string name="name">Nombre</string>
+    <string name="firstName">Apellidos</string>
+    <string name="emailFan">Correo electronico</string>
 </resources>

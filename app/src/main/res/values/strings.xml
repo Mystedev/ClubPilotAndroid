@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <!--Generals-->
     <string name="themeDark">Dark Mode</string>
     <string name="themeLight">Light Mode</string>
@@ -12,8 +12,6 @@
     <string name="inicio">Get started</string>
     <!--Pantalla de inici de sessio-->
     <string name="tipo_usuari">Select user type</string>
-    <string name="jugador_titol">Player</string>
-    <string name="aficionat_titol">Fan</string>
     <string name="user">Username</string>
     <string name="password">Password</string>
     <string name="login">Login</string>
@@ -23,7 +21,7 @@
     <string name="spanish">Spanish</string>
     <string name="catalan">Catalan</string>
     <string name="english">English</string>
-    <!--Pantalla de noticies-->
+    <!--Pantalla de aficionat-->
     <string name="noticies">News</string>
     <string name="config">Configuration</string>
     <string name="config_fan">Configuration</string>
@@ -41,6 +39,13 @@
     <string name="new_email">New email</string>
     <string name="confirm_password">Confirm</string>
     <string name="confirm_email">Confirm email</string>
+    <string name="registerFan">Register account</string>
+    <!--Dades del fan per registrar-se-->
+    <string name="username">Username</string>
+    <string name="name" tools:ignore="DuplicateDefinition">Name</string>
+    <string name="firstName">Surnames</string>
+    <string name="emailFan">Email</string>
+    <string name="passwordFan">Password</string>
     <!--Pnatalla de Jugadors-->
     <string name="dashboard">Dashboard</string>
     <string name="available">Available</string>
@@ -48,7 +53,7 @@
     <string name="sent">Sent</string>
     <string name="message">Message</string>
     <string name="seleccionaClub">Select a team</string>
-    <!--Missatges del sistem-->
+    <!--Missatges del sistema-->
     <string name="errorSelectUser">Select a user type to enter</string>
     <string name="hasLogout">You have been logged out</string>
     <string name="alert">Alert!</string>

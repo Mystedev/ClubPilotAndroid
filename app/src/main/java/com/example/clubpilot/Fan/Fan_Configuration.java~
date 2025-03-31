@@ -66,6 +66,20 @@ public class Fan_Configuration extends AppCompatActivity implements View.OnClick
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
                 String opcio = adapterView.getItemAtPosition(position).toString();
+                List<String> idioma = Arrays.asList("en","es","ca");
+                if(opcio.equals(english)){
+                    // Configurar el idioma de la aplicación
+                    LocaleListCompat appLocale = LocaleListCompat.forLanguageTags(idioma.get(0));
+                    AppCompatDelegate.setApplicationLocales(appLocale);
+                } else if(opcio.equals(spanish)){
+                    // Configurar el idioma de la aplicación
+                    LocaleListCompat appLocale = LocaleListCompat.forLanguageTags(idioma.get(1));
+                    AppCompatDelegate.setApplicationLocales(appLocale);
+                } else if(opcio.equals(catalan)){
+                    // Configurar el idioma de la aplicación
+                    LocaleListCompat appLocale = LocaleListCompat.forLanguageTags(idioma.get(2));
+                    AppCompatDelegate.setApplicationLocales(appLocale);
+                }
             }
 
             @Override

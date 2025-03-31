@@ -11,7 +11,7 @@
     tools:context=".Login">
 
     <androidx.cardview.widget.CardView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="30dp"
         android:animateLayoutChanges="true"
@@ -25,8 +25,8 @@
         tools:ignore="MissingConstraints">
 
         <LinearLayout
-            android:layout_width="336dp"
-            android:layout_height="481dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:orientation="vertical"
             android:padding="24dp">
@@ -118,6 +118,16 @@
                 android:text="@string/recover_password"
                 android:textAlignment="center"
                 android:textColor="#187ECD"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/registerfan"
+                android:layout_width="match_parent"
+                android:layout_height="28dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/registerFan"
+                android:textAlignment="center"
+                android:textColor="@color/red_500"
                 android:textSize="16sp" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
