@@ -6,8 +6,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:elevation="2dp"
-    android:background="@drawable/gradient_blue"
+    android:background="@drawable/wallpaper"
     android:layout_gravity="center|center_horizontal|center_vertical"
+    
     tools:context=".Login">
 
     <androidx.cardview.widget.CardView

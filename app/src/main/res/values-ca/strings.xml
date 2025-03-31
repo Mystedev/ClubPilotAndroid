@@ -4,6 +4,7 @@
     <string name="themeLight">Mode clar</string>
     <string name="button_tornar">Tornar enrere</string>
     <string name="logout">Tancar sessió</string>
+    <string name="fan">Aficionat</string>
     <string name="app_name">ClubPilot</string>
     <string name="seleccio_idioma">Selecciona un idioma</string>
     <string name="inicio">Inicia</string>
@@ -14,6 +15,7 @@
     <string name="login">Iniciar sessió</string>
     <string name="catalan">Catalá</string>
     <string name="english">Anglés</string>
+    <string name="club">Club</string>
     <string name="recover_password">Has oblidat la teva contrasenya?</string>
     <string name="spanish">Castellá</string>
     <string name="user">Usuari</string>
@@ -40,4 +42,9 @@
     <string name="sent">Enviar</string>
     <string name="message">Missatge</string>
     <string name="seleccionaClub">Selecciona un club</string>
+    <string name="player">Jugador</string>
+    <string name="errorSelectUser">Selecciona un usuari per accedir</string>
+    <string name="hasLogout">Has sortit</string>
+    <string name="alert">Ves amb compte</string>
+    <string name="loginOut">Vas a tancar sessio</string>
 </resources>

@@ -27,6 +27,8 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     TextView forgotPassword;
     //Button buttonforgotpassword;
     Spinner user;
+    // Strings
+    String tipusUsuari,player,fan,errorMessage;
     @SuppressLint({"MissingInflatedId", "WrongViewCast"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +40,11 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        // Strings de la pantalla de login
+        tipusUsuari = getResources().getString(R.string.tipo_usuari);
+        player = getResources().getString(R.string.player);
+        fan = getResources().getString(R.string.fan);
+        errorMessage = getResources().getString(R.string.errorSelectUser);
         // Boto de login
         buttonlogin = findViewById(R.id.buttonLogin);
         buttonlogin.setOnClickListener(this);
@@ -55,14 +62,14 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
-                Toast.makeText(Login.this, "Selecciona un tipus d'usuari", Toast.LENGTH_SHORT).show();
+                Toast.makeText(Login.this, tipusUsuari, Toast.LENGTH_SHORT).show();
             }
         });
 
         ArrayList<String> items = new ArrayList<>();
-        items.add("Selecciona un tipus d'usuari");
-        items.add("Jugador");
-        items.add("Aficionat");
+        items.add(tipusUsuari);
+        items.add(player);
+        items.add(fan);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, items);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         user.setAdapter(adapter);
@@ -71,12 +78,12 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     @Override
     public void onClick(View view) {
         if (view.getId() == R.id.buttonLogin){
-            if(user.getSelectedItem().toString().equals("Selecciona un tipus d'usuari")){
-                Toast.makeText(this, "Selecciona un tipus d'usuari per poder accedir", Toast.LENGTH_SHORT).show();
-            } else if (user.getSelectedItem().toString().equals("Aficionat")){
+            if(user.getSelectedItem().toString().equals(tipusUsuari)){
+                Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show();
+            } else if (user.getSelectedItem().toString().equals(fan)){
                 Intent intent = new Intent(this, News.class);
                 startActivity(intent);
-            } else if (user.getSelectedItem().toString().equals("Jugador")){
+            } else if (user.getSelectedItem().toString().equals(player)){
                 Intent intent = new Intent(this, Dashboard.class);
                 startActivity(intent);
             }

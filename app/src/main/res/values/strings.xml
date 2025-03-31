@@ -4,6 +4,8 @@
     <string name="themeLight">Light Mode</string>
     <string name="button_tornar">Back</string>
     <string name="logout">Logout</string>
+    <string name="player">Player</string>
+    <string name="fan">Fan</string>
     <!--Pantalla de seleccio de idioma-->
     <string name="app_name">ClubPilot</string>
     <string name="seleccio_idioma">Choose a language</string>
@@ -15,6 +17,7 @@
     <string name="user">Username</string>
     <string name="password">Password</string>
     <string name="login">Login</string>
+    <string name="club">Club</string>"
     <string name="recover_password">You have forgotten your password?</string>
     <!--Idiomes-->
     <string name="spanish">Spanish</string>
@@ -45,5 +48,9 @@
     <string name="sent">Sent</string>
     <string name="message">Message</string>
     <string name="seleccionaClub">Select a team</string>
-
+    <!--Missatges del sistem-->
+    <string name="errorSelectUser">Select a user type to enter</string>
+    <string name="hasLogout">You have been logged out</string>
+    <string name="alert">Alert!</string>
+    <string name="loginOut">You\'re about to logout</string>
 </resources>

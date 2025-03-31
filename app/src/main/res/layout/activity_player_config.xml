@@ -12,37 +12,38 @@
         android:id="@+id/textView5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="516dp"
+        android:layout_marginBottom="616dp"
         android:text="@string/config"
         android:textAlignment="center"
-        android:textColor="@color/white"
         android:textSize="34sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="122dp"
         android:layout_height="93dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="56dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView5"
         app:srcCompat="@drawable/account_circle_white" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="436dp"
-        android:background="@drawable/bottom_white"
+        android:layout_height="wrap_content"
+        android:layout_margin="40dp"
+        android:background="@drawable/custom_card"
         android:orientation="vertical"
-        android:paddingTop="120dp"
-        android:layout_marginBottom="0dp"
+        android:padding="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintEnd_toEndOf="@+id/textView5"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/textView5">
 
         <Switch
             android:id="@+id/themeChange"

@@ -64,21 +64,21 @@
         app:layout_constraintVertical_bias="0.655">
 
         <RadioButton
-            android:id="@+id/radioButton"
+            android:id="@+id/english"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/english"
             android:textSize="20sp" />
 
         <RadioButton
-            android:id="@+id/radioButton2"
+            android:id="@+id/spanish"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/spanish"
             android:textSize="20sp" />
 
         <RadioButton
-            android:id="@+id/radioButton3"
+            android:id="@+id/catalan"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/catalan"

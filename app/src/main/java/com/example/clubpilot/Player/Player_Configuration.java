@@ -32,6 +32,9 @@ public class Player_Configuration extends AppCompatActivity implements View.OnCl
     Button buttonBack;
     Spinner spinner;
     TextView account;
+    // Strings generals
+    String logout,catalan,english,spanish,idioma,cancel,hasLogout;
+    String alert,loginOut;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,11 +45,22 @@ public class Player_Configuration extends AppCompatActivity implements View.OnCl
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        // Obtenir el misstage de seleccio de idiooma
+        idioma = getResources().getString(R.string.seleccio_idioma);
+        english = getResources().getString(R.string.english);
+        spanish = getResources().getString(R.string.spanish);
+        catalan = getResources().getString(R.string.catalan);
+        logout = getResources().getString(R.string.logout);
+        cancel = getResources().getString(R.string.cancel);
+        hasLogout = getResources().getString(R.string.hasLogout);
+        alert = getResources().getString(R.string.alert);
+        loginOut = getResources().getString(R.string.loginOut);
+        // Elements de la pantalla
         buttonBack = findViewById(R.id.buttonBack);
         buttonBack.setOnClickListener(this);
         account = findViewById(R.id.textAccount);
         account.setOnClickListener(this);
-
+        // Spinner selector de idioma
         spinner = findViewById(R.id.spinnerIdiomes);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -56,14 +70,15 @@ public class Player_Configuration extends AppCompatActivity implements View.OnCl
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
-                Toast.makeText(Player_Configuration.this, "Selecciona un tipus d'usuari", Toast.LENGTH_SHORT).show();
+                Toast.makeText(Player_Configuration.this, idioma, Toast.LENGTH_SHORT).show();
             }
         });
+        // Llista de opcions
         ArrayList<String> items = new ArrayList<>();
-        items.add("Selecciona un tipus d'usuari");
-        items.add("English");
-        items.add("Spanish");
-        items.add("Catalan");
+        items.add(idioma);
+        items.add(english);
+        items.add(spanish);
+        items.add(catalan);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, items);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
@@ -84,24 +99,24 @@ public class Player_Configuration extends AppCompatActivity implements View.OnCl
     public void showDialogo() {
         // Aquest array conte les opcions que es poden seleccionar
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setPositiveButton("Logout", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(logout, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int id) {
                 Intent intent = new Intent(Player_Configuration.this, Login.class);
                 startActivity(intent);
                 dialog.dismiss();
-                Toast.makeText(Player_Configuration.this, "Has tancat sessió", Toast.LENGTH_SHORT).show();
+                Toast.makeText(Player_Configuration.this, hasLogout, Toast.LENGTH_SHORT).show();
             }
         });
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton(cancel, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int id) {
                 dialog.dismiss();
             }
         });
 
-        builder.setTitle("Alert!");
-        builder.setMessage("You're about to logout the session");
+        builder.setTitle(alert);
+        builder.setMessage(loginOut);
         AlertDialog dialog = builder.create();
         dialog.show();
     }

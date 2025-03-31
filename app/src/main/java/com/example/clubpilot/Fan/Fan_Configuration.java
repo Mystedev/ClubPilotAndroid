@@ -27,8 +27,8 @@ import java.util.ArrayList;
 public class Fan_Configuration extends AppCompatActivity implements View.OnClickListener {
     Button buttonBack;
     TextView textContactAdmin;
-
     Spinner spinner;
+    String idioma,english,spanish,catalan,logout,cancel,hasLogout,alert,loginOut;
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +40,17 @@ public class Fan_Configuration extends AppCompatActivity implements View.OnClick
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        // Strings de la pantalla de login
+        idioma = getResources().getString(R.string.seleccio_idioma);
+        english = getResources().getString(R.string.english);
+        spanish = getResources().getString(R.string.spanish);
+        catalan = getResources().getString(R.string.catalan);
+        logout = getResources().getString(R.string.logout);
+        cancel = getResources().getString(R.string.cancel);
+        hasLogout = getResources().getString(R.string.hasLogout);
+        alert = getResources().getString(R.string.alert);
+        loginOut = getResources().getString(R.string.loginOut);
+        // Elements visuals
         buttonBack = findViewById(R.id.buttonBack);
         buttonBack.setOnClickListener(this);
 
@@ -55,13 +66,13 @@ public class Fan_Configuration extends AppCompatActivity implements View.OnClick
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
-                Toast.makeText(Fan_Configuration.this, "Selecciona un tipus d'usuari", Toast.LENGTH_SHORT).show();
+                Toast.makeText(Fan_Configuration.this, idioma, Toast.LENGTH_SHORT).show();
             }
         });
         ArrayList<String> items = new ArrayList<>();
-        items.add("English");
-        items.add("Spanish");
-        items.add("Catalan");
+        items.add(english);
+        items.add(spanish);
+        items.add(catalan);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, items);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
@@ -81,24 +92,24 @@ public class Fan_Configuration extends AppCompatActivity implements View.OnClick
     public void showDialogo() {
         // Aquest array conte les opcions que es poden seleccionar
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setPositiveButton("Logout", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(logout, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int id) {
                 Intent intent = new Intent(Fan_Configuration.this, Login.class);
                 startActivity(intent);
                 dialog.dismiss();
-                Toast.makeText(Fan_Configuration.this, "Has tancat sessió", Toast.LENGTH_SHORT).show();
+                Toast.makeText(Fan_Configuration.this, hasLogout, Toast.LENGTH_SHORT).show();
             }
         });
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton(cancel, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int id) {
                 dialog.dismiss();
             }
         });
 
-        builder.setTitle("Alert!");
-        builder.setMessage("You're about to logout the session");
+        builder.setTitle(alert);
+        builder.setMessage(loginOut);
         AlertDialog dialog = builder.create();
         dialog.show();
     }

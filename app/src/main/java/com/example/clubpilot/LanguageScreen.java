@@ -2,18 +2,23 @@ package com.example.clubpilot;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RadioButton;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.graphics.Insets;
+import androidx.core.os.LocaleListCompat;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 public class LanguageScreen extends AppCompatActivity implements View.OnClickListener {
     Button buttonStart;
+    RadioButton rb1, rb2, rb3;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -26,16 +31,59 @@ public class LanguageScreen extends AppCompatActivity implements View.OnClickLis
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
         buttonStart = findViewById(R.id.buttonStart);
         buttonStart.setOnClickListener(this);
-        // Boto de login
 
+        rb1 = findViewById(R.id.english);
+        rb2 = findViewById(R.id.spanish);
+        rb3 = findViewById(R.id.catalan);
+
+        // Recuperar el idioma guardado en SharedPreferences
+        SharedPreferences sharedPref = getSharedPreferences("config", MODE_PRIVATE);
+        String savedLanguage = sharedPref.getString("idioma", "en");
+
+        // Configurar el idioma de la aplicación
+        LocaleListCompat appLocale = LocaleListCompat.forLanguageTags(savedLanguage);
+        AppCompatDelegate.setApplicationLocales(appLocale);
+
+        // Marcar el RadioButton correspondiente al idioma guardado
+        if (savedLanguage.equals("en")) {
+            rb1.setChecked(true);
+        } else if (savedLanguage.equals("es")) {
+            rb2.setChecked(true);
+        } else if (savedLanguage.equals("ca")) {
+            rb3.setChecked(true);
+        }
     }
 
     @Override
     public void onClick(View view) {
-        // Iniciar sessio amb un idioma sleccionat i moure a la pantalla de login
-        Intent intent = new Intent(this, Login.class);
-        startActivity(intent);
+        if (view.getId() == R.id.buttonStart) {
+            String selectedLanguage;
+            if (rb1.isChecked()) {
+                selectedLanguage = "en";
+            } else if (rb2.isChecked()) {
+                selectedLanguage = "es";
+            } else if (rb3.isChecked()) {
+                selectedLanguage = "ca";
+            } else {
+                selectedLanguage = "en"; // Idioma por defecto
+            }
+
+            // Guardar el idioma seleccionado en SharedPreferences
+            SharedPreferences sharedPref = getSharedPreferences("config", MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPref.edit();
+            editor.putString("idioma", selectedLanguage);
+            editor.apply();
+
+            // Configurar el idioma de la aplicación
+            LocaleListCompat appLocale = LocaleListCompat.forLanguageTags(selectedLanguage);
+            AppCompatDelegate.setApplicationLocales(appLocale);
+
+            // Iniciar la actividad de Login
+            Intent intent = new Intent(this, Login.class);
+            startActivity(intent);
+        }
     }
 }
