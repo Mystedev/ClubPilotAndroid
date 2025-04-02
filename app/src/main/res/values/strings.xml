@@ -58,4 +58,6 @@
     <string name="hasLogout">You have been logged out</string>
     <string name="alert">Alert!</string>
     <string name="loginOut">You\'re about to logout</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
 </resources>

@@ -1,6 +1,5 @@
 package com.example.clubpilot.Fan;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuInflater;
@@ -8,11 +7,9 @@ import android.view.MenuItem;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LayoutAnimationController;
-import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -20,10 +17,8 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.clubpilot.Login;
 import com.example.clubpilot.R;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 public class News extends AppCompatActivity{
@@ -45,11 +40,11 @@ public class News extends AppCompatActivity{
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         listNews = new ArrayList<CardNew>();
-        listNews.add(new CardNew("Partido vs FCB", "Partido contra el FCB", R.drawable.fcbarcelona));
-        listNews.add(new CardNew("Partido vs RM", "Description2", R.drawable.realmadrid));
-        listNews.add(new CardNew("Evento bienvenida", "Description3", R.drawable.evento));
-        listNews.add(new CardNew("Evento debut ??", "Description4", R.drawable.debut));
-        listNews.add(new CardNew("Entreno liga", "Description5", R.drawable.liga));
+        listNews.add(new CardNew("FCB","Partido vs FCB", "Partido contra el FCB", R.drawable.fcbarcelona));
+        listNews.add(new CardNew("RB","Partido vs RM", "Description2", R.drawable.realmadrid));
+        listNews.add(new CardNew("MCU","Evento bienvenida", "Description3", R.drawable.evento));
+        listNews.add(new CardNew("LOP","Evento debut ??", "Description4", R.drawable.debut));
+        listNews.add(new CardNew("MC","Entreno liga", "Description5", R.drawable.liga));
 
         Adapter adapter = new Adapter(listNews);
         // Iniciar animacio de la llista
@@ -59,7 +54,6 @@ public class News extends AppCompatActivity{
         LayoutAnimationController controller = AnimationUtils.loadLayoutAnimation(this, R.anim.layout_animation);
         recyclerView.setLayoutAnimation(controller);
         recyclerView.scheduleLayoutAnimation();
-
         recyclerView.setAdapter(adapter);
     }
 
@@ -81,7 +75,6 @@ public class News extends AppCompatActivity{
         }
         return super.onOptionsItemSelected(item);
     }
-
 
 
 }

@@ -7,12 +7,12 @@
     android:layout_height="match_parent"
     android:layout_centerHorizontal="true"
     android:padding="10dp"
-    android:background="@drawable/gradient_blue"
     tools:context=".Fan.News">
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -24,10 +24,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="6dp"
-            android:layout_marginVertical="14dp"
             android:text="@string/noticies"
             android:textAlignment="center"
             android:textSize="28sp" />
+
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/listNews"
@@ -39,4 +39,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
     </LinearLayout>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

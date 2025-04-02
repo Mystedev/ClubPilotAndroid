@@ -88,7 +88,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         UsuariXML uf = new UsuariXML();
         EsdevenimentXML ef = new EsdevenimentXML();
         TipusEsdevenimentXML tf = new TipusEsdevenimentXML();
-        Thread thread = new Thread(df);
+        /*Thread thread = new Thread(df);
         thread.start();
         ClubXML fd = null;
         try {
@@ -101,7 +101,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
             Toast.makeText(this, "Connected", Toast.LENGTH_SHORT).show();
         } else {
             Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show();
-        }
+        }*/
     }
 
     @Override

@@ -58,7 +58,7 @@
                 android:layout_marginRight="10dp"
                 android:layout_marginBottom="10dp"
                 android:background="@drawable/custom_edittext"
-                android:drawableLeft="@drawable/baseline_assignment_ind_24"
+                android:drawableLeft="@drawable/account"
                 android:drawablePadding="8dp"
                 android:hint="@string/user"
                 android:inputType="text"
@@ -77,22 +77,6 @@
                 android:drawableLeft="@drawable/lock_24"
                 android:drawablePadding="8dp"
                 android:hint="@string/password"
-                android:inputType="text"
-                android:padding="8dp"
-                android:textColor="@color/black" />
-
-            <EditText
-                android:id="@+id/inputClub"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginBottom="10dp"
-                android:background="@drawable/custom_edittext"
-                android:drawableLeft="@drawable/lock_24"
-                android:drawablePadding="8dp"
-                android:hint="@string/club"
                 android:inputType="text"
                 android:padding="8dp"
                 android:textColor="@color/black" />

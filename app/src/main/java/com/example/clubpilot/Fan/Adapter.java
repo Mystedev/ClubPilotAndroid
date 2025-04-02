@@ -35,6 +35,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
         holder.description.setText(news.getDescription());
         holder.image.setImageResource(news.getImage());
         holder.data.setText(news.getDate().toString());
+        holder.club.setText(news.getClub());
     }
 
     @Override
@@ -43,11 +44,12 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView title, description, data;
+        TextView title, description, data,club;
         ImageView image;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+            club = itemView.findViewById(R.id.club);
             title = itemView.findViewById(R.id.titleNew);
             description = itemView.findViewById(R.id.descriptionNew);
             image = itemView.findViewById(R.id.imageNew);

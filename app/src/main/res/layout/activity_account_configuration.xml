@@ -61,7 +61,7 @@
                 android:layout_marginHorizontal="30dp"
                 android:layout_marginTop="16dp"
                 android:background="@drawable/custom_edittext"
-                android:drawableLeft="@drawable/baseline_email_24"
+                android:drawableLeft="@drawable/account"
                 android:hint="@string/mail"
                 android:inputType="textEmailAddress"
                 android:padding="12dp"
@@ -91,13 +91,13 @@
 
     <ImageView
         android:id="@+id/imageBack"
-        android:layout_width="122dp"
-        android:layout_height="93dp"
+        android:layout_width="145dp"
+        android:layout_height="100dp"
         android:layout_marginTop="40dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView8"
-        app:srcCompat="@drawable/baseline_lock_24" />
+        app:srcCompat="@drawable/locked" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
