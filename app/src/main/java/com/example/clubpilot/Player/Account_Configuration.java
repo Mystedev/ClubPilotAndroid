@@ -9,13 +9,15 @@ import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.clubpilot.Fan.News;
 import com.example.clubpilot.R;
 
-public class Account_Configuration extends AppCompatActivity implements View.OnClickListener {
+public class Account_Configuration extends AppCompatActivity {
     Button button;
     @SuppressLint("MissingInflatedId")
     @Override
@@ -28,15 +30,23 @@ public class Account_Configuration extends AppCompatActivity implements View.OnC
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        //button = findViewById(R.id.button);
-        //button.setOnClickListener(this);
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        // Mostrar botón "atrás"/izquierdo
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            toolbar.setNavigationIcon(R.drawable.back_arrow); // tu drawable personalizado
+
+            // Acción al pulsarlo
+            toolbar.setNavigationOnClickListener(v -> {
+                // Lo que tú quieras hacer, como volver a otra actividad:
+                Intent intent = new Intent(Account_Configuration.this, Player_Configuration.class);
+                startActivity(intent);
+                finish(); // Opcional, para cerrar esta actividad
+            });
+        }
     }
 
-    @Override
-    public void onClick(View view) {
-        /*if (view.getId() == R.id.button){
-            Intent intent = new Intent(this, Player_Configuration.class);
-            startActivity(intent);
-        }*/
-    }
 }

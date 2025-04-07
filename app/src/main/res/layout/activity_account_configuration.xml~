@@ -8,32 +8,11 @@
     android:background="@drawable/gradient_blue"
     tools:context=".Player.Account_Configuration">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:title="@string/config_fan"
-        app:titleTextColor="@android:color/black"
-        tools:ignore="MissingConstraints" >
-
-        <!-- Botón personalizado a la izquierda -->
-        <ImageButton
-            android:id="@+id/left_button"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:background="@android:color/transparent"
-            android:contentDescription="Menu"
-            tools:ignore="OnClick" />
-    </androidx.appcompat.widget.Toolbar>
-
     <TextView
         android:id="@+id/textView8"
         android:layout_width="301dp"
         android:layout_height="97dp"
-        android:layout_marginBottom="460dp"
+        android:layout_marginBottom="536dp"
         android:text="@string/recover_password"
         android:textAlignment="center"
         android:textSize="34sp"

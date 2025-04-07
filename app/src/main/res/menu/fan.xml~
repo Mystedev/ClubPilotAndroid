@@ -4,7 +4,7 @@
 
     <item
         android:id="@+id/config_fan"
-        android:icon="@drawable/settings_white"
+        android:icon="@drawable/settings_"
         android:title="@string/config_fan"
         app:showAsAction="ifRoom" />
 

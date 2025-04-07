@@ -12,10 +12,9 @@ public class CardNew {
     private final String formatData = "dd/MM/yyyy";
     private SimpleDateFormat sdf = new SimpleDateFormat(formatData);
 
-    public CardNew(String club,String title, String description, int image) {
+    public CardNew(String club, String title, int image) {
         this.club = club;
         this.title = title;
-        this.description = description;
         this.image = image;
         this.date = sdf.format(new Date());
     }

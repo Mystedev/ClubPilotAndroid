@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -21,7 +22,6 @@ import com.resend.services.emails.model.CreateEmailOptions;
 import com.resend.services.emails.model.CreateEmailResponse;
 
 public class Contact_Admin extends AppCompatActivity implements View.OnClickListener{
-    Button btnBack;
     Button btnSend;
 
     @Override
@@ -35,18 +35,29 @@ public class Contact_Admin extends AppCompatActivity implements View.OnClickList
             return insets;
         });
 
-        btnBack = findViewById(R.id.buttonBack);
-        btnBack.setOnClickListener(this);
         btnSend = findViewById(R.id.buttonSentEmail);
         btnSend.setOnClickListener(this);
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        // Mostrar botón "atrás"/izquierdo
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            toolbar.setNavigationIcon(R.drawable.back_arrow); // tu drawable personalizado
+
+            // Acción al pulsarlo
+            toolbar.setNavigationOnClickListener(v -> {
+                // Lo que tú quieras hacer, como volver a otra actividad:
+                Intent intent = new Intent(Contact_Admin.this, Fan_Configuration.class);
+                startActivity(intent);
+                finish(); // Opcional, para cerrar esta actividad
+            });
+        }
     }
 
     @Override
     public void onClick(View view) {
-        if (view.getId() == R.id.buttonBack){
-            Intent intent = new Intent(this, Fan_Configuration.class);
-            startActivity(intent);
-        }
         if (view.getId() == R.id.buttonSentEmail){
             sendMessage(view);
         }

@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -16,6 +17,7 @@ import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.graphics.Insets;
 import androidx.core.os.LocaleListCompat;
 import androidx.core.view.ViewCompat;
@@ -33,12 +35,14 @@ public class Fan_Configuration extends AppCompatActivity implements View.OnClick
     TextView textContactAdmin;
     Spinner spinner;
     String idioma,english,spanish,catalan,logout,cancel,hasLogout,alert,loginOut;
+    
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_fan_configuration);
+        setSupportActionBar(findViewById(R.id.toolbar));
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -66,20 +70,6 @@ public class Fan_Configuration extends AppCompatActivity implements View.OnClick
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
                 String opcio = adapterView.getItemAtPosition(position).toString();
-                List<String> idioma = Arrays.asList("en","es","ca");
-                if(opcio.equals(english)){
-                    // Configurar el idioma de la aplicación
-                    LocaleListCompat appLocale = LocaleListCompat.forLanguageTags(idioma.get(0));
-                    AppCompatDelegate.setApplicationLocales(appLocale);
-                } else if(opcio.equals(spanish)){
-                    // Configurar el idioma de la aplicación
-                    LocaleListCompat appLocale = LocaleListCompat.forLanguageTags(idioma.get(1));
-                    AppCompatDelegate.setApplicationLocales(appLocale);
-                } else if(opcio.equals(catalan)){
-                    // Configurar el idioma de la aplicación
-                    LocaleListCompat appLocale = LocaleListCompat.forLanguageTags(idioma.get(2));
-                    AppCompatDelegate.setApplicationLocales(appLocale);
-                }
             }
 
             @Override
@@ -94,6 +84,25 @@ public class Fan_Configuration extends AppCompatActivity implements View.OnClick
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, items);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        // Mostrar botón "atrás"/izquierdo
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            toolbar.setNavigationIcon(R.drawable.back_arrow); // tu drawable personalizado
+
+            // Acción al pulsarlo
+            toolbar.setNavigationOnClickListener(v -> {
+                // Lo que tú quieras hacer, como volver a otra actividad:
+                Intent intent = new Intent(Fan_Configuration.this, News.class);
+                startActivity(intent);
+                finish(); // Opcional, para cerrar esta actividad
+            });
+        }
+
+
     }
 
     @Override

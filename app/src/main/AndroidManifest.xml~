@@ -17,12 +17,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ClubPilot"
         tools:targetApi="31">
+        
+        <activity
+            android:name=".Fan.NewsDetail"
+            android:exported="false" />
         <activity
             android:name=".Fan.RegisterFan"
-            android:exported="false" />
+            android:exported="false"
+            android:label="@string/registerFan" />
         <activity
             android:name=".PSP.DownloadFiles"
-            android:exported="false" />
+            android:exported="false"
+            tools:ignore="Instantiatable,MissingClass" />
         <activity
             android:name=".Fan.Contact_Admin"
             android:exported="false" />

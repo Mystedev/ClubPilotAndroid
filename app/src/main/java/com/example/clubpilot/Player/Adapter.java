@@ -29,7 +29,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-       // events = listEvents.get(position);
+        // events = listEvents.get(position);
         holder.description.setText(listEvents.get(position).getDescription());
         holder.data.setText(listEvents.get(position).getDate().toString());
     }
