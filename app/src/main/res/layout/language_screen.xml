@@ -12,18 +12,18 @@
         android:id="@+id/buttonStart"
         android:layout_width="match_parent"
         android:layout_height="70dp"
-        android:layout_marginBottom="24dp"
-        android:layout_marginRight="30dp"
         android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginBottom="24dp"
         android:text="@string/inicio"
         android:textSize="20sp"
-        app:cornerRadius="20dp"
+        app:cornerRadius="14dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/radioGroup"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="@+id/radioGroup"
         app:layout_constraintTop_toBottomOf="@+id/radioGroup"
-        app:layout_constraintVertical_bias="0.617" />
+        app:layout_constraintVertical_bias="0.897" />
 
     <TextView
         android:id="@+id/textView"
@@ -33,8 +33,10 @@
         android:textSize="34sp"
         app:layout_constraintBottom_toTopOf="@+id/textView2"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.255" />
 
     <TextView
         android:id="@+id/textView2"
@@ -46,22 +48,24 @@
         android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/radioGroup"
         app:layout_constraintEnd_toEndOf="@+id/radioGroup"
+        app:layout_constraintHorizontal_bias="0.6"
         app:layout_constraintStart_toStartOf="@+id/radioGroup"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
 
     <RadioGroup
         android:id="@+id/radioGroup"
-        android:layout_width="220dp"
-        android:layout_height="wrap_content"
-        android:textAlignment="center"
+        android:layout_width="289dp"
+        android:layout_height="166dp"
+        android:background="@drawable/custom_card"
         android:padding="15dp"
+        android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:background="@drawable/custom_card"
-        app:layout_constraintVertical_bias="0.655">
+        app:layout_constraintVertical_bias="0.777">
 
         <RadioButton
             android:id="@+id/english"

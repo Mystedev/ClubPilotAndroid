@@ -32,12 +32,13 @@
     </androidx.appcompat.widget.Toolbar>
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="323dp"
+        android:layout_height="473dp"
         android:layout_marginHorizontal="16dp"
         android:layout_marginVertical="10dp"
         android:orientation="vertical"
         android:padding="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/buttonLogin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.437"
         app:layout_constraintStart_toStartOf="parent"

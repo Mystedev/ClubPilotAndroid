@@ -12,18 +12,18 @@
         android:id="@+id/buttonStart"
         android:layout_width="match_parent"
         android:layout_height="70dp"
-        android:layout_marginBottom="24dp"
-        android:layout_marginRight="30dp"
         android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginBottom="24dp"
         android:text="@string/inicio"
         android:textSize="20sp"
-        app:cornerRadius="20dp"
+        app:cornerRadius="14dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/radioGroup"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="@+id/radioGroup"
         app:layout_constraintTop_toBottomOf="@+id/radioGroup"
-        app:layout_constraintVertical_bias="0.617" />
+        app:layout_constraintVertical_bias="0.897" />
 
     <TextView
         android:id="@+id/textView"
@@ -71,14 +71,14 @@
             android:textSize="20sp" />
 
         <RadioButton
-            android:id="@+id/radioButton2"
+            android:id="@+id/spanish"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/spanish"
             android:textSize="20sp" />
 
         <RadioButton
-            android:id="@+id/radioButton3"
+            android:id="@+id/catalan"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/catalan"

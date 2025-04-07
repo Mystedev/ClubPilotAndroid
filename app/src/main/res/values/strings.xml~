@@ -39,7 +39,7 @@
     <string name="new_email">New email</string>
     <string name="confirm_password">Confirm</string>
     <string name="confirm_email">Confirm email</string>
-    <string name="registerFan">Sign up</string>
+    <string name="registerFan">Register account</string>
     <!--Dades del fan per registrar-se-->
     <string name="username">Username</string>
     <string name="name" tools:ignore="DuplicateDefinition">Name</string>

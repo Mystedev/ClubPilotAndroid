@@ -7,6 +7,7 @@ import android.widget.ImageView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -14,8 +15,8 @@ import androidx.core.view.WindowInsetsCompat;
 import com.example.clubpilot.Login;
 import com.example.clubpilot.R;
 
-public class RegisterFan extends AppCompatActivity implements View.OnClickListener{
-    ImageView backArrow;
+public class RegisterFan extends AppCompatActivity {
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,15 +28,22 @@ public class RegisterFan extends AppCompatActivity implements View.OnClickListen
             return insets;
         });
 
-        backArrow = findViewById(R.id.backArrow);
-        backArrow.setOnClickListener(this);
-    }
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
-    @Override
-    public void onClick(View view) {
-        if(view.getId() == R.id.backArrow){
-            Intent intent = new Intent(this, Login.class);
-            startActivity(intent);
+        // Mostrar botón "atrás"/izquierdo
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            toolbar.setNavigationIcon(R.drawable.back_arrow); // tu drawable personalizado
+
+            // Acción al pulsarlo
+            toolbar.setNavigationOnClickListener(v -> {
+                // Lo que tú quieras hacer, como volver a otra actividad:
+                Intent intent = new Intent(RegisterFan.this, Login.class);
+                startActivity(intent);
+                finish(); // Opcional, para cerrar esta actividad
+            });
         }
+
     }
 }

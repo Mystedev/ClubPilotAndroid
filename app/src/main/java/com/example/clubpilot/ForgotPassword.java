@@ -10,14 +10,17 @@ import android.widget.ImageView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.clubpilot.Fan.RegisterFan;
+
 import java.text.SimpleDateFormat;
 
-public class ForgotPassword extends AppCompatActivity implements  View.OnClickListener {
-    ImageView back;
+public class ForgotPassword extends AppCompatActivity  {
+
 
     @SuppressLint("WrongViewCast")
     @Override
@@ -30,15 +33,24 @@ public class ForgotPassword extends AppCompatActivity implements  View.OnClickLi
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        back = findViewById(R.id.back);
-        back.setOnClickListener(this);
-    }
 
-    @Override
-    public void onClick(View view) {
-        if(view.getId() == R.id.back){
-            Intent intent = new Intent(this, Login.class);
-            startActivity(intent);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        // Mostrar botón "atrás"/izquierdo
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            toolbar.setNavigationIcon(R.drawable.back_arrow); // tu drawable personalizado
+
+            // Acción al pulsarlo
+            toolbar.setNavigationOnClickListener(v -> {
+                // Lo que tú quieras hacer, como volver a otra actividad:
+                Intent intent = new Intent(ForgotPassword.this, Login.class);
+                startActivity(intent);
+                finish(); // Opcional, para cerrar esta actividad
+            });
         }
     }
+
+
 }
