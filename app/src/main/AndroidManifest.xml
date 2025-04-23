@@ -58,10 +58,6 @@
             android:label="@string/noticies" />
         <activity
             android:name=".Login"
-            android:exported="false"
-            android:label="@string/login" />
-        <activity
-            android:name=".LanguageScreen"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

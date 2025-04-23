@@ -3,7 +3,9 @@ package com.example.clubpilot.Player;
 import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -17,23 +19,20 @@ import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.graphics.Insets;
+import androidx.core.os.LocaleListCompat;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.example.clubpilot.Fan.Contact_Admin;
-import com.example.clubpilot.Fan.Fan_Configuration;
-import com.example.clubpilot.Fan.News;
 import com.example.clubpilot.Login;
 import com.example.clubpilot.R;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
 
 public class Player_Configuration extends AppCompatActivity implements View.OnClickListener {
     Button buttonBack;
-    Spinner spinner;
     TextView account;
     // Strings generals
     String logout,catalan,english,spanish,idioma,cancel,hasLogout;
@@ -64,27 +63,6 @@ public class Player_Configuration extends AppCompatActivity implements View.OnCl
         account = findViewById(R.id.textAccount);
         account.setOnClickListener(this);
         // Spinner selector de idioma
-        spinner = findViewById(R.id.spinnerIdiomes);
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
-                String tipo_usuari = adapterView.getItemAtPosition(position).toString();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-                Toast.makeText(Player_Configuration.this, idioma, Toast.LENGTH_SHORT).show();
-            }
-        });
-        // Llista de opcions
-        ArrayList<String> items = new ArrayList<>();
-        items.add(idioma);
-        items.add(english);
-        items.add(spanish);
-        items.add(catalan);
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, items);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -139,5 +117,41 @@ public class Player_Configuration extends AppCompatActivity implements View.OnCl
         builder.setMessage(loginOut);
         AlertDialog dialog = builder.create();
         dialog.show();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.idioma, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        String selectedLanguage;
+        // Obtener el idioma seleccionado
+
+        if (item.getItemId() == R.id.englishMenu) {
+            selectedLanguage = "en";
+        } else if (item.getItemId() == R.id.catalanMenu) {
+            selectedLanguage = "ca";
+        } else if (item.getItemId() == R.id.spanishMenu) {
+            selectedLanguage = "es";
+        } else {
+            selectedLanguage = "en";
+        }
+
+        // Guardar en SharedPreferences
+        SharedPreferences sharedPref = getSharedPreferences("config", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString("idioma", selectedLanguage);
+        editor.apply();
+
+        // Cambiar idioma
+        LocaleListCompat appLocale = LocaleListCompat.forLanguageTags(selectedLanguage);
+        AppCompatDelegate.setApplicationLocales(appLocale);
+        recreate();
+
+        return super.onOptionsItemSelected(item);
     }
 }

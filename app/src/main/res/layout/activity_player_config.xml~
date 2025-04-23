@@ -5,7 +5,6 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/gradient_blue"
     tools:context=".Fan.Fan_Configuration">
 
     <androidx.appcompat.widget.Toolbar
@@ -16,6 +15,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:title="@string/config_fan"
+        app:menu="@menu/idioma"
         app:titleTextColor="@android:color/black"
         tools:ignore="MissingConstraints" >
 
@@ -31,13 +31,14 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="142dp"
-        android:layout_height="109dp"
-        android:layout_marginTop="58dp"
-        android:layout_marginBottom="76dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.384"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        app:layout_constraintVertical_bias="0.954"
         app:srcCompat="@drawable/ui" />
 
     <LinearLayout
@@ -85,18 +86,7 @@
         </LinearLayout>
 
 
-        <Spinner
-            android:id="@+id/spinnerIdiomes"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginRight="15dp"
-            android:textAlignment="textStart"
-            app:layout_constraintEnd_toEndOf="@+id/themeChange"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/themeChange"
-            app:layout_constraintTop_toBottomOf="@+id/themeChange" />
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -112,7 +102,7 @@
                 android:layout_marginTop="5dp"
                 android:layout_marginRight="15dp"
                 android:text="@string/account"
-                android:textColor="#2D667C"
+                android:textColor="@color/black"
                 android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/spinnerIdiomes"

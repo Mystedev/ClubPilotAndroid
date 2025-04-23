@@ -2,7 +2,11 @@ package com.example.clubpilot;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -12,11 +16,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.graphics.Insets;
+import androidx.core.os.LocaleListCompat;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.clubpilot.Fan.Fan_Configuration;
 import com.example.clubpilot.Fan.News;
 import com.example.clubpilot.Fan.RegisterFan;
 import com.example.clubpilot.PSP.ClubXML;
@@ -26,7 +35,15 @@ import com.example.clubpilot.PSP.TipusEsdevenimentXML;
 import com.example.clubpilot.PSP.UsuariXML;
 import com.example.clubpilot.Player.Dashboard;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class Login extends AppCompatActivity implements View.OnClickListener {
     Button buttonlogin;
@@ -36,9 +53,21 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     Spinner user;
     // Strings
     String tipusUsuari,player,fan,errorMessage;
+    // DB
+    Conection conn;
+    Connection con;
+    ResultSet rs;
+    String str;
+
     @SuppressLint({"MissingInflatedId", "WrongViewCast"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        // 💡 Configurar el idioma ANTES de cargar el layout
+        SharedPreferences sharedPref = getSharedPreferences("config", MODE_PRIVATE);
+        String savedLanguage = sharedPref.getString("idioma", "en");
+        LocaleListCompat appLocale = LocaleListCompat.forLanguageTags(savedLanguage);
+        AppCompatDelegate.setApplicationLocales(appLocale);
+
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_login);
@@ -75,7 +104,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                 Toast.makeText(Login.this, tipusUsuari, Toast.LENGTH_SHORT).show();
             }
         });
-        // Llista d'opcions d'idiomes
+        // Llista d'opcions de jugadors
         ArrayList<String> items = new ArrayList<>();
         items.add(tipusUsuari);
         items.add(player);
@@ -103,13 +132,58 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         } else {
             Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show();
         }*/
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        // Mostrar botón "atrás"/izquierdo
+        if (getSupportActionBar() != null) {
+            //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+            // Acción al pulsarlo
+            toolbar.setNavigationOnClickListener(v -> {
+                // Lo que tú quieras hacer, como volver a otra actividad:
+                Intent intent = getIntent();
+                startActivity(intent);
+                recreate();
+            });
+        }
+
+        conn = new Conection();
+        connect();
+    }
+    public void connect() {
+
+        ExecutorService executorService = Executors.newSingleThreadExecutor();
+        executorService.execute(() -> {
+            try{
+                con = Conection.CONN();
+                if (con == null) {
+                    str = "Error connecting to database";
+                } else {
+                    str = "Connected to database";
+                }
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+
+            runOnUiThread(() -> {
+                try{
+                    Thread.sleep(1000);
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+                Toast.makeText(this, str, Toast.LENGTH_SHORT).show();
+            });
+        });
     }
 
     @Override
     public void onClick(View view) {
         if (view.getId() == R.id.buttonLogin){
             if(user.getSelectedItem().toString().equals(tipusUsuari)){
-                Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show();
+
+
             } else if (user.getSelectedItem().toString().equals(fan)){
                 Intent intent = new Intent(this, News.class);
                 startActivity(intent);
@@ -126,6 +200,44 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
             Intent intent = new Intent(this, RegisterFan.class);
             startActivity(intent);
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.idioma, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        String selectedLanguage;
+        // Obtener el idioma seleccionado
+
+        if (item.getItemId() == R.id.englishMenu) {
+            selectedLanguage = "en";
+        } else if (item.getItemId() == R.id.catalanMenu) {
+            selectedLanguage = "ca";
+        } else if (item.getItemId() == R.id.spanishMenu) {
+            selectedLanguage = "es";
+        } else {
+            selectedLanguage = "en";
+        }
+
+        // Guardar en SharedPreferences
+        SharedPreferences sharedPref = getSharedPreferences("config", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString("idioma", selectedLanguage);
+        editor.apply();
+
+        // Cambiar idioma
+        LocaleListCompat appLocale = LocaleListCompat.forLanguageTags(selectedLanguage);
+        AppCompatDelegate.setApplicationLocales(appLocale);
+
+        // Reiniciar la actividad
+        recreate();
+
+        return super.onOptionsItemSelected(item);
     }
 
 }
