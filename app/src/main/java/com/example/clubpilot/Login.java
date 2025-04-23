@@ -160,7 +160,15 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                 if (con == null) {
                     str = "Error connecting to database";
                 } else {
-                    str = "Connected to database";
+                    String query = "SELECT nom FROM Usuari WHERE id = 1";
+                    Statement stmt = con.createStatement();
+                    rs = stmt.executeQuery(query);
+                    if (rs.next()) {
+                        String nom = rs.getString("nom");
+                        str = nom;
+                    } else {
+                        str = "No se encontró el usuario.";
+                    }
                 }
             } catch (Exception e) {
                 throw new RuntimeException(e);
