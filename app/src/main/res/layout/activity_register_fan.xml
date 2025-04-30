@@ -18,7 +18,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:title="@string/registerFan"
-        app:titleTextColor="@android:color/black"
+        app:titleTextColor="?attr/colorOnPrimary"
         tools:ignore="MissingConstraints">
 
         <!-- Botón personalizado a la izquierda -->
@@ -35,14 +35,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
-        android:layout_marginVertical="10dp"
+        android:layout_marginVertical="30dp"
+        android:layout_marginTop="140dp"
         android:orientation="vertical"
         android:padding="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/buttonLogin"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.437"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar"
-        app:layout_constraintVertical_bias="0.5">
+        app:layout_constraintVertical_bias="1.0">
 
         <EditText
             android:id="@+id/editTextText"
@@ -56,13 +57,14 @@
             android:hint="@string/username"
             android:inputType="text"
             android:padding="8dp"
-            android:textColor="#837D7D"
+            android:textColor="?attr/colorSecondary"
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
             android:id="@+id/nameFan"
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:layout_marginTop="30dp"
             android:layout_marginBottom="10dp"
             android:background="@drawable/custom_edittext"
             android:drawableLeft="@drawable/account_circle_24"
@@ -70,7 +72,7 @@
             android:hint="@string/name"
             android:inputType="text"
             android:padding="8dp"
-            android:textColor="#837D7D"
+            android:textColor="?attr/colorSecondary"
             app:layout_constraintBottom_toBottomOf="parent"
             tools:layout_editor_absoluteX="42dp" />
 
@@ -78,6 +80,7 @@
             android:id="@+id/editTextText2"
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:layout_marginTop="30dp"
             android:layout_marginBottom="10dp"
             android:background="@drawable/custom_edittext"
             android:drawableLeft="@drawable/account_circle_24"
@@ -85,7 +88,7 @@
             android:hint="@string/firstName"
             android:inputType="text"
             android:padding="8dp"
-            android:textColor="#837D7D"
+            android:textColor="?attr/colorSecondary"
             app:layout_constraintBottom_toBottomOf="parent"
             tools:layout_editor_absoluteX="29dp" />
 
@@ -93,6 +96,7 @@
             android:id="@+id/editTextText3"
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:layout_marginTop="30dp"
             android:layout_marginBottom="10dp"
             android:background="@drawable/custom_edittext"
             android:drawableLeft="@drawable/lock_24"
@@ -100,7 +104,7 @@
             android:hint="@string/emailFan"
             android:inputType="text"
             android:padding="8dp"
-            android:textColor="#837D7D"
+            android:textColor="?attr/colorSecondary"
             app:layout_constraintEnd_toEndOf="@+id/editTextText2"
             tools:layout_editor_absoluteY="295dp" />
 
@@ -108,13 +112,14 @@
             android:id="@+id/passwordFan"
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:layout_marginTop="30dp"
             android:background="@drawable/custom_edittext"
             android:drawableLeft="@drawable/lock_24"
             android:ems="10"
             android:hint="@string/passwordFan"
             android:inputType="text"
             android:padding="8dp"
-            android:textColor="#837D7D"
+            android:textColor="?attr/colorSecondary"
             app:layout_constraintEnd_toEndOf="@+id/editTextText2"
             tools:layout_editor_absoluteY="427dp" />
     </LinearLayout>
@@ -124,16 +129,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="14dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="100dp"
         android:backgroundTint="@color/red_900"
         android:text="Guardar"
+        android:textColor="?attr/colorOnPrimary"
         app:cornerRadius="10dp"
         app:icon="@drawable/confirm_white"
         app:iconGravity="textEnd"
         app:iconPadding="12dp"
-        app:iconTint="@color/white"
+        app:iconTint="?attr/colorOnPrimary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         tools:ignore="MissingConstraints" />
 

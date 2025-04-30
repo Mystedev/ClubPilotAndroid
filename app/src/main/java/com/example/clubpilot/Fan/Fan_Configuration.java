@@ -3,6 +3,8 @@ package com.example.clubpilot.Fan;
 import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -58,6 +60,7 @@ public class Fan_Configuration extends AppCompatActivity implements View.OnClick
         hasLogout = getResources().getString(R.string.hasLogout);
         alert = getResources().getString(R.string.alert);
         loginOut = getResources().getString(R.string.loginOut);
+
         // Elements visuals
         buttonBack = findViewById(R.id.buttonBack);
         buttonBack.setOnClickListener(this);
@@ -104,6 +107,9 @@ public class Fan_Configuration extends AppCompatActivity implements View.OnClick
 
 
     }
+
+
+
 
     @Override
     public void onClick(View view) {

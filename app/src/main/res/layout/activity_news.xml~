@@ -5,7 +5,6 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/gradient_blue"
     tools:context=".Fan.News">
 
     <androidx.appcompat.widget.Toolbar
@@ -18,7 +17,7 @@
         app:menu="@menu/fan"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         app:title="@string/noticies"
-        app:titleTextColor="@android:color/black"
+        app:titleTextColor="?attr/colorOnPrimary"
         tools:ignore="MissingConstraints" />
 
     <ListView

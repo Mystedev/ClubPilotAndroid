@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:padding="10dp"
     tools:context=".Fan.NewsDetail">
 
     <TextView
@@ -16,7 +17,7 @@
         android:textSize="20sp"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="20dp"
-        android:textColor="@color/green_300"
+        android:textColor="?attr/colorSecondary"
         android:layout_gravity="center"/>
 
         <androidx.cardview.widget.CardView
@@ -37,25 +38,26 @@
         </androidx.cardview.widget.CardView>
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
         android:id="@+id/description"
-        android:text="Description"
-        android:textSize="16sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_gravity="start"
-        android:layout_marginTop="20dp"/>
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="20dp"
+        android:text="Description"
+        android:textColor="?attr/colorSecondary"
+        android:textSize="16sp" />
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
         android:id="@+id/content"
-        android:text="Content"
-        android:textSize="14sp"
-        android:textColor="@color/green_300"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_gravity="start"
-        android:layout_marginTop="12dp"/>
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="12dp"
+        android:text="Contingut de la noticia"
+        android:textColor="?attr/colorOnTertiary"
+        android:textSize="14sp" />
 
 
 </LinearLayout>

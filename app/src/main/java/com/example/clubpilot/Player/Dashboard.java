@@ -68,6 +68,7 @@ public class Dashboard extends AppCompatActivity {
         recyclerView.scheduleLayoutAnimation();
         // Iniciar adapter
         recyclerView.setAdapter(adapter);
+
     }
 
     @Override
