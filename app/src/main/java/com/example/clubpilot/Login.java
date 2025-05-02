@@ -134,12 +134,10 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         } else {
             Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show();
         }*/
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
 
-        conn = new Conection();
-        connect();
+        //conn = new Conection();
+        //connect();
     }
     public void connect() {
         ExecutorService executorService = Executors.newSingleThreadExecutor();
