@@ -44,7 +44,7 @@ dependencies {
     androidTestImplementation libs.ext.junit
     androidTestImplementation libs.espresso.core
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'mysql:mysql-connector-java:5.1.49'
+    implementation("mysql:mysql-connector-java:5.1.49")
     implementation 'com.google.android.material:material:1.11.0'
     // Dependencia de commons-net per FTP
     implementation("commons-net:commons-net:3.9.0")

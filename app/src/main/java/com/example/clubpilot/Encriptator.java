@@ -1,6 +1,7 @@
 package com.example.clubpilot;
 
 import java.security.MessageDigest;
+import java.util.Base64;
 
 public class Encriptator {
     /*
@@ -14,16 +15,8 @@ public class Encriptator {
         try {
             MessageDigest digest = MessageDigest.getInstance("SHA-256");
             byte[] encodedHash = digest.digest(password.getBytes());
-
-            // Convertimos el hash a una cadena hexadecimal
-            StringBuilder hexString = new StringBuilder();
-            for (byte b : encodedHash) {
-                String hex = Integer.toHexString(0xff & b);
-                if (hex.length() == 1) hexString.append('0');
-                hexString.append(hex);
-            }
-            return hexString.toString();
-
+            // Convertir a Base64 en lugar de hexadecimal
+            return Base64.getEncoder().encodeToString(encodedHash);
         } catch (Exception e) {
             throw new RuntimeException("Error al generar hash", e);
         }

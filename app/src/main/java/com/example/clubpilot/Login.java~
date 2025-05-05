@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -57,6 +58,8 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     Connection con;
     ResultSet rs;
     String str;
+
+    EditText use, pass;
 
     @SuppressLint({"MissingInflatedId", "WrongViewCast"})
     @Override
@@ -134,55 +137,47 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         } else {
             Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show();
         }*/
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
-
-        //conn = new Conection();
-        //connect();
-    }
-    public void connect() {
-        ExecutorService executorService = Executors.newSingleThreadExecutor();
-        executorService.execute(() -> {
-            try{
-                con = Conection.CONN();
-                if (con == null) {
-                    str = "Error connecting to database";
-                } else {
-                    String query = "SELECT nom FROM Usuari WHERE id = 1";
-                    Statement stmt = con.createStatement();
-                    rs = stmt.executeQuery(query);
-                    if (rs.next()) {
-                        String nom = rs.getString("nom");
-                        str = nom;
-                    } else {
-                        str = "No se encontró el usuario.";
-                    }
-                }
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
-
-            runOnUiThread(() -> {
-                try{
-                    Thread.sleep(1000);
-                }catch (Exception e){
-                    e.printStackTrace();
-                }
-                Toast.makeText(this, str, Toast.LENGTH_SHORT).show();
-            });
-        });
+        use = findViewById(R.id.inputUser);
+        pass = findViewById(R.id.inputPassword);
     }
 
     @Override
     public void onClick(View view) {
         if (view.getId() == R.id.buttonLogin){
             if(user.getSelectedItem().toString().equals(tipusUsuari)){
-                //Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show();
-                connect();
+                Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show();
             } else if (user.getSelectedItem().toString().equals(fan)){
-                Intent intent = new Intent(this, News.class);
-                startActivity(intent);
+                // Obtenir les dades del formulari (LOGIN)
+                String username = use.getText().toString().trim();
+                String password = pass.getText().toString().trim();
+                // Comprovar que hagin dades
+                if (username.isEmpty() || password.isEmpty()) {
+                    Toast.makeText(this, "Introdueix usuari i contrasenya", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                ExecutorService executor = Executors.newSingleThreadExecutor();
+                executor.execute(() -> {
+                    // Obtenir dades de inici de sessio
+                    boolean loginSuccess = UserDAO.loginUser(username, password);
+
+                    runOnUiThread(() -> {
+                        if (loginSuccess) {
+                            String selectedUser = user.getSelectedItem().toString();
+                            Intent intent;
+                            if (selectedUser.equals(fan)) {
+                                intent = new Intent(this, News.class);
+                            } else {
+                                intent = new Intent(this, Dashboard.class);
+                            }
+                            startActivity(intent);
+                            finish();
+                        } else {
+                            Toast.makeText(this, "Credencials incorrectes", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                });
             } else if (user.getSelectedItem().toString().equals(player)){
                 Intent intent = new Intent(this, Dashboard.class);
                 startActivity(intent);
@@ -226,13 +221,11 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         editor.putString("idioma", selectedLanguage);
         editor.apply();
 
-        // Cambiar idioma
+        // Camviar idioma
         LocaleListCompat appLocale = LocaleListCompat.forLanguageTags(selectedLanguage);
         AppCompatDelegate.setApplicationLocales(appLocale);
 
-        // Reiniciar la actividad
         recreate();
-
         return super.onOptionsItemSelected(item);
     }
 

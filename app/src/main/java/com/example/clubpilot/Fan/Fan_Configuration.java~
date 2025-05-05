@@ -121,6 +121,10 @@ public class Fan_Configuration extends AppCompatActivity implements View.OnClick
             Intent intent = new Intent(this, Contact_Admin.class);
             startActivity(intent);
         }
+
+        if(view.getId() == R.id.themeChange){
+
+        }
     }
 
     public void showDialogo() {

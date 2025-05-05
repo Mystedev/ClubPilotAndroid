@@ -51,7 +51,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
-        <Switch
+        <androidx.appcompat.widget.SwitchCompat
             android:id="@+id/themeChange"
             android:layout_width="match_parent"
             android:layout_height="50dp"

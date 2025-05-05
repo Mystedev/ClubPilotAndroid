@@ -122,7 +122,7 @@
             android:drawableLeft="@drawable/lock_24"
             android:ems="10"
             android:hint="@string/passwordFan"
-            android:inputType="textPassword"
+            android:inputType="textCapCharacters"
             android:padding="8dp"
             android:textColor="?attr/colorSecondary"
             app:layout_constraintEnd_toEndOf="@+id/editTextText2"
