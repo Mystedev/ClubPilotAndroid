@@ -25,7 +25,7 @@ import com.google.android.material.button.MaterialButton;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class RegisterFan extends AppCompatActivity implements View.OnClickListener{
+public class RegisterFan extends AppCompatActivity implements View.OnClickListener {
 
     Button buttonRegister;
     EditText username,password,nom,cognoms,email;
@@ -40,19 +40,19 @@ public class RegisterFan extends AppCompatActivity implements View.OnClickListen
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-
+        // Obtenir toolbar personalitzat
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         // Mostrar botón "atrás"/izquierdo
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            toolbar.setNavigationIcon(R.drawable.back_arrow); // tu drawable personalizado
+            toolbar.setNavigationIcon(R.drawable.back_arrow);
 
             // Acción al pulsarlo
             toolbar.setNavigationOnClickListener(v -> {
                 // Lo que tú quieras hacer, como volver a otra actividad:
-                Intent intent = new Intent(RegisterFan.this, Login.class);
+                Intent intent = new Intent(this, Login.class);
                 startActivity(intent);
                 finish(); // Opcional, para cerrar esta actividad
             });
@@ -92,17 +92,24 @@ public class RegisterFan extends AppCompatActivity implements View.OnClickListen
     public void setNewAccount(String username, String password, String nom, String cognoms, String email) {
         ExecutorService executorService = Executors.newSingleThreadExecutor();
         executorService.execute(() -> {
-            boolean result = UserDAO.insertUser(username, password, nom, cognoms, email);
+            int userId = UserDAO.insertUserAndReturnId(username, password, nom, cognoms, email);
+            boolean result = false;
+            if (userId != -1) {
+                result = UserDAO.insertAficionat(userId);
+            }
+
+            boolean finalResult = result;
             runOnUiThread(() -> {
-                if (result) {
-                    Toast.makeText(this, "Usuari registrat correctament", Toast.LENGTH_SHORT).show();
+                if (finalResult) {
+                    Toast.makeText(this, "Usuari aficionat registrat correctament", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(this, Login.class);
                     startActivity(intent);
                     finish();
                 } else {
-                    Toast.makeText(this, "Error en registrar usuari", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Error en registrar usuari aficionat", Toast.LENGTH_SHORT).show();
                 }
             });
         });
     }
+
 }

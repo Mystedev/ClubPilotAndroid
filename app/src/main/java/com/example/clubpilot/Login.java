@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -106,8 +107,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                 Toast.makeText(Login.this, tipusUsuari, Toast.LENGTH_SHORT).show();
             }
         });
-        // Configurar tema de la app
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM); // -> Tema del sistema
 
         // Llista d'opcions de jugadors
         ArrayList<String> items = new ArrayList<>();
@@ -148,39 +147,9 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
             if(user.getSelectedItem().toString().equals(tipusUsuari)){
                 Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show();
             } else if (user.getSelectedItem().toString().equals(fan)){
-                // Obtenir les dades del formulari (LOGIN)
-                String username = use.getText().toString().trim();
-                String password = pass.getText().toString().trim();
-                // Comprovar que hagin dades
-                if (username.isEmpty() || password.isEmpty()) {
-                    Toast.makeText(this, "Introdueix usuari i contrasenya", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-                ExecutorService executor = Executors.newSingleThreadExecutor();
-                executor.execute(() -> {
-                    // Obtenir dades de inici de sessio
-                    boolean loginSuccess = UserDAO.loginUser(username, password);
-
-                    runOnUiThread(() -> {
-                        if (loginSuccess) {
-                            String selectedUser = user.getSelectedItem().toString();
-                            Intent intent;
-                            if (selectedUser.equals(fan)) {
-                                intent = new Intent(this, News.class);
-                            } else {
-                                intent = new Intent(this, Dashboard.class);
-                            }
-                            startActivity(intent);
-                            finish();
-                        } else {
-                            Toast.makeText(this, "Dades incorrectes", Toast.LENGTH_SHORT).show();
-                        }
-                    });
-                });
+                accesFan(); // Accedir com a fan
             } else if (user.getSelectedItem().toString().equals(player)){
-                Intent intent = new Intent(this, Dashboard.class);
-                startActivity(intent);
+                accesPlayer(); // Accedir com a jugador
             }
         }
         if (view.getId() == R.id.forgotPassowrd){
@@ -192,13 +161,73 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
             startActivity(intent);
         }
     }
+    public void accesPlayer(){
+        // Obtenir les dades del formulari (LOGIN)
+        String username = use.getText().toString().trim();
+        String password = pass.getText().toString().trim();
+        // Comprovar que hagin dades
+        if (username.isEmpty() || password.isEmpty()) {
+            Toast.makeText(this, "Introdueix usuari i contrasenya", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        ExecutorService executor = Executors.newSingleThreadExecutor();
+        executor.execute(() -> {
+            // Obtenir dades de inici de sessio
+            boolean loginSuccess = UserDAO.loginUser(username, password);
+
+            runOnUiThread(() -> {
+                if (loginSuccess) {
+                    String userType = UserDAO.getUserType(username);
+                    Log.d("UserTypeeeeeeeeeeeeeeeee", userType);
+
+                    if (userType.equals("Jugador") ) {
+                        Intent intent = new Intent(this, Dashboard.class);
+                        startActivity(intent);
+                        finish();
+                    } else {
+                        Toast.makeText(this, "Tipus d'usuari incorrecte", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+        });
+    }
+
+    public void accesFan(){
+        // Obtenir les dades del formulari (LOGIN)
+        String username = use.getText().toString().trim();
+        String password = pass.getText().toString().trim();
+        // Comprovar que hagin dades
+        if (username.isEmpty() || password.isEmpty()) {
+            Toast.makeText(this, "Introdueix usuari i contrasenya", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        ExecutorService executor = Executors.newSingleThreadExecutor();
+        executor.execute(() -> {
+            boolean loginSuccess = UserDAO.loginUser(username, password);
+
+            runOnUiThread(() -> {
+                if (loginSuccess) {
+                    String userType = UserDAO.getUserType(username);
+                    Log.d("UserTypeeeeeeeeeeeeeeeee", userType);
+
+                    if (userType.equals("Aficionado")) {
+                        Intent intent = new Intent(this, News.class);
+                        startActivity(intent);
+                    } else {
+                        Toast.makeText(this, "Tipus d'usuari incorrecte", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+        });
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.idioma, menu);
         return super.onCreateOptionsMenu(menu);
     }
-
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
@@ -228,5 +257,4 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         recreate();
         return super.onOptionsItemSelected(item);
     }
-
 }

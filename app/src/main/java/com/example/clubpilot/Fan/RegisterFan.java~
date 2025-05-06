@@ -25,7 +25,7 @@ import com.google.android.material.button.MaterialButton;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class RegisterFan extends AppCompatActivity implements View.OnClickListener{
+public class RegisterFan extends AppCompatActivity implements View.OnClickListener {
 
     Button buttonRegister;
     EditText username,password,nom,cognoms,email;
@@ -40,19 +40,19 @@ public class RegisterFan extends AppCompatActivity implements View.OnClickListen
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-
+        // Obtenir toolbar personalitzat
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         // Mostrar botón "atrás"/izquierdo
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            toolbar.setNavigationIcon(R.drawable.back_arrow); // tu drawable personalizado
+            toolbar.setNavigationIcon(R.drawable.back_arrow);
 
             // Acción al pulsarlo
             toolbar.setNavigationOnClickListener(v -> {
                 // Lo que tú quieras hacer, como volver a otra actividad:
-                Intent intent = new Intent(RegisterFan.this, Login.class);
+                Intent intent = new Intent(this, Login.class);
                 startActivity(intent);
                 finish(); // Opcional, para cerrar esta actividad
             });
@@ -82,7 +82,7 @@ public class RegisterFan extends AppCompatActivity implements View.OnClickListen
             if (usuari.isEmpty() || contrasenya.isEmpty() || nomText.isEmpty() || cognomsText.isEmpty() || correu.isEmpty()) {
                 Toast.makeText(this, "Rellena tots els camps", Toast.LENGTH_SHORT).show(); // Comprovar que els camps tenen dades
             } else {
-                String hashedPassword = Encriptator.hashPassword(contrasenya);
+                String hashedPassword = Encriptator.hashPassword(contrasenya); // Encriptar la contrasenya i pujarla
                 setNewAccount(usuari, hashedPassword, nomText, cognomsText, correu); // Registrar un usuari a la base de dades
             }
         }
@@ -92,7 +92,7 @@ public class RegisterFan extends AppCompatActivity implements View.OnClickListen
     public void setNewAccount(String username, String password, String nom, String cognoms, String email) {
         ExecutorService executorService = Executors.newSingleThreadExecutor();
         executorService.execute(() -> {
-            boolean result = UserDAO.insertUser(username, password, nom, cognoms, email);
+            boolean result = UserDAO.insertUserAndReturnId(username, password, nom, cognoms, email);
             runOnUiThread(() -> {
                 if (result) {
                     Toast.makeText(this, "Usuari registrat correctament", Toast.LENGTH_SHORT).show();
