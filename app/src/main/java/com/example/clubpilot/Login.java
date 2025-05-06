@@ -179,12 +179,14 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
             runOnUiThread(() -> {
                 if (loginSuccess) {
                     String userType = UserDAO.getUserType(username);
-                    Log.d("UserTypeeeeeeeeeeeeeeeee", userType);
+                    if(userType.equals("Unknown")){
+                        Toast.makeText(this, "Aquest usuari no existeix", Toast.LENGTH_SHORT).show();
+                    }
 
                     if (userType.equals("Jugador") ) {
                         Intent intent = new Intent(this, Dashboard.class);
+                        intent.putExtra("username", username);
                         startActivity(intent);
-                        finish();
                     } else {
                         Toast.makeText(this, "Tipus d'usuari incorrecte", Toast.LENGTH_SHORT).show();
                     }
@@ -210,10 +212,12 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
             runOnUiThread(() -> {
                 if (loginSuccess) {
                     String userType = UserDAO.getUserType(username);
-                    Log.d("UserTypeeeeeeeeeeeeeeeee", userType);
-
-                    if (userType.equals("Aficionado")) {
+                    if(userType.equals("Unknown")){
+                        Toast.makeText(this, "Aquest usuari no existeix", Toast.LENGTH_SHORT).show();
+                    }
+                    else if (userType.equals("Aficionado")) {
                         Intent intent = new Intent(this, News.class);
+                        intent.putExtra("username", username);
                         startActivity(intent);
                     } else {
                         Toast.makeText(this, "Tipus d'usuari incorrecte", Toast.LENGTH_SHORT).show();

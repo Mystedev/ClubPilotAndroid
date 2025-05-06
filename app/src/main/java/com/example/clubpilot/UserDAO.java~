@@ -220,19 +220,7 @@ public class UserDAO extends Encriptator{
                     e.printStackTrace();
                 }
             }
-        });
-
-        // Iniciar el hilo principal
-        getDataThread.start();
-
-        // Esperar a que el hilo principal termine
-        try {
-            getDataThread.join();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
         }
-
-        return playerData[0];
     }
 
 }

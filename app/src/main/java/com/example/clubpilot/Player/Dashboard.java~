@@ -83,7 +83,7 @@ public class Dashboard extends AppCompatActivity {
         String textWelcome = getString(R.string.welcome);
         welcome.setText(textWelcome + " " + name);
 
-
+        
     }
 
     @Override
