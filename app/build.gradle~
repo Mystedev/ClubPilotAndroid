@@ -4,7 +4,7 @@ plugins {
 
 android {
     namespace 'com.example.clubpilot'
-    compileSdk 35  // <-- Actualiza esto
+    compileSdk 35
 
     defaultConfig {
         applicationId "com.example.clubpilot"

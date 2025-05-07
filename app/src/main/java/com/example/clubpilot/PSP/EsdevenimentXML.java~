@@ -1,19 +1,23 @@
 package com.example.clubpilot.PSP;
 
 import android.os.Environment;
+import android.util.Log;
 
-import com.example.clubpilot.Player.Event;
+import com.google.android.datatransport.Event;
 
 import org.apache.commons.net.ftp.FTPClient;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.SocketException;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -75,7 +79,7 @@ public class EsdevenimentXML implements Runnable{
     }
 
     public static List<Event> parseEsdevenimentsXML() {
-        List<com.example.clubpilot.Player.Event> eventList = new ArrayList<>();
+        List<Event> eventList = new ArrayList<>();
 
         try {
             File downloadsDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);

@@ -9,6 +9,11 @@ public class Event {
     private final String formatData = "dd/MM/yyyy";
     private SimpleDateFormat sdf = new SimpleDateFormat(formatData);
 
+    public Event(String description,String data){
+        this.description = description;
+        this.date = data;
+    }
+
     public Event( String description) {
         this.date = sdf.format(new Date());
         this.description = description;
