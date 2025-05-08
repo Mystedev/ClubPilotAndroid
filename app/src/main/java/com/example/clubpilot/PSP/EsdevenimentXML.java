@@ -93,18 +93,15 @@ public class EsdevenimentXML implements Runnable{
             for (int i = 0; i < nodeList.getLength(); i++) {
                 Element element = (Element) nodeList.item(i);
 
-                String titol = element.getElementsByTagName("titol").item(0).getTextContent();
-                String data = element.getElementsByTagName("data").item(0).getTextContent();
                 String categoria = element.getElementsByTagName("categoria").item(0).getTextContent();
+                String data = element.getElementsByTagName("ordre").item(0).getTextContent();
+                String nom = element.getElementsByTagName("descripcio").item(0).getTextContent();
 
-                eventList.add(new com.example.clubpilot.Player.Event(titol, data));
+                eventList.add(new com.example.clubpilot.Player.Event(categoria, data, nom));
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         return eventList;
     }
-
-
 }

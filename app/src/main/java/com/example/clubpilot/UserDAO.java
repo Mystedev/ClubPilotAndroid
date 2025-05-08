@@ -235,4 +235,23 @@ public class UserDAO extends Encriptator{
         return playerData[0];
     }
 
+    public static int getUserId(String username) {
+        int userId = -1;
+        try (Connection conn = Conection.CONN()) {
+            if (conn != null) {
+                String query = "SELECT id FROM usuari WHERE username = ?";
+                PreparedStatement stmt = conn.prepareStatement(query);
+                stmt.setString(1, username);
+                ResultSet rs = stmt.executeQuery();
+                if (rs.next()) {
+                    userId = rs.getInt("id");
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return userId;
+    }
+
+
 }

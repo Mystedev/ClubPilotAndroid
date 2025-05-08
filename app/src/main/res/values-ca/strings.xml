@@ -51,4 +51,8 @@
     <string name="firstName">Cognoms</string>
     <string name="emailFan">Correu electronic</string>
     <string name="tipo_usuari">Selecciona un tipus d\'usuari</string>
+    <string name="dorsal">Dorsal</string>
+    <string name="jugador_titol">Jugador</string>
+    <string name="disponibilitat">Disponible</string>
+    <string name="posicio">Contrasenya</string>
 </resources>

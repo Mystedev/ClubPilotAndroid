@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LayoutAnimationController;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,6 +32,7 @@ public class Dashboard extends AppCompatActivity {
     RecyclerView recyclerView;
     ArrayList<Event> listEvents;
     TextView welcome, dorsal, disponibilidad, posicion;
+    Switch available;
 
     @SuppressLint({"MissingInflatedId", "SetTextI18n"})
     @Override
@@ -47,16 +49,6 @@ public class Dashboard extends AppCompatActivity {
         recyclerView = findViewById(R.id.listEvents);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-//        listEvents = new ArrayList<Event>();
-//        listEvents.add(new Event("Partido vs FCB"));
-//        listEvents.add(new Event("Partido vs RM"));
-//        listEvents.add(new Event("Evento bienvenida"));
-//        listEvents.add(new Event("Evento debut ??"));
-//        listEvents.add(new Event("Entreno liga"));
-//        listEvents.add(new Event("Partido vs PSG"));
-//        listEvents.add(new Event("Evento debut ??"));
-//        listEvents.add(new Event("Partido preparación"));
-//        listEvents.add(new Event("Entrenamiento publico"));
         listEvents = new ArrayList<>();
 
         Adapter adapter = new Adapter(listEvents);
@@ -76,13 +68,30 @@ public class Dashboard extends AppCompatActivity {
         dorsal = findViewById(R.id.dorsal);
         disponibilidad = findViewById(R.id.available);
         posicion = findViewById(R.id.posicio);
+        available = findViewById(R.id.available);
 
         // Mostra dades del jugador
         Intent intent = getIntent();
         String name = intent.getStringExtra("username");
+        String dorsal = intent.getStringExtra("playerDorsal");
+        String disponibilidad = intent.getStringExtra("playerDisponibilitat");
+        String posicion = intent.getStringExtra("playerPosicio");
+
         // Mostrar el text de benvinguda
         String textWelcome = getString(R.string.welcome);
         welcome.setText(textWelcome + " " + name);
+        // Mostrar el dorsal
+        String textDorsal = getString(R.string.dorsal);
+        this.dorsal.setText(textDorsal + " " + dorsal);
+        // Mostrar la disponibilidad
+        int checkState = Integer.parseInt(disponibilidad);
+        if(checkState == 1){
+            available.setChecked(true);
+        } else {
+            available.setChecked(false);
+        }
+        // Mostrar la posición
+        this.posicion.setText(posicion);
 
     }
 

@@ -53,6 +53,6 @@
     <string name="firstName">Apellidos</string>
     <string name="emailFan">Correo electronico</string>
     <string name="dorsal">Dorsal</string>
-    <string name="disponibilitat">Disponible</string>
+    <string name="disponibilitat">Correo</string>
     <string name="posicio">Contraseña</string>
 </resources>

@@ -30,6 +30,7 @@ import com.example.clubpilot.Fan.RegisterFan;
 import com.example.clubpilot.PSP.EsdevenimentXML;
 import com.example.clubpilot.PSP.NoticiaXML;
 import com.example.clubpilot.Player.Dashboard;
+import com.example.clubpilot.Player.PlayerData;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -148,25 +149,40 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
 
         ExecutorService executor = Executors.newSingleThreadExecutor();
         executor.execute(() -> {
-            // Obtenir dades de inici de sessio
             boolean loginSuccess = UserDAO.loginUser(username, password);
 
-            runOnUiThread(() -> {
-                if (loginSuccess) {
-                    String userType = UserDAO.getUserType(username);
-                    if(userType.equals("Unknown")){
-                        Toast.makeText(this, "Aquest usuari no existeix", Toast.LENGTH_SHORT).show();
-                    }
+            if (loginSuccess) {
+                String userType = UserDAO.getUserType(username);
+                if ("Jugador".equals(userType)) {
+                    // 1. Obtener el ID del usuario
+                    int userId = UserDAO.getUserId(username);
 
-                    if (userType.equals("Jugador") ) {
-                        Intent intent = new Intent(this, Dashboard.class);
-                        intent.putExtra("username", username);
-                        startActivity(intent);
-                    } else {
-                        Toast.makeText(this, "Tipus d'usuari incorrecte", Toast.LENGTH_SHORT).show();
-                    }
+                    // 2. Obtener datos del jugador
+                    PlayerData playerData = UserDAO.getDataPlayer(String.valueOf(userId));
+
+                    // 3. Ir al Dashboard
+                    runOnUiThread(() -> {
+                        if (playerData != null) {
+                            Intent intent = new Intent(this, Dashboard.class);
+                            intent.putExtra("username", username);
+                            intent.putExtra("playerDisponibilitat", playerData.getDisponibilitat());
+                            intent.putExtra("playerDorsal", playerData.getDorsal());
+                            intent.putExtra("playerPosicio", playerData.getPosicio());
+                            startActivity(intent);
+                        } else {
+                            Toast.makeText(this, "Error obtenint dades del jugador", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                } else {
+                    runOnUiThread(() ->
+                            Toast.makeText(this, "Tipus d'usuari incorrecte", Toast.LENGTH_SHORT).show()
+                    );
                 }
-            });
+            } else {
+                runOnUiThread(() ->
+                        Toast.makeText(this, "Usuari o contrasenya incorrectes", Toast.LENGTH_SHORT).show()
+                );
+            }
         });
     }
 
