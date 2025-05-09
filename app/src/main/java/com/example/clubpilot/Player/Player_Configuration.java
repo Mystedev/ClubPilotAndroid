@@ -1,5 +1,6 @@
 package com.example.clubpilot.Player;
 
+import android.accounts.Account;
 import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -89,8 +90,9 @@ public class Player_Configuration extends AppCompatActivity implements View.OnCl
             showDialogo();
         }
         if (view.getId() == R.id.textAccount){
-            Intent intent = new Intent(this, Account_Configuration.class);
+            Intent intent = new Intent(this, Account.class);
             startActivity(intent);
+            finish();
         }
     }
 

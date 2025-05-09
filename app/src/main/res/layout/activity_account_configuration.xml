@@ -16,7 +16,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:title="@string/config_fan"
         app:titleTextColor="?attr/colorSecondary"
-        tools:ignore="MissingConstraints" >
+        tools:ignore="MissingConstraints">
 
         <!-- Botón personalizado a la izquierda -->
         <ImageButton
@@ -46,8 +46,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="435dp"
-        android:paddingTop="120dp"
         android:orientation="vertical"
+        android:paddingTop="120dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">

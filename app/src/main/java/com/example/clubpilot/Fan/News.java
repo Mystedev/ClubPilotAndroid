@@ -22,20 +22,14 @@ import com.example.clubpilot.R;
 import com.example.clubpilot.databinding.ActivityNewsBinding;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 public class News extends AppCompatActivity{
-    ActivityNewsBinding binding;
-    ListAdapter adapter;
-    ArrayList<CardNew> cards = new ArrayList<>();
-    CardNew card;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        binding = ActivityNewsBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
+        setContentView(R.layout.activity_news);
         setSupportActionBar(findViewById(R.id.toolbar));
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
@@ -43,34 +37,7 @@ public class News extends AppCompatActivity{
             return insets;
         });
 
-        int[] images = {R.drawable.fcbarcelona, R.drawable.realmadrid, R.drawable.evento, R.drawable.debut, R.drawable.liga};
-        String[] title = {"FCB", "RB", "MCU", "LOP", "MC"};
-        String[] description = {"Partido vs FCB", "Partido vs RM", "Evento bienvenida", "Evento debut ??", "Entreno liga"};
-        for (int i = 0; i < images.length; i++) {
-            card = new CardNew(title[i], description[i], images[i]);
-            cards.add(card);
-        }
 
-        adapter = new NewsAdapter(this, cards);
-        binding.listView.setAdapter(adapter);
-        binding.listView.setClickable(true);
-
-        binding.listView.setOnItemClickListener((parent, view, position, id) -> {
-            Intent intent = new Intent(this, NewsDetail.class);
-            intent.putExtra("title", cards.get(position).getTitle());
-            intent.putExtra("description", cards.get(position).getDescription());
-            intent.putExtra("image", cards.get(position).getImage());
-            startActivity(intent);
-        });
-
-        // Iniciar animacio de la llista
-        Animation animation = AnimationUtils.loadAnimation(this, R.anim.fade_in);
-        binding.listView.startAnimation(animation);
-
-        LayoutAnimationController controller = AnimationUtils.loadLayoutAnimation(this, R.anim.layout_animation);
-        binding.listView.setLayoutAnimation(controller);
-        binding.listView.scheduleLayoutAnimation();
-        binding.listView.setAdapter(adapter);
     }
 
 

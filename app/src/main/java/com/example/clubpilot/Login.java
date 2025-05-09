@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -24,12 +23,13 @@ import androidx.core.graphics.Insets;
 import androidx.core.os.LocaleListCompat;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.clubpilot.Fan.News;
 import com.example.clubpilot.Fan.RegisterFan;
 import com.example.clubpilot.PSP.EsdevenimentXML;
-import com.example.clubpilot.PSP.NoticiaXML;
 import com.example.clubpilot.Player.Dashboard;
+import com.example.clubpilot.Player.Event;
 import com.example.clubpilot.Player.PlayerData;
 
 import java.sql.Connection;
@@ -46,11 +46,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     Spinner user;
     // Strings
     String tipusUsuari,player,fan,errorMessage;
-    // DB
-    Conection conn;
-    Connection con;
-    ResultSet rs;
-    String str;
 
     EditText use, pass;
 
@@ -108,12 +103,31 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, items);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         user.setAdapter(adapter);
-
         use = findViewById(R.id.inputUser);
         pass = findViewById(R.id.inputPassword);
 
-
     }
+
+//    public List<Event> downloadFromServer(){
+//        EsdevenimentXML ef = new EsdevenimentXML();
+//        Thread thread = new Thread(ef);
+//        thread.start();
+//
+//        try {
+//            thread.join();
+//        } catch (InterruptedException e) {
+//            throw new RuntimeException(e);
+//        }
+//
+//        if(ef.connected){
+//            Toast.makeText(this, "Connected to files", Toast.LENGTH_SHORT).show();
+//            return EsdevenimentXML.parseEsdevenimentsXML();
+//        } else {
+//            Toast.makeText(this, "Error descargando archivos", Toast.LENGTH_SHORT).show();
+//            return new ArrayList<>();
+//        }
+//    }
+
 
     @Override
     public void onClick(View view) {
@@ -154,20 +168,21 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
             if (loginSuccess) {
                 String userType = UserDAO.getUserType(username);
                 if ("Jugador".equals(userType)) {
-                    // 1. Obtener el ID del usuario
                     int userId = UserDAO.getUserId(username);
 
-                    // 2. Obtener datos del jugador
                     PlayerData playerData = UserDAO.getDataPlayer(String.valueOf(userId));
 
-                    // 3. Ir al Dashboard
                     runOnUiThread(() -> {
                         if (playerData != null) {
+                            //ArrayList<Event> events = (ArrayList<Event>) downloadFromServer();
+
+                            int playerDisponibilitat = Integer.parseInt(playerData.getDisponibilitat());
                             Intent intent = new Intent(this, Dashboard.class);
                             intent.putExtra("username", username);
-                            intent.putExtra("playerDisponibilitat", playerData.getDisponibilitat());
+                            intent.putExtra("playerDisponibilitat", playerDisponibilitat);
                             intent.putExtra("playerDorsal", playerData.getDorsal());
                             intent.putExtra("playerPosicio", playerData.getPosicio());
+                            //intent.putExtra("listEvents", events);
                             startActivity(intent);
                         } else {
                             Toast.makeText(this, "Error obtenint dades del jugador", Toast.LENGTH_SHORT).show();
@@ -207,8 +222,8 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                         Toast.makeText(this, "Aquest usuari no existeix", Toast.LENGTH_SHORT).show();
                     }
                     else if (userType.equals("Aficionado")) {
+
                         Intent intent = new Intent(this, News.class);
-                        intent.putExtra("username", username);
                         startActivity(intent);
                     } else {
                         Toast.makeText(this, "Tipus d'usuari incorrecte", Toast.LENGTH_SHORT).show();

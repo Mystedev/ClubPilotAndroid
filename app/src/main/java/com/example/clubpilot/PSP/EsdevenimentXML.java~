@@ -49,9 +49,7 @@ public class EsdevenimentXML implements Runnable{
                 connected = true;
                 System.out.println("Connection established...");
 
-                File downloadsDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
-                File file = new File(downloadsDir, "esdeveniment.xml");
-
+                File file = getLocalFile();
                 fos = new FileOutputStream(file);
                 boolean download = ftpClient.retrieveFile("/htdocs/esdeveniment.xml", fos);
 

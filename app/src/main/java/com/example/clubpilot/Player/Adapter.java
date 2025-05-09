@@ -14,7 +14,6 @@ import java.util.ArrayList;
 
 public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     ArrayList<Event> listEvents;
-    Event events = new Event("");
 
     public Adapter(ArrayList<Event> listEvents) {
         this.listEvents = listEvents;

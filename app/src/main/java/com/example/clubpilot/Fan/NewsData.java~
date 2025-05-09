@@ -1,0 +1,35 @@
+package com.example.clubpilot.Fan;
+
+public class NewsData {
+    private String id;
+    private String autor;
+    private String data;
+    private String descripcio;
+    private String titol;
+    public NewsData(String id) {
+        this.id = id;
+    }
+
+    public NewsData(String id, String autor, String data, String descripcio, String titol) {
+        this.id = id;
+        this.autor = autor;
+        this.data = data;
+        this.descripcio = descripcio;
+        this.titol = titol;
+    }
+    public String getId() {
+        return id;
+    }
+    public String getAutor() {
+        return autor;
+    }
+    public String getData() {
+        return data;
+    }
+    public String getDescripcio() {
+        return descripcio;
+    }
+    public String getTitol() {
+        return titol;
+    }
+}

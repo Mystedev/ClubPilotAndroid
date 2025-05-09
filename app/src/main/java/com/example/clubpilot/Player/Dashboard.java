@@ -27,8 +27,9 @@ import com.example.clubpilot.PSP.NoticiaXML;
 import com.example.clubpilot.R;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class Dashboard extends AppCompatActivity {
+public class Dashboard extends AppCompatActivity  {
     RecyclerView recyclerView;
     ArrayList<Event> listEvents;
     TextView welcome, dorsal, disponibilidad, posicion;
@@ -50,7 +51,6 @@ public class Dashboard extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         listEvents = new ArrayList<>();
-
         Adapter adapter = new Adapter(listEvents);
         // Iniciar animacio de la llista
         Animation animation = AnimationUtils.loadAnimation(this, R.anim.fade_in);
@@ -61,8 +61,15 @@ public class Dashboard extends AppCompatActivity {
         recyclerView.scheduleLayoutAnimation();
         // Iniciar adapter
         recyclerView.setAdapter(adapter);
+        downloadFromServer();
 
-        downloadFromServer(); // luego puedes descargar los eventos
+        // Obtener datos del intent
+        Intent intent = getIntent();
+//        List<Event> receivedEvents = (List<Event>) intent.getSerializableExtra("listEvents");
+//        if (receivedEvents != null) {
+//            listEvents.clear();
+//            listEvents.addAll(receivedEvents);
+//        }
 
         welcome = findViewById(R.id.welcome);
         dorsal = findViewById(R.id.dorsal);
@@ -71,10 +78,9 @@ public class Dashboard extends AppCompatActivity {
         available = findViewById(R.id.available);
 
         // Mostra dades del jugador
-        Intent intent = getIntent();
         String name = intent.getStringExtra("username");
         String dorsal = intent.getStringExtra("playerDorsal");
-        String disponibilidad = intent.getStringExtra("playerDisponibilitat");
+        int disponibilidad = intent.getIntExtra("playerDisponibilitat",0);
         String posicion = intent.getStringExtra("playerPosicio");
 
         // Mostrar el text de benvinguda
@@ -84,40 +90,35 @@ public class Dashboard extends AppCompatActivity {
         String textDorsal = getString(R.string.dorsal);
         this.dorsal.setText(textDorsal + " " + dorsal);
         // Mostrar la disponibilidad
-        int checkState = Integer.parseInt(disponibilidad);
-        if(checkState == 1){
+        if(disponibilidad == 1){
             available.setChecked(true);
         } else {
             available.setChecked(false);
         }
         // Mostrar la posición
         this.posicion.setText(posicion);
-
     }
 
-    public void downloadFromServer(){
-        NoticiaXML df = new NoticiaXML();
-        EsdevenimentXML ef = new EsdevenimentXML();
-        Thread thread = new Thread(df);
-        Thread thread2 = new Thread(ef);
+    public void downloadFromServer() {
+        EsdevenimentXML ef = new EsdevenimentXML(this);
+        Thread thread = new Thread(ef);
         thread.start();
-        thread2.start();
 
         try {
-            thread.join();
-            thread2.join();
+            thread.join(); // Espera a que termine la descarga
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
 
-        if(df.connected && ef.connected){
+        if (ef.connected) {
             Toast.makeText(this, "Connected to files", Toast.LENGTH_SHORT).show();
 
-            ArrayList<Event> events = (ArrayList<Event>) EsdevenimentXML.parseEsdevenimentsXML();
-            runOnUiThread(() -> {
-                listEvents.addAll(events);
-                recyclerView.getAdapter().notifyDataSetChanged();
-            });
+            List<Event> downloadedEvents = ef.parseEsdevenimentsXML(); // Usa el mismo objeto
+            if (downloadedEvents != null) {
+                listEvents.clear(); // Limpia lista original
+                listEvents.addAll(downloadedEvents); // Agrega los nuevos eventos
+                recyclerView.getAdapter().notifyDataSetChanged(); // Notifica al Adapter
+            }
 
         } else {
             Toast.makeText(this, "Error descargando archivos", Toast.LENGTH_SHORT).show();

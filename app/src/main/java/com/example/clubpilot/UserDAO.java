@@ -1,18 +1,12 @@
 package com.example.clubpilot;
 
-import android.content.Intent;
-import android.util.Log;
-import android.widget.Toast;
-
-import com.example.clubpilot.Fan.News;
+import com.example.clubpilot.Fan.NewsData;
 import com.example.clubpilot.Player.PlayerData;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 public class UserDAO extends Encriptator{
     public static String getUserNameById(int userId) {
@@ -233,6 +227,46 @@ public class UserDAO extends Encriptator{
         }
 
         return playerData[0];
+    }
+
+    public static NewsData getNewsData(String idUsuari) {
+        final NewsData[] newsData = {null};
+        Thread getDataThread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try (Connection conn = Conection.CONN()) {
+                    if (conn != null) {
+                        // Consulta SQL para obtener los campos id_usuari, disponibilitat, dorsal, posicio
+                        String query = "SELECT id_usuari FROM aficionat WHERE id_usuari = ?";
+                        PreparedStatement stmt = conn.prepareStatement(query);
+                        stmt.setString(1, idUsuari);
+                        ResultSet rs = stmt.executeQuery();
+
+                        if (rs.next()) {
+                            // Crear un objeto PlayerData con los valores obtenidos
+                            String id = rs.getString("id_usuari");
+
+                            // Crear y llenar el objeto PlayerData
+                            newsData[0] = new NewsData(id);
+                        }
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        // Iniciar el hilo principal
+        getDataThread.start();
+
+        // Esperar a que el hilo principal termine
+        try {
+            getDataThread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        return newsData[0];
     }
 
     public static int getUserId(String username) {
