@@ -26,8 +26,10 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.clubpilot.Fan.News;
+import com.example.clubpilot.Fan.NewsData;
 import com.example.clubpilot.Fan.RegisterFan;
 import com.example.clubpilot.PSP.EsdevenimentXML;
+import com.example.clubpilot.PSP.NoticiaXML;
 import com.example.clubpilot.Player.Dashboard;
 import com.example.clubpilot.Player.Event;
 import com.example.clubpilot.Player.PlayerData;
@@ -108,26 +110,45 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
 
     }
 
-//    public List<Event> downloadFromServer(){
-//        EsdevenimentXML ef = new EsdevenimentXML();
-//        Thread thread = new Thread(ef);
-//        thread.start();
-//
-//        try {
-//            thread.join();
-//        } catch (InterruptedException e) {
-//            throw new RuntimeException(e);
-//        }
-//
-//        if(ef.connected){
-//            Toast.makeText(this, "Connected to files", Toast.LENGTH_SHORT).show();
-//            return EsdevenimentXML.parseEsdevenimentsXML();
-//        } else {
-//            Toast.makeText(this, "Error descargando archivos", Toast.LENGTH_SHORT).show();
-//            return new ArrayList<>();
-//        }
-//    }
+    public List<Event> downloadFromServer(){
+        EsdevenimentXML ef = new EsdevenimentXML(this);
+        Thread thread = new Thread(ef);
+        thread.start();
 
+        try {
+            thread.join();
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
+        if(ef.connected){
+            Toast.makeText(this, "Connected to files", Toast.LENGTH_SHORT).show();
+            return EsdevenimentXML.parseEsdevenimentsXML();
+        } else {
+            Toast.makeText(this, "Error descargando archivos", Toast.LENGTH_SHORT).show();
+            return new ArrayList<>();
+        }
+    }
+
+    public List<NewsData> downloadNewsFromServer(){
+        NoticiaXML ef = new NoticiaXML(this);
+        Thread thread = new Thread(ef);
+        thread.start();
+
+        try {
+            thread.join();
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
+        if(ef.connected){
+            Toast.makeText(this, "Connected to files", Toast.LENGTH_SHORT).show();
+            return NoticiaXML.parseXML();
+        } else {
+            Toast.makeText(this, "Error descargando archivos", Toast.LENGTH_SHORT).show();
+            return new ArrayList<>();
+        }
+    }
 
     @Override
     public void onClick(View view) {
@@ -174,7 +195,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
 
                     runOnUiThread(() -> {
                         if (playerData != null) {
-                            //ArrayList<Event> events = (ArrayList<Event>) downloadFromServer();
+                            ArrayList<Event> events = (ArrayList<Event>) downloadFromServer();
 
                             int playerDisponibilitat = Integer.parseInt(playerData.getDisponibilitat());
                             Intent intent = new Intent(this, Dashboard.class);
@@ -182,7 +203,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                             intent.putExtra("playerDisponibilitat", playerDisponibilitat);
                             intent.putExtra("playerDorsal", playerData.getDorsal());
                             intent.putExtra("playerPosicio", playerData.getPosicio());
-                            //intent.putExtra("listEvents", events);
+                            intent.putExtra("listEvents", events);
                             startActivity(intent);
                         } else {
                             Toast.makeText(this, "Error obtenint dades del jugador", Toast.LENGTH_SHORT).show();
@@ -222,8 +243,10 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                         Toast.makeText(this, "Aquest usuari no existeix", Toast.LENGTH_SHORT).show();
                     }
                     else if (userType.equals("Aficionado")) {
+                        ArrayList<NewsData> news = (ArrayList<NewsData>) downloadNewsFromServer();
 
                         Intent intent = new Intent(this, News.class);
+                        intent.putExtra("listNews", news);
                         startActivity(intent);
                     } else {
                         Toast.makeText(this, "Tipus d'usuari incorrecte", Toast.LENGTH_SHORT).show();

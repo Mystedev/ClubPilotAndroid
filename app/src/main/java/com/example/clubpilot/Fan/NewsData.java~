@@ -10,8 +10,7 @@ public class NewsData {
         this.id = id;
     }
 
-    public NewsData(String id, String autor, String data, String descripcio, String titol) {
-        this.id = id;
+    public NewsData(String autor, String data, String descripcio, String titol) {
         this.autor = autor;
         this.data = data;
         this.descripcio = descripcio;

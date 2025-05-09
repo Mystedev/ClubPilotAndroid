@@ -39,6 +39,7 @@ public class Player_Configuration extends AppCompatActivity implements View.OnCl
     // Strings generals
     String logout,catalan,english,spanish,idioma,cancel,hasLogout;
     String alert,loginOut;
+    MaterialSwitch darkMode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,6 +84,15 @@ public class Player_Configuration extends AppCompatActivity implements View.OnCl
                 finish(); // Opcional, para cerrar esta actividad
             });
         }
+
+        darkMode = findViewById(R.id.darkMode);
+        darkMode.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isChecked) {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+            } else {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+            }
+        });
 
     }
 

@@ -5,7 +5,6 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/teal_200"
     android:elevation="2dp"
     android:orientation="vertical"
     android:padding="14dp"
@@ -18,7 +17,7 @@
         app:menu="@menu/player"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         app:title="@string/dashboard"
-        app:titleTextColor="?attr/colorOnPrimary"
+        app:titleTextColor="?attr/colorSecondary"
         tools:ignore="MissingConstraints" />
 
     <TextView
@@ -29,7 +28,7 @@
         android:paddingTop="10dp"
         android:text="@string/welcome"
         android:textAlignment="textStart"
-        android:textColor="?attr/colorOnPrimary"
+        android:textColor="?attr/colorSecondary"
         android:textSize="38sp"
         android:textStyle="bold" />
 
@@ -47,7 +46,7 @@
         android:layout_marginHorizontal="15dp"
         android:text="TextView"
         android:textAlignment="textStart"
-        android:textColor="?attr/colorOnPrimary"
+        android:textColor="?attr/colorSecondary"
         android:textSize="25sp" />
 
 
@@ -82,7 +81,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/available"
                 android:textAlignment="center"
-                android:textColor="?attr/colorSecondary"
+                android:textColor="?attr/colorOnPrimary"
                 android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/dorsal"
@@ -112,13 +111,12 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginHorizontal="0dp"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="20dp"
         android:paddingTop="10dp"
         android:textAlignment="center"
         app:cardBackgroundColor="?attr/colorOnBackground"
         app:cardCornerRadius="25dp"
-        app:contentPadding="8dp">
+        app:contentPadding="4dp">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/listEvents"

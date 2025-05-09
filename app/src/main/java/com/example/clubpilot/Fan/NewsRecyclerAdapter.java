@@ -35,16 +35,11 @@ public class NewsRecyclerAdapter extends RecyclerView.Adapter<NewsRecyclerAdapte
     @Override
     public void onBindViewHolder(@NonNull NewsViewHolder holder, int position) {
         NewsData item = newsList.get(position);
-        holder.title.setText(item.getAutor());
+        holder.title.setText(item.getTitol());
+        holder.author.setText(item.getAutor());
+        holder.description.setText(item.getDescripcio());
         holder.date.setText(item.getData());
 
-//        holder.itemView.setOnClickListener(v -> {
-//            Intent intent = new Intent(context, NewsDetail.class);
-//            intent.putExtra("title", item.getTitle());
-//            intent.putExtra("description", item.getDescription());
-//            intent.putExtra("image", item.getImage());
-//            context.startActivity(intent);
-//        });
     }
 
     @Override
@@ -54,13 +49,14 @@ public class NewsRecyclerAdapter extends RecyclerView.Adapter<NewsRecyclerAdapte
 
     public static class NewsViewHolder extends RecyclerView.ViewHolder {
 
-        TextView title, date;
+        TextView title, author, description, date;
 
         public NewsViewHolder(@NonNull View itemView) {
             super(itemView);
-
-            title = itemView.findViewById(R.id.listName);
-            date = itemView.findViewById(R.id.time);
+            title = itemView.findViewById(R.id.title);
+            author = itemView.findViewById(R.id.author);
+            description = itemView.findViewById(R.id.description);
+            date = itemView.findViewById(R.id.date);
         }
     }
 }

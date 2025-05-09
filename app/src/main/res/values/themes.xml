@@ -13,7 +13,7 @@
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
         <item name="colorOnTertiary">@color/green_500</item>
-        <item name="colorOnBackground">@color/white</item>
+        <item name="colorOnBackground">@color/purple_500</item>
     </style>
 
     <style name="roundedImageView">

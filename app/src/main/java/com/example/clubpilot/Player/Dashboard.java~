@@ -37,7 +37,7 @@ public class Dashboard extends AppCompatActivity {
     ArrayList<Event> listEvents;
     TextView welcome, dorsal, disponibilidad, posicion;
     Switch available;
-
+    MaterialSwitch darkMode;
 
     @SuppressLint({"MissingInflatedId", "SetTextI18n"})
     @Override
@@ -109,6 +109,16 @@ public class Dashboard extends AppCompatActivity {
         }
 
         adapter.notifyDataSetChanged();
+
+        darkMode = findViewById(R.id.darkMode);
+        darkMode.setChecked(prefs.getBoolean("darkMode", false));
+        darkMode.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isChecked) {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+            } else {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+            }
+        });
 
     }
 

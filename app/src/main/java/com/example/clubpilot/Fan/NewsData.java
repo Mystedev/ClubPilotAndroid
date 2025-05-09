@@ -1,6 +1,8 @@
 package com.example.clubpilot.Fan;
 
-public class NewsData {
+import java.io.Serializable;
+
+public class NewsData implements Serializable {
     private String id;
     private String autor;
     private String data;

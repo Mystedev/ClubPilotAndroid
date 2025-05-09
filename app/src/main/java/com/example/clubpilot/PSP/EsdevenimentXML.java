@@ -43,6 +43,7 @@ public class EsdevenimentXML implements Runnable{
 
         try {
             ftpClient.connect(hostname, port);
+            ftpClient.enterLocalPassiveMode();
             boolean login = ftpClient.login(username, password);
 
             if (login) {
@@ -78,16 +79,18 @@ public class EsdevenimentXML implements Runnable{
         }
     }
 
-    private File getLocalFile() {
-        return new File(context.getExternalFilesDir(null), "esdeveniment.xml");
+    private static File getLocalFile() {
+        File file = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
+        File downDir = new File(file, "esdeveniment.xml");
+        return downDir;
     }
 
 
-    public List<Event> parseEsdevenimentsXML() {
+    public static List<Event> parseEsdevenimentsXML() {
         List<Event> eventList = new ArrayList<>();
 
         try {
-            File file = getLocalFile();  // misma ruta
+            File file = getLocalFile();
 
             if (!file.exists() || file.length() == 0) {
                 System.out.println("Archivo no encontrado o vacío");
