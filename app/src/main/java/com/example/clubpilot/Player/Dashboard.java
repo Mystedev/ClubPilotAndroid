@@ -108,7 +108,6 @@ public class Dashboard extends AppCompatActivity {
             adapter.notifyDataSetChanged();
         }
 
-        adapter.notifyDataSetChanged();
 
     }
 

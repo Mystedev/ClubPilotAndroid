@@ -6,10 +6,12 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LayoutAnimationController;
 import android.widget.ListAdapter;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -21,6 +23,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.clubpilot.R;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 import java.util.ArrayList;
 
@@ -52,15 +55,16 @@ public class News extends AppCompatActivity{
             Log.d("NEWS", "Tamaño de la lista: " + newsList.size());
         }
 
-        newsList = new ArrayList<>();
-        newsList.add(new NewsData("Autor 1", "Descripción 1", "2024-05-01", "Título 1"));
-        newsList.add(new NewsData("Autor 2", "Descripción 2", "2024-05-02", "Título 2"));
+//        newsList = new ArrayList<>();
+//        newsList.add(new NewsData("Autor 1", "Descripción 1", "2024-05-01", "Título 1"));
+//        newsList.add(new NewsData("Autor 2", "Descripción 2", "2024-05-02", "Título 2"));
 
         // 2. Configurar el RecyclerView
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new NewsRecyclerAdapter(this, newsList);
         recyclerView.setAdapter(adapter);
+
     }
 
 
