@@ -246,6 +246,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                         ArrayList<NewsData> news = (ArrayList<NewsData>) downloadNewsFromServer();
 
                         Intent intent = new Intent(this, News.class);
+                        intent.putExtra("username", username);
                         intent.putExtra("listNews", news);
                         startActivity(intent);
                     } else {

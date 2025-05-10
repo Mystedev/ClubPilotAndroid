@@ -55,16 +55,11 @@ public class News extends AppCompatActivity{
             Log.d("NEWS", "Tamaño de la lista: " + newsList.size());
         }
 
-//        newsList = new ArrayList<>();
-//        newsList.add(new NewsData("Autor 1", "Descripción 1", "2024-05-01", "Título 1"));
-//        newsList.add(new NewsData("Autor 2", "Descripción 2", "2024-05-02", "Título 2"));
-
         // 2. Configurar el RecyclerView
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new NewsRecyclerAdapter(this, newsList);
         recyclerView.setAdapter(adapter);
-
     }
 
 
