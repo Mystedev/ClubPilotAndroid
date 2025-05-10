@@ -25,11 +25,4 @@ public class Conection {
         }
         return conn;
     }
-
-    /*
-    * String query = "SELECT * FROM Club";
-    * PreparedStatement stmt = con.prepareStatement(query);
-    * ResultSet rs = stmt.executeQuery();
-    * String nom = rs.getString("nom");
-    * * */
 }

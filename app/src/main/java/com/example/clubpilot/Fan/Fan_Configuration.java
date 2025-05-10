@@ -118,8 +118,15 @@ public class Fan_Configuration extends AppCompatActivity implements View.OnClick
             showDialogo();
         }
         if(view.getId() == R.id.textAccount){
-            Intent intent = new Intent(this, Contact_Admin.class);
-            startActivity(intent);
+            Intent emailIntent = new Intent(Intent.ACTION_SEND);
+            emailIntent.setType("message/rfc822");
+            emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{"moyadeni267@gmail.com"});
+
+            try {
+                startActivity(Intent.createChooser(emailIntent, "Enviar correo con..."));
+            } catch (android.content.ActivityNotFoundException ex) {
+                Toast.makeText(this, "No hay apps de correo instaladas.", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 

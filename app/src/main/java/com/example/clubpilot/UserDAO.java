@@ -304,4 +304,5 @@ public class UserDAO extends Encriptator{
         }
         return userId;
     }
+
 }

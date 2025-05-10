@@ -41,7 +41,6 @@
             android:src="@drawable/clubpilot" />
     </androidx.cardview.widget.CardView>
 
-
     <!-- RecyclerView debajo de la imagen -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"

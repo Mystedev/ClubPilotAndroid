@@ -287,7 +287,6 @@ public class UserDAO extends Encriptator{
         return success;
     }
 
-
     public static int getUserId(String username) {
         int userId = -1;
         try (Connection conn = Conection.CONN()) {
@@ -304,5 +303,15 @@ public class UserDAO extends Encriptator{
             e.printStackTrace();
         }
         return userId;
+    }
+
+    public static void getClub() {
+        try(Connection conn = Conection.CONN()){
+            if (conn != null) {
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

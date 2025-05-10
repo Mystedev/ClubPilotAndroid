@@ -91,7 +91,7 @@ public class NoticiaXML implements Runnable {
     public static List<NewsData> parseXML() {
         List<NewsData> newsList = new ArrayList<>();
 
-        try{
+        try {
             File file = getLocalFile();
 
             if (!file.exists() || file.length() == 0) {
@@ -117,10 +117,15 @@ public class NoticiaXML implements Runnable {
                 newsList.add(new NewsData(data, autor, titol, descripcio));
             }
 
+            // Ordenar por autor
+            newsList.sort((n1, n2) -> n1.getAutor().compareToIgnoreCase(n2.getAutor()));
+
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+
         return newsList;
     }
+
 
 }
