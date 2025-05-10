@@ -6,6 +6,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/wallpaper_blue"
     tools:context=".Fan.News">
 
     <!-- Toolbar en la parte superior -->
@@ -49,7 +50,6 @@
         android:layout_height="0dp"
         android:clipToPadding="false"
         android:padding="8dp"
-        android:background="@android:color/transparent"
         app:layout_constraintTop_toBottomOf="@id/imageCard"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"

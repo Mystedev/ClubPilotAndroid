@@ -287,7 +287,6 @@ public class UserDAO extends Encriptator{
         return success;
     }
 
-
     public static int getUserId(String username) {
         int userId = -1;
         try (Connection conn = Conection.CONN()) {

@@ -269,9 +269,24 @@ public class UserDAO extends Encriptator{
         return newsData[0];
     }
 
-    public static void updatePassword(){
-
+    public static boolean updatePassword(String email, String newPassword) {
+        boolean success = false;
+        try (Connection conn = Conection.CONN()) {
+            if (conn != null) {
+                String hashedPassword = hashPassword(newPassword); // Asegúrate de encriptar la nueva contraseña
+                String query = "UPDATE usuari SET password = ? WHERE email = ?";
+                PreparedStatement stmt = conn.prepareStatement(query);
+                stmt.setString(1, hashedPassword);
+                stmt.setString(2, email);
+                int rows = stmt.executeUpdate();
+                success = rows > 0;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return success;
     }
+
 
     public static int getUserId(String username) {
         int userId = -1;

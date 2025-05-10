@@ -50,7 +50,7 @@ public class ForgotPassword extends AppCompatActivity implements View.OnClickLis
                 // Lo que tú quieras hacer, como volver a otra actividad:
                 Intent intent = new Intent(ForgotPassword.this, Login.class);
                 startActivity(intent);
-                finish(); // Opcional, para cerrar esta actividad
+                finish();
             });
         }
 
