@@ -40,7 +40,6 @@ import java.util.List;
 
 public class Fan_Configuration extends AppCompatActivity implements View.OnClickListener {
     Button buttonBack;
-    TextView textContactAdmin;
     Spinner spinner;
     String idioma,english,spanish,catalan,logout,cancel,hasLogout,alert,loginOut;
 
@@ -70,9 +69,6 @@ public class Fan_Configuration extends AppCompatActivity implements View.OnClick
         // Elements visuals
         buttonBack = findViewById(R.id.buttonBack);
         buttonBack.setOnClickListener(this);
-
-        textContactAdmin = findViewById(R.id.textAccount);
-        textContactAdmin.setOnClickListener(this);
 
         spinner = findViewById(R.id.spinnerIdiomes);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -116,17 +112,6 @@ public class Fan_Configuration extends AppCompatActivity implements View.OnClick
     public void onClick(View view) {
         if (view.getId() == R.id.buttonBack){
             showDialogo();
-        }
-        if(view.getId() == R.id.textAccount){
-            Intent emailIntent = new Intent(Intent.ACTION_SEND);
-            emailIntent.setType("message/rfc822");
-            emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{"moyadeni267@gmail.com"});
-
-            try {
-                startActivity(Intent.createChooser(emailIntent, "Enviar correo con..."));
-            } catch (android.content.ActivityNotFoundException ex) {
-                Toast.makeText(this, "No hay apps de correo instaladas.", Toast.LENGTH_SHORT).show();
-            }
         }
     }
 

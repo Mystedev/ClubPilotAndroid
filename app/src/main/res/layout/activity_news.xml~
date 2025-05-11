@@ -6,6 +6,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+
     tools:context=".Fan.News">
 
     <!-- Toolbar en la parte superior -->
@@ -40,7 +41,7 @@
             android:scaleType="centerCrop"
             android:src="@drawable/clubpilot" />
     </androidx.cardview.widget.CardView>
-    
+
     <!-- RecyclerView debajo de la imagen -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"

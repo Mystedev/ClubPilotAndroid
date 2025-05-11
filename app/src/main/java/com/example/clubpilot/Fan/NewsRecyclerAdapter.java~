@@ -14,6 +14,7 @@ import com.example.clubpilot.R;
 import com.example.clubpilot.UserDAO;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -31,7 +32,7 @@ public class NewsRecyclerAdapter extends RecyclerView.Adapter<NewsRecyclerAdapte
         this.newsList = newsList;
         this.currentUsername = username;
         this.currentUserId = userId;
-        this.followedClubMap = followedClubs; // Usamos la lista de clubes seguidos
+        this.followedClubMap = new HashMap<>(followedClubs);
     }
 
     @NonNull
@@ -44,36 +45,32 @@ public class NewsRecyclerAdapter extends RecyclerView.Adapter<NewsRecyclerAdapte
     @Override
     public void onBindViewHolder(@NonNull NewsViewHolder holder, int position) {
         NewsData item = newsList.get(position);
+        
         holder.title.setText(item.getTitol());
         holder.author.setText(item.getAutor());
         holder.description.setText(item.getDescripcio());
         holder.date.setText(item.getData());
 
-        int clubId = item.getClubId(); // id del club asociado con esta noticia
-        String clubName = followedClubMap.get(clubId); // nombre del club desde followedClubMap
+        int clubId = item.getClubId();
+        String clubName = item.getClubName(); // fallback por si lo quieres usar también
 
-        // Verifica si el club está siendo seguido
         boolean isFollowing = followedClubMap.containsKey(clubId);
         holder.btnFollow.setText(isFollowing ? "Dejar de seguir" : "Seguir");
 
         holder.btnFollow.setOnClickListener(v -> {
             ExecutorService executor = Executors.newSingleThreadExecutor();
             executor.execute(() -> {
-                // Determina si el club está siendo seguido o no
                 boolean currentlyFollowing = followedClubMap.containsKey(clubId);
-
                 if (currentlyFollowing) {
-                    // Si ya está seguido, deshacer la acción
-                    UserDAO.unfollowClub(currentUserId, clubId);  // Asegúrate de que `unfollowClub` maneje correctamente el id de club
-                    followedClubMap.remove(clubId);  // Elimina del mapa
+                    UserDAO.unfollowClub(currentUserId, clubId);
+                    followedClubMap.remove(clubId);
                     holder.itemView.post(() -> {
                         holder.btnFollow.setText("Seguir");
                         Toast.makeText(context, "Has dejado de seguir a " + clubName, Toast.LENGTH_SHORT).show();
                     });
                 } else {
-                    // Si no está seguido, seguir al club
-                    UserDAO.followClub(currentUserId, clubId);  // Asegúrate de que `followClub` maneje correctamente el id de club
-                    followedClubMap.put(clubId, clubName); // Añade al mapa el club seguido
+                    UserDAO.followClub(currentUserId, clubId);
+                    followedClubMap.put(clubId, clubName); // podrías usar item.getClubName()
                     holder.itemView.post(() -> {
                         holder.btnFollow.setText("Dejar de seguir");
                         Toast.makeText(context, "Ahora sigues a " + clubName, Toast.LENGTH_SHORT).show();

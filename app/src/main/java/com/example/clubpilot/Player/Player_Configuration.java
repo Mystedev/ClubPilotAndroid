@@ -91,10 +91,6 @@ public class Player_Configuration extends AppCompatActivity implements View.OnCl
         if (view.getId() == R.id.buttonBack){
             showDialogo();
         }
-        if (view.getId() == R.id.textAccount){
-            Intent intent = new Intent(this, Account_Configuration.class);
-            startActivity(intent);
-        }
     }
 
     public void showDialogo() {

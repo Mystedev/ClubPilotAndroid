@@ -6,7 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:elevation="2dp"
-    android:background="@drawable/wallpaper_blue"
     android:layout_gravity="center|center_horizontal|center_vertical"
     tools:context=".Login">
 
@@ -89,7 +88,7 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginBottom="10dp"
-                android:drawableLeft="@drawable/account"
+                android:drawableLeft="@drawable/account_circle_24"
                 android:drawablePadding="8dp"
                 android:hint="@string/user"
                 android:inputType="text"
@@ -104,7 +103,7 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginBottom="10dp"
-                android:drawableLeft="@drawable/lock_24"
+                android:drawableLeft="@drawable/locked"
                 android:drawablePadding="8dp"
                 android:hint="@string/password"
                 android:inputType="textPassword"

@@ -15,6 +15,15 @@ public class NewsData implements Serializable {
         this.id = id;
     }
 
+    public NewsData(String autor, String data, String descripcio, String titol, int clubId, String clubName) {
+        this.autor = autor;
+        this.data = data;
+        this.descripcio = descripcio;
+        this.titol = titol;
+        this.clubId = clubId;
+        this.clubName = clubName;
+    }
+
     public NewsData(String data, String autor, String titol, String descripcio) {
         this.data = data;
         this.autor = autor;

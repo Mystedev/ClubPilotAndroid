@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/config_player"
-        android:icon="@drawable/settings_white"
+        android:icon="@drawable/settings"
         android:title="@string/config_fan"
         app:showAsAction="ifRoom" />
 </menu>

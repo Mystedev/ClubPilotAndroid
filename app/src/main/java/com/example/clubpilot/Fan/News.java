@@ -89,10 +89,7 @@ public class News extends AppCompatActivity{
                 adapter.notifyDataSetChanged();
             });
         });
-
-
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(android.view.Menu menu) {
