@@ -14,8 +14,7 @@ import com.example.clubpilot.R;
 import com.example.clubpilot.UserDAO;
 
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -23,16 +22,16 @@ public class NewsRecyclerAdapter extends RecyclerView.Adapter<NewsRecyclerAdapte
 
     private final Context context;
     private final ArrayList<NewsData> newsList;
-    private String currentUsername;           // Pásala desde la Activity
-    private int currentUserId;
-    private Set<Integer> followedClubSet;     // Para comprobar rápido
+    private final String currentUsername;
+    private final int currentUserId;
+    private final Map<Integer, String> followedClubMap; // clave: id_club, valor: nombre
 
-    public NewsRecyclerAdapter(Context context, ArrayList<NewsData> newsList, String username) {
+    public NewsRecyclerAdapter(Context context, ArrayList<NewsData> newsList, String username, int userId, Map<Integer, String> followedClubs) {
         this.context = context;
         this.newsList = newsList;
         this.currentUsername = username;
-        this.currentUserId = UserDAO.getUserId(username);
-        this.followedClubSet = new HashSet<>(UserDAO.getFollowedClubIds(currentUserId));
+        this.currentUserId = userId;
+        this.followedClubMap = followedClubs; // Usamos la lista de clubes seguidos
     }
 
     @NonNull
@@ -50,35 +49,36 @@ public class NewsRecyclerAdapter extends RecyclerView.Adapter<NewsRecyclerAdapte
         holder.description.setText(item.getDescripcio());
         holder.date.setText(item.getData());
 
-        // Usa un Executor para no bloquear el hilo principal
-        ExecutorService executor = Executors.newSingleThreadExecutor();
-        executor.execute(() -> {
-            // Verifica si el club está siendo seguido en segundo plano
-            boolean isFollowing = followedClubSet.contains(item.getClubId());
+        int clubId = item.getClubId(); // id del club asociado con esta noticia
+        String clubName = followedClubMap.get(clubId); // nombre del club desde followedClubMap
 
-            // Ejecuta el código en el hilo principal para modificar la UI
-            holder.itemView.post(() -> {
-                holder.btnFollow.setText(isFollowing ? "Dejar de seguir" : "Seguir");
+        // Verifica si el club está siendo seguido
+        boolean isFollowing = followedClubMap.containsKey(clubId);
+        holder.btnFollow.setText(isFollowing ? "Dejar de seguir" : "Seguir");
 
-                holder.btnFollow.setOnClickListener(v -> {
-                    executor.execute(() -> {
-                        if (isFollowing) {
-                            UserDAO.unfollowClub(currentUserId, item.getClubId());
-                            followedClubSet.remove(item.getClubId());
-                            holder.itemView.post(() -> {
-                                holder.btnFollow.setText("Seguir");
-                                Toast.makeText(context, "Has dejado de seguir a " + item.getClubName(), Toast.LENGTH_SHORT).show();
-                            });
-                        } else {
-                            UserDAO.followClub(currentUserId, item.getClubId());
-                            followedClubSet.add(item.getClubId());
-                            holder.itemView.post(() -> {
-                                holder.btnFollow.setText("Dejar de seguir");
-                                Toast.makeText(context, "Ahora sigues a " + item.getClubName(), Toast.LENGTH_SHORT).show();
-                            });
-                        }
+        holder.btnFollow.setOnClickListener(v -> {
+            ExecutorService executor = Executors.newSingleThreadExecutor();
+            executor.execute(() -> {
+                // Determina si el club está siendo seguido o no
+                boolean currentlyFollowing = followedClubMap.containsKey(clubId);
+
+                if (currentlyFollowing) {
+                    // Si ya está seguido, deshacer la acción
+                    UserDAO.unfollowClub(currentUserId, clubId);  // Asegúrate de que `unfollowClub` maneje correctamente el id de club
+                    followedClubMap.remove(clubId);  // Elimina del mapa
+                    holder.itemView.post(() -> {
+                        holder.btnFollow.setText("Seguir");
+                        Toast.makeText(context, "Has dejado de seguir a " + clubName, Toast.LENGTH_SHORT).show();
                     });
-                });
+                } else {
+                    // Si no está seguido, seguir al club
+                    UserDAO.followClub(currentUserId, clubId);  // Asegúrate de que `followClub` maneje correctamente el id de club
+                    followedClubMap.put(clubId, clubName); // Añade al mapa el club seguido
+                    holder.itemView.post(() -> {
+                        holder.btnFollow.setText("Dejar de seguir");
+                        Toast.makeText(context, "Ahora sigues a " + clubName, Toast.LENGTH_SHORT).show();
+                    });
+                }
             });
         });
     }
@@ -89,7 +89,6 @@ public class NewsRecyclerAdapter extends RecyclerView.Adapter<NewsRecyclerAdapte
     }
 
     public static class NewsViewHolder extends RecyclerView.ViewHolder {
-
         TextView title, author, description, date, btnFollow;
 
         public NewsViewHolder(@NonNull View itemView) {

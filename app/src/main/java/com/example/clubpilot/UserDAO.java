@@ -8,7 +8,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class UserDAO extends Encriptator{
     // Funcio per registrar un usuari
@@ -307,24 +309,28 @@ public class UserDAO extends Encriptator{
     }
 
     // Devuelve la lista de IDs de clubes que sigue el usuario
-    public static List<Integer> getFollowedClubIds(int userId) {
-        List<Integer> clubs = new ArrayList<>();
+    public static Map<Integer, String> getFollowedClubMap(int userId) {
+        Map<Integer, String> clubs = new HashMap<>();
 
-        try (Connection conn = Conection.CONN()){
+        try (Connection conn = Conection.CONN()) {
             if (conn != null) {
-                String sql = "SELECT id_club FROM aficionat WHERE id_usuari = ?";
+                String sql = "SELECT c.id, c.nom FROM club c JOIN aficionat a ON c.id = a.id_club WHERE a.id_usuari = ?";
                 PreparedStatement stmt = conn.prepareStatement(sql);
-                    stmt.setInt(1, userId);
-                    ResultSet rs = stmt.executeQuery();
-                    while (rs.next()) {
-                        clubs.add(rs.getInt("id_club"));
-                    }
+                stmt.setInt(1, userId);
+                ResultSet rs = stmt.executeQuery();
+                while (rs.next()) {
+                    int id = rs.getInt("id");
+                    String name = rs.getString("nom");
+                    clubs.put(id, name);
+                }
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
         return clubs;
     }
+
 
     // Inserta una fila en aficionat (ignora si ya existe)
     public static void followClub(int userId, int clubId) {

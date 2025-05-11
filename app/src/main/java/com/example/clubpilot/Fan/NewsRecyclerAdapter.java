@@ -14,8 +14,8 @@ import com.example.clubpilot.R;
 import com.example.clubpilot.UserDAO;
 
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -23,17 +23,16 @@ public class NewsRecyclerAdapter extends RecyclerView.Adapter<NewsRecyclerAdapte
 
     private final Context context;
     private final ArrayList<NewsData> newsList;
-    private String currentUsername;           // Pásala desde la Activity
-    private int currentUserId;
-    private Set<Integer> followedClubSet;     // Para comprobar rápido
+    private final String currentUsername;
+    private final int currentUserId;
+    private final Map<Integer, String> followedClubMap; // clave: id_club, valor: nombre
 
-    public NewsRecyclerAdapter(Context context, ArrayList<NewsData> newsList, String username) {
+    public NewsRecyclerAdapter(Context context, ArrayList<NewsData> newsList, String username, int userId, Map<Integer, String> followedClubs) {
         this.context = context;
         this.newsList = newsList;
         this.currentUsername = username;
-        this.currentUserId = UserDAO.getUserId(username);
-        Toast.makeText(context, currentUserId + " " + currentUsername, Toast.LENGTH_SHORT).show();
-        this.followedClubSet = new HashSet<>(UserDAO.getFollowedClubIds(currentUserId));
+        this.currentUserId = userId;
+        this.followedClubMap = new HashMap<>(followedClubs);
     }
 
     @NonNull
@@ -51,35 +50,31 @@ public class NewsRecyclerAdapter extends RecyclerView.Adapter<NewsRecyclerAdapte
         holder.description.setText(item.getDescripcio());
         holder.date.setText(item.getData());
 
-        // Usa un Executor para no bloquear el hilo principal
-        ExecutorService executor = Executors.newSingleThreadExecutor();
-        executor.execute(() -> {
-            // Verifica si el club está siendo seguido en segundo plano
-            boolean isFollowing = followedClubSet.contains(item.getClubId());
+        int clubId = item.getClubId();
+        String clubName = item.getClubName(); // fallback por si lo quieres usar también
 
-            // Ejecuta el código en el hilo principal para modificar la UI
-            holder.itemView.post(() -> {
-                holder.btnFollow.setText(isFollowing ? "Dejar de seguir" : "Seguir");
+        boolean isFollowing = followedClubMap.containsKey(clubId);
+        holder.btnFollow.setText(isFollowing ? "Dejar de seguir" : "Seguir");
 
-                holder.btnFollow.setOnClickListener(v -> {
-                    executor.execute(() -> {
-                        if (isFollowing) {
-                            UserDAO.unfollowClub(currentUserId, item.getClubId());
-                            followedClubSet.remove(item.getClubId());
-                            holder.itemView.post(() -> {
-                                holder.btnFollow.setText("Seguir");
-                                Toast.makeText(context, "Has dejado de seguir a " + item.getClubName(), Toast.LENGTH_SHORT).show();
-                            });
-                        } else {
-                            UserDAO.followClub(currentUserId, item.getClubId());
-                            followedClubSet.add(item.getClubId());
-                            holder.itemView.post(() -> {
-                                holder.btnFollow.setText("Dejar de seguir");
-                                Toast.makeText(context, "Ahora sigues a " + item.getClubName(), Toast.LENGTH_SHORT).show();
-                            });
-                        }
+        holder.btnFollow.setOnClickListener(v -> {
+            ExecutorService executor = Executors.newSingleThreadExecutor();
+            executor.execute(() -> {
+                boolean currentlyFollowing = followedClubMap.containsKey(clubId);
+                if (currentlyFollowing) {
+                    UserDAO.unfollowClub(currentUserId, clubId);
+                    followedClubMap.remove(clubId);
+                    holder.itemView.post(() -> {
+                        holder.btnFollow.setText("Seguir");
+                        Toast.makeText(context, "Has dejado de seguir a " + clubName, Toast.LENGTH_SHORT).show();
                     });
-                });
+                } else {
+                    UserDAO.followClub(currentUserId, clubId);
+                    followedClubMap.put(clubId, clubName); // podrías usar item.getClubName()
+                    holder.itemView.post(() -> {
+                        holder.btnFollow.setText("Dejar de seguir");
+                        Toast.makeText(context, "Ahora sigues a " + clubName, Toast.LENGTH_SHORT).show();
+                    });
+                }
             });
         });
     }
@@ -90,7 +85,6 @@ public class NewsRecyclerAdapter extends RecyclerView.Adapter<NewsRecyclerAdapte
     }
 
     public static class NewsViewHolder extends RecyclerView.ViewHolder {
-
         TextView title, author, description, date, btnFollow;
 
         public NewsViewHolder(@NonNull View itemView) {

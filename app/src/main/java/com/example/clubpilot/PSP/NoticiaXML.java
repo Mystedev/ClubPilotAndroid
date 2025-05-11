@@ -114,6 +114,7 @@ public class NoticiaXML implements Runnable {
                 String titol = element.getElementsByTagName("titol").item(0).getTextContent();
                 String descripcio = element.getElementsByTagName("descripcio").item(0).getTextContent();
 
+
                 newsList.add(new NewsData(data, autor, titol, descripcio));
             }
 
