@@ -1,13 +1,11 @@
 package com.example.clubpilot.PSP;
 
-
 import android.content.Context;
 import android.os.Environment;
+import android.util.Log;
 
-import com.example.clubpilot.Fan.CardNew;
 import com.example.clubpilot.Fan.NewsData;
 import com.example.clubpilot.SQLite.DatabaseHelper;
-import com.example.clubpilot.UserDAO;
 
 import org.apache.commons.net.ftp.FTPClient;
 import org.w3c.dom.Document;
@@ -35,15 +33,16 @@ public class NoticiaXML implements Runnable {
 
     public NoticiaXML(Context context) {
         this.context = context;
-
     }
 
     @Override
     public void run() {
         FTPClient ftpClient = new FTPClient();
         FileOutputStream fos = null;
+        DatabaseHelper dbHelper = null;
 
         try {
+            // Establecer conexión FTP
             ftpClient.connect(hostname, port);
             ftpClient.enterLocalPassiveMode();
             boolean login = ftpClient.login(username, password);
@@ -52,51 +51,65 @@ public class NoticiaXML implements Runnable {
                 connected = true;
                 System.out.println("Connection established...");
 
-                // Obtener la ruta de la carpeta de descargas
+                // Configurar archivo local para descarga
                 File downloadsDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
                 File file = new File(downloadsDir, "noticia.xml");
 
+                // Descargar archivo
                 fos = new FileOutputStream(file);
                 boolean download = ftpClient.retrieveFile("/htdocs/noticia.xml", fos);
 
                 if (download) {
                     System.out.println("File downloaded successfully!");
 
-                        List<NewsData> news = parseXML();
-                        DatabaseHelper dbHelper = new DatabaseHelper(context);
-                        for (NewsData item : news) {
-                            dbHelper.insertNews(item);
-                        }
+                    // Procesar XML y guardar en base de datos
+                    dbHelper = new DatabaseHelper(context);
+                    dbHelper.clearNewsTable(); // Limpiar tablas existentes
 
+                    List<NewsData> news = parseXML();
+                    for (NewsData item : news) {
+                        dbHelper.insertNews(item);
+                    }
+                    int count = dbHelper.getNewsCount();
+                    Log.d("Database", "Noticias insertadas: " + count);
+
+                    System.out.println("News inserted successfully!");
                 } else {
-                    System.out.println("Error in downloading file!");
+                    System.out.println("Error downloading file!");
                 }
 
-                boolean logout = ftpClient.logout();
-                if (logout) {
-                    System.out.println("Connection closed...");
-                }
+                // Cerrar sesión FTP
+                ftpClient.logout();
+                System.out.println("Connection closed...");
             } else {
                 connected = false;
                 System.out.println("Connection failed...");
             }
         } catch (SocketException e) {
-            e.printStackTrace();
+            System.err.println("Socket error: " + e.getMessage());
         } catch (IOException e) {
-            e.printStackTrace();
+            System.err.println("IO error: " + e.getMessage());
         } finally {
+            // Cerrar recursos
             try {
-                ftpClient.disconnect();
+                if (ftpClient.isConnected()) {
+                    ftpClient.disconnect();
+                }
+                if (fos != null) {
+                    fos.close();
+                }
+                if (dbHelper != null) {
+                    dbHelper.close();
+                }
             } catch (IOException e) {
-                e.printStackTrace();
+                System.err.println("Error closing resources: " + e.getMessage());
             }
         }
     }
 
     private static File getLocalFile() {
         File file = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
-        File downDir = new File(file, "noticia.xml");
-        return downDir;
+        return new File(file, "noticia.xml");
     }
 
     public static List<NewsData> parseXML() {
@@ -110,6 +123,7 @@ public class NoticiaXML implements Runnable {
                 return newsList;
             }
 
+            // Parsear XML
             FileInputStream fis = new FileInputStream(file);
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = factory.newDocumentBuilder();
@@ -117,31 +131,43 @@ public class NoticiaXML implements Runnable {
 
             NodeList nodeList = doc.getElementsByTagName("noticia");
 
+            // Procesar cada noticia
             for (int i = 0; i < nodeList.getLength(); i++) {
                 Element element = (Element) nodeList.item(i);
+
+                // Extraer datos del XML
                 int id = Integer.parseInt(element.getElementsByTagName("id").item(0).getTextContent());
                 String data = element.getElementsByTagName("data").item(0).getTextContent();
                 String autor = element.getElementsByTagName("autor").item(0).getTextContent();
                 String titol = element.getElementsByTagName("titol").item(0).getTextContent();
                 String descripcio = element.getElementsByTagName("descripcio").item(0).getTextContent();
-                String clubname = ""; //falta coger bien el nombre del club
+                String imatge = element.getElementsByTagName("imatge").item(0).getTextContent();
 
+                // Valores por defecto para club
+                int clubId = 0;
+                String clubName = "Club Desconocido";
 
-
-
-                newsList.add(new NewsData(autor, data, descripcio, titol, id, clubname));
-
+                // Crear objeto NewsData
+                newsList.add(new NewsData(
+                        String.valueOf(id),
+                        autor,
+                        data,
+                        descripcio,
+                        titol,
+                        clubId,
+                        clubName,
+                        imatge
+                ));
             }
 
             // Ordenar por autor
             newsList.sort((n1, n2) -> n1.getAutor().compareToIgnoreCase(n2.getAutor()));
 
         } catch (Exception e) {
+            System.err.println("Error parsing XML: " + e.getMessage());
             throw new RuntimeException(e);
         }
 
         return newsList;
     }
-
-
 }
