@@ -40,21 +40,19 @@ public class RegisterFan extends AppCompatActivity implements View.OnClickListen
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        // Obtenir toolbar personalitzat
+        // Mostrar toolbar personalitzat
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        // Mostrar botón "atrás"/izquierdo
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             toolbar.setNavigationIcon(R.drawable.back_arrow);
 
-            // Acción al pulsarlo
+
             toolbar.setNavigationOnClickListener(v -> {
-                // Lo que tú quieras hacer, como volver a otra actividad:
                 Intent intent = new Intent(this, Login.class);
                 startActivity(intent);
-                finish(); // Opcional, para cerrar esta actividad
+                finish();
             });
         }
 
@@ -78,7 +76,7 @@ public class RegisterFan extends AppCompatActivity implements View.OnClickListen
             String nomText = nom.getText().toString().trim();
             String cognomsText = cognoms.getText().toString().trim();
             String correu = email.getText().toString().trim();
-
+            // Comprovar que els camps tenen dades
             if (usuari.isEmpty() || contrasenya.isEmpty() || nomText.isEmpty() || cognomsText.isEmpty() || correu.isEmpty()) {
                 Toast.makeText(this, "Rellena tots els camps", Toast.LENGTH_SHORT).show(); // Comprovar que els camps tenen dades
             } else {
@@ -95,6 +93,7 @@ public class RegisterFan extends AppCompatActivity implements View.OnClickListen
             int userId = UserDAO.insertUserAndReturnId(username, password, nom, cognoms, email);
             boolean result = false;
             if (userId != -1) {
+                // Registrar l'usuari aficionat
                 result = UserDAO.insertAficionat(userId);
             }
 

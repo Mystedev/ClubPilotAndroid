@@ -10,6 +10,8 @@ import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -21,6 +23,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
@@ -40,7 +43,6 @@ import java.util.List;
 
 public class Fan_Configuration extends AppCompatActivity implements View.OnClickListener {
     Button buttonBack;
-    TextView textContactAdmin;
     Spinner spinner;
     String idioma,english,spanish,catalan,logout,cancel,hasLogout,alert,loginOut;
 
@@ -71,41 +73,19 @@ public class Fan_Configuration extends AppCompatActivity implements View.OnClick
         buttonBack = findViewById(R.id.buttonBack);
         buttonBack.setOnClickListener(this);
 
-        textContactAdmin = findViewById(R.id.textAccount);
-        textContactAdmin.setOnClickListener(this);
 
-        spinner = findViewById(R.id.spinnerIdiomes);
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
-                String opcio = adapterView.getItemAtPosition(position).toString();
-            }
 
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-                Toast.makeText(Fan_Configuration.this, idioma, Toast.LENGTH_SHORT).show();
-            }
-        });
-        ArrayList<String> items = new ArrayList<>();
-        items.add(english);
-        items.add(spanish);
-        items.add(catalan);
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, items);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
-
+        // Mostrar toolbar personalitzat
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        // Mostrar botón "atrás"/izquierdo
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            toolbar.setNavigationIcon(R.drawable.back_arrow); // tu drawable personalizado
+            toolbar.setNavigationIcon(R.drawable.back_arrow);
 
-            // Acción al pulsarlo
             toolbar.setNavigationOnClickListener(v -> {
-                // Lo que tú quieras hacer, como volver a otra actividad:
-                Intent intent = new Intent(Fan_Configuration.this, News.class);
+                // Obrir noticies
+                Intent intent = new Intent(this, News.class);
                 startActivity(intent);
                 finish();
             });
@@ -142,5 +122,40 @@ public class Fan_Configuration extends AppCompatActivity implements View.OnClick
         builder.setMessage(loginOut);
         AlertDialog dialog = builder.create();
         dialog.show();
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.idioma, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        String selectedLanguage;
+        // Obtenir l'idioma seleccionat
+
+        if (item.getItemId() == R.id.englishMenu) {
+            selectedLanguage = "en";
+        } else if (item.getItemId() == R.id.catalanMenu) {
+            selectedLanguage = "ca";
+        } else if (item.getItemId() == R.id.spanishMenu) {
+            selectedLanguage = "es";
+        } else {
+            selectedLanguage = "en";
+        }
+
+        // Guardar en SharedPreferences
+        SharedPreferences sharedPref = getSharedPreferences("config", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString("idioma", selectedLanguage);
+        editor.apply();
+
+        // Camviar idioma
+        LocaleListCompat appLocale = LocaleListCompat.forLanguageTags(selectedLanguage);
+        AppCompatDelegate.setApplicationLocales(appLocale);
+        recreate();
+
+        return super.onOptionsItemSelected(item);
     }
 }

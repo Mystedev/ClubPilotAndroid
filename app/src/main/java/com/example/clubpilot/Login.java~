@@ -44,11 +44,8 @@ import java.util.concurrent.Executors;
 public class Login extends AppCompatActivity implements View.OnClickListener {
     Button buttonlogin,registerAsFan;
     TextView forgotPassword;
-    //Button buttonforgotpassword;
     Spinner user;
-    // Strings
     String tipusUsuari,player,fan,errorMessage;
-
     EditText use, pass;
 
     @SuppressLint({"MissingInflatedId", "WrongViewCast"})
@@ -111,6 +108,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     }
 
     public List<Event> downloadFromServer(){
+        // Iniciar fil principal per descarregar esdeveniments del servidor
         EsdevenimentXML ef = new EsdevenimentXML(this);
         Thread thread = new Thread(ef);
         thread.start();
@@ -131,6 +129,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     }
 
     public List<NewsData> downloadNewsFromServer(){
+        // Iniciar fil per descarregar noticies del servidor
         NoticiaXML ef = new NoticiaXML(this);
         Thread thread = new Thread(ef);
         thread.start();
@@ -238,17 +237,16 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
 
             runOnUiThread(() -> {
                 if (loginSuccess) {
+                    // Obtenir tipus d'usuari
                     String userType = UserDAO.getUserType(username);
                     if(userType.equals("Unknown")){
                         Toast.makeText(this, "Aquest usuari no existeix", Toast.LENGTH_SHORT).show();
                     }
                     else if (userType.equals("Aficionado")) {
                         ArrayList<NewsData> news = (ArrayList<NewsData>) downloadNewsFromServer();
-
-                        int userId = UserDAO.getUserId(username);
+                        
                         Intent intent = new Intent(this, News.class);
                         intent.putExtra("username", username);
-                        intent.putExtra("userId", userId);
                         intent.putExtra("listNews", news);
                         startActivity(intent);
                     } else {

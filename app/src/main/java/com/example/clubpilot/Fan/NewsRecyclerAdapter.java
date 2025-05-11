@@ -27,6 +27,7 @@ public class NewsRecyclerAdapter extends RecyclerView.Adapter<NewsRecyclerAdapte
     private final int currentUserId;
     private final Map<Integer, String> followedClubMap; // clave: id_club, valor: nombre
 
+    // Constructor del adapter
     public NewsRecyclerAdapter(Context context, ArrayList<NewsData> newsList, String username, int userId, Map<Integer, String> followedClubs) {
         this.context = context;
         this.newsList = newsList;
@@ -49,27 +50,25 @@ public class NewsRecyclerAdapter extends RecyclerView.Adapter<NewsRecyclerAdapte
         holder.author.setText(item.getAutor());
         holder.description.setText(item.getDescripcio());
         holder.date.setText(item.getData());
-
+        // Obtenir elements de la noticia
         int clubId = item.getClubId();
         String clubName = item.getImatge(); // fallback por si lo quieres usar también
 
         boolean isFollowing = followedClubMap.containsKey(clubId);
-        holder.btnFollow.setText(isFollowing ? "Dejar de seguir" : "Seguir");
+        holder.btnFollow.setText(isFollowing ? "Deixar de seguir" : "Seguir");
 
         holder.btnFollow.setOnClickListener(v -> {
             ExecutorService executor = Executors.newSingleThreadExecutor();
             executor.execute(() -> {
                 boolean currentlyFollowing = followedClubMap.containsKey(clubId);
                 if (currentlyFollowing) {
-                    UserDAO.unfollowClub(currentUserId, clubId);
                     followedClubMap.remove(clubId);
                     holder.itemView.post(() -> {
                         holder.btnFollow.setText("Seguir");
                         Toast.makeText(context, "Has dejado de seguir a " + clubName, Toast.LENGTH_SHORT).show();
                     });
                 } else {
-                    UserDAO.followClub(currentUserId, clubId);
-                    followedClubMap.put(clubId, clubName); // podrías usar item.getClubName()
+                    followedClubMap.put(clubId, clubName);
                     holder.itemView.post(() -> {
                         holder.btnFollow.setText("Dejar de seguir");
                         Toast.makeText(context, "Ahora sigues a " + clubName, Toast.LENGTH_SHORT).show();

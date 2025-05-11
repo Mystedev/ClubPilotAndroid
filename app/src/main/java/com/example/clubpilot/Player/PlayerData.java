@@ -6,7 +6,7 @@ public class PlayerData {
     private String dorsal;
     private String posicio;
 
-    // Constructor
+    // Constructor del la informacio del jugador
     public PlayerData(String idUsuari, String disponibilitat, String dorsal, String posicio) {
         this.idUsuari = idUsuari;
         this.disponibilitat = disponibilitat;

@@ -70,7 +70,7 @@ public class News extends AppCompatActivity{
         alert = getResources().getString(R.string.alert);
         loginOut = getResources().getString(R.string.loginOut);
 
-        //Recuperar la llista del intent
+        // 1. Recuperar la lista del intent
         newsList = (ArrayList<NewsData>) getIntent().getSerializableExtra("listNews");
 
         if (newsList == null) {
@@ -79,19 +79,19 @@ public class News extends AppCompatActivity{
 
         String currentUsername = getIntent().getStringExtra("username");
 
-        //Configurar el RecyclerView
+        // 2. Configurar el RecyclerView
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        // Obtenir els clubs seguits
+        // 3. Obtener el userId y los clubes seguidos en segundo plano
         ExecutorService executor = Executors.newSingleThreadExecutor();
         executor.execute(() -> {
             int userId = UserDAO.getUserId(currentUsername);
-            // Llista amb el club i el seu id
             Map<Integer, String> followedClubs = UserDAO.getFollowedClubMap(userId);
 
             new Handler(Looper.getMainLooper()).post(() -> {
-                // Afegir la llista al RecyclerView
+                Toast.makeText(News.this, "Club: " + followedClubs, Toast.LENGTH_SHORT).show();
+                Toast.makeText(News.this, "Usuario: " + currentUsername + " - ID: " + userId, Toast.LENGTH_SHORT).show();
                 adapter = new NewsRecyclerAdapter(News.this, newsList, currentUsername, userId, followedClubs);
                 recyclerView.setAdapter(adapter);
                 adapter.notifyDataSetChanged();
@@ -108,6 +108,7 @@ public class News extends AppCompatActivity{
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        // Handle item selection
         if (item.getItemId() == R.id.config_fan) {
             Intent intent = new Intent(News.this, Fan_Configuration.class);
             startActivity(intent);

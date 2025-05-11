@@ -92,17 +92,24 @@ public class RegisterFan extends AppCompatActivity implements View.OnClickListen
     public void setNewAccount(String username, String password, String nom, String cognoms, String email) {
         ExecutorService executorService = Executors.newSingleThreadExecutor();
         executorService.execute(() -> {
-            boolean result = UserDAO.insertUserAndReturnId(username, password, nom, cognoms, email);
+            int userId = UserDAO.insertUserAndReturnId(username, password, nom, cognoms, email);
+            boolean result = false;
+            if (userId != -1) {
+                result = UserDAO.insertAficionat(userId);
+            }
+
+            boolean finalResult = result;
             runOnUiThread(() -> {
-                if (result) {
-                    Toast.makeText(this, "Usuari registrat correctament", Toast.LENGTH_SHORT).show();
+                if (finalResult) {
+                    Toast.makeText(this, "Usuari aficionat registrat correctament", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(this, Login.class);
                     startActivity(intent);
                     finish();
                 } else {
-                    Toast.makeText(this, "Error en registrar usuari", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Error en registrar usuari aficionat", Toast.LENGTH_SHORT).show();
                 }
             });
         });
     }
+
 }

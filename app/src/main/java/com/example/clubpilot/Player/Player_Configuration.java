@@ -65,22 +65,19 @@ public class Player_Configuration extends AppCompatActivity implements View.OnCl
         buttonBack.setOnClickListener(this);
         account = findViewById(R.id.textAccount);
         account.setOnClickListener(this);
-        // Spinner selector de idioma
 
+        // Mostrar toolbar personalitzat
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        // Mostrar botón "atrás"/izquierdo
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            toolbar.setNavigationIcon(R.drawable.back_arrow); // tu drawable personalizado
+            toolbar.setNavigationIcon(R.drawable.back_arrow);
 
-            // Acción al pulsarlo
             toolbar.setNavigationOnClickListener(v -> {
-                // Lo que tú quieras hacer, como volver a otra actividad:
                 Intent intent = new Intent(Player_Configuration.this, Dashboard.class);
                 startActivity(intent);
-                finish(); // Opcional, para cerrar esta actividad
+                finish();
             });
         }
 
@@ -124,12 +121,10 @@ public class Player_Configuration extends AppCompatActivity implements View.OnCl
         return super.onCreateOptionsMenu(menu);
     }
 
-
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         String selectedLanguage;
-        // Obtener el idioma seleccionado
-
+        // Obtenir idioma seleccionat
         if (item.getItemId() == R.id.englishMenu) {
             selectedLanguage = "en";
         } else if (item.getItemId() == R.id.catalanMenu) {
@@ -146,7 +141,7 @@ public class Player_Configuration extends AppCompatActivity implements View.OnCl
         editor.putString("idioma", selectedLanguage);
         editor.apply();
 
-        // Cambiar idioma
+        // Camviar idioma
         LocaleListCompat appLocale = LocaleListCompat.forLanguageTags(selectedLanguage);
         AppCompatDelegate.setApplicationLocales(appLocale);
         recreate();

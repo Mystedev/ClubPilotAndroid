@@ -57,7 +57,7 @@ public class Dashboard extends AppCompatActivity {
         listEvents = new ArrayList<>();
         Adapter adapter = new Adapter(listEvents);
 
-        // Animación de la lista
+        // Animacio de la llista
         Animation animation = AnimationUtils.loadAnimation(this, R.anim.fade_in);
         recyclerView.startAnimation(animation);
         LayoutAnimationController controller = AnimationUtils.loadLayoutAnimation(this, R.anim.layout_animation);
@@ -71,7 +71,7 @@ public class Dashboard extends AppCompatActivity {
         posicion = findViewById(R.id.posicio);
         available = findViewById(R.id.available);
 
-        // Recuperar datos desde Intent o SharedPreferences
+        // Recuperar dades de l'intent
         Intent intent = getIntent();
         SharedPreferences prefs = getSharedPreferences("user_data", MODE_PRIVATE);
 
@@ -80,13 +80,13 @@ public class Dashboard extends AppCompatActivity {
         int disponibilidadInt = intent.getIntExtra("playerDisponibilitat", -1);
         String posicionStr = intent.getStringExtra("playerPosicio");
 
-        // Si no vienen en el Intent, usar caché
+        // Si estan al intent, utilitzar cache
         if (name == null) name = prefs.getString("username", "Jugador");
         if (dorsalStr == null) dorsalStr = prefs.getString("playerDorsal", "0");
         if (disponibilidadInt == -1) disponibilidadInt = prefs.getInt("playerDisponibilitat", 0);
         if (posicionStr == null) posicionStr = prefs.getString("playerPosicio", "Sin posición");
 
-        // Guardar en caché
+        // Guardar en cache
         SharedPreferences.Editor editor = prefs.edit();
         editor.putString("username", name);
         editor.putString("playerDorsal", dorsalStr);
@@ -94,13 +94,13 @@ public class Dashboard extends AppCompatActivity {
         editor.putString("playerPosicio", posicionStr);
         editor.apply();
 
-        // Mostrar los datos
+        // Mostrar les dades
         welcome.setText(getString(R.string.welcome) + " " + name);
         this.dorsal.setText(getString(R.string.dorsal) + " " + dorsalStr);
         this.available.setChecked(disponibilidadInt == 1);
         this.posicion.setText(posicionStr);
 
-        // Recuperar eventos del intent o del archivo
+        // Recuperar events del intent
         List<Event> receivedEvents = (List<Event>) intent.getSerializableExtra("listEvents");
         if (receivedEvents != null) {
             listEvents.clear();

@@ -13,7 +13,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "club.db";
     private static final int DATABASE_VERSION = 1;
 
-    // SQL para crear tabla de eventos
+    // SQL per crear taula  events
     private static final String SQL_CREATE_EVENTS =
             "CREATE TABLE " + EventContract.EventEntry.TABLE_NAME + " (" +
                     EventContract.EventEntry.COLUMN_ID + " INTEGER PRIMARY KEY," +
@@ -23,7 +23,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     EventContract.EventEntry.COLUMN_TITOL + " TEXT," +
                     EventContract.EventEntry.COLUMN_IMATGE + " TEXT)";
 
-    // SQL para crear tabla de noticias
+    // SQL per crear taula noticies
     private static final String SQL_CREATE_NEWS =
             "CREATE TABLE " + NewsContract.NewsEntry.TABLE_NAME + " (" +
                     NewsContract.NewsEntry.COLUMN_ID + " INTEGER PRIMARY KEY," +
@@ -50,7 +50,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    // Método para insertar eventos
+    // Metode per afegir events
     public void insertEvent(Event event) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -63,7 +63,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.insert(EventContract.EventEntry.TABLE_NAME, null, values);
     }
 
-    // Método para insertar noticias
+    // Metode per afegir noticies
     public void insertNews(NewsData news) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -77,7 +77,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.insert(NewsContract.NewsEntry.TABLE_NAME, null, values);
     }
 
-    // Método para borrar datos antiguos antes de importar
+    // Metode per esborrar totes les taules
     public void clearTables() {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(EventContract.EventEntry.TABLE_NAME, null, null);

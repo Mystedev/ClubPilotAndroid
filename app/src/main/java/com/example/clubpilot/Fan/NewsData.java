@@ -2,20 +2,23 @@ package com.example.clubpilot.Fan;
 
 import java.io.Serializable;
 
+// Classe que representa una notícia
 public class NewsData implements Serializable {
-    private String id;
-    private String autor;
-    private String data;
-    private String descripcio;
-    private String titol;
-    private String Imatge;
-    private int clubId;          // 🔥 NUEVO
-    private String clubName;     // 🔥 NUEVO
+    private String id;             // Identificador de la noticia
+    private String autor;          // Autor de la notícia
+    private String data;           // Data de publicacio
+    private String descripcio;     // Descripcio del contingut
+    private String titol;          // Títol de la notícia
+    private String Imatge;         // Ruta o URL de la imatge
+    private int clubId;            // Identificador del club
+    private String clubName;       // Nom del club
 
+    // Constructor amb només l'id
     public NewsData(String id) {
         this.id = id;
     }
 
+    // Constructor amb data, autor, títol i descripcio
     public NewsData(String data, String autor, String titol, String descripcio) {
         this.data = data;
         this.autor = autor;
@@ -23,7 +26,8 @@ public class NewsData implements Serializable {
         this.descripcio = descripcio;
     }
 
-    public NewsData(String id, String autor, String data, String descripcio, String titol, int clubId, String clubName,String imatge) {
+    // Constructor complet amb tots els atributs
+    public NewsData(String id, String autor, String data, String descripcio, String titol, int clubId, String clubName, String imatge) {
         this.id = id;
         this.autor = autor;
         this.data = data;
@@ -34,6 +38,17 @@ public class NewsData implements Serializable {
         this.clubName = clubName;
     }
 
+    // Constructor alternatiu amb id com a enter
+    public NewsData(String autor, String data, String descripcio, String titol, int id, String clubname) {
+        this.autor = autor;
+        this.data = data;
+        this.descripcio = descripcio;
+        this.titol = titol;
+        this.id = String.valueOf(id);
+        this.clubName = clubname;
+    }
+
+    // Getters
     public String getId() {
         return id;
     }
@@ -66,6 +81,7 @@ public class NewsData implements Serializable {
         return Imatge;
     }
 
+    // Setter per a la imatge
     public void setImatge(String imatge) {
         Imatge = imatge;
     }
