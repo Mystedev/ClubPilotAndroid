@@ -8,6 +8,7 @@ public final class NewsContract {
     public static class NewsEntry implements BaseColumns {
         public static final String TABLE_NAME = "news";
         public static final String COLUMN_ID = "id";
+
         public static final String COLUMN_TITOL = "titol";
         public static final String COLUMN_DESCRIPCIO = "descripcio";
         public static final String COLUMN_AUTOR = "autor";

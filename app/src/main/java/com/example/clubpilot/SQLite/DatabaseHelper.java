@@ -3,6 +3,7 @@ package com.example.clubpilot.SQLite;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -43,6 +44,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(SQL_CREATE_NEWS);
     }
 
+    public int getNewsCount() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT COUNT(*) FROM " + NewsContract.NewsEntry.TABLE_NAME, null);
+        cursor.moveToFirst();
+        int count = cursor.getInt(0);
+        cursor.close();
+        return count;
+    }
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + EventContract.EventEntry.TABLE_NAME);
@@ -82,5 +91,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(EventContract.EventEntry.TABLE_NAME, null, null);
         db.delete(NewsContract.NewsEntry.TABLE_NAME, null, null);
+    }
+
+    public void clearEventsTable() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(EventContract.EventEntry.TABLE_NAME, null, null); // Cambiar a la tabla de eventos
+        db.close();
+    }
+
+    public void clearNewsTable() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(NewsContract.NewsEntry.TABLE_NAME, null, null);
+        db.close();
     }
 }

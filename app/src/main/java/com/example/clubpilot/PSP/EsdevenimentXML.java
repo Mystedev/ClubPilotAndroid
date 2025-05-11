@@ -66,7 +66,7 @@ public class EsdevenimentXML implements Runnable{
 
                         List<Event> events = parseEsdevenimentsXML();
                         DatabaseHelper dbHelper = new DatabaseHelper(context);
-                        dbHelper.clearTables(); // Opcional: Limpiar datos antiguos
+                        dbHelper.clearEventsTable();// Opcional: Limpiar datos antiguos
                         for (Event event : events) {
                             dbHelper.insertEvent(event);
                         }
