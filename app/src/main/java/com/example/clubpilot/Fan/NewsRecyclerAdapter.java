@@ -51,7 +51,7 @@ public class NewsRecyclerAdapter extends RecyclerView.Adapter<NewsRecyclerAdapte
         holder.date.setText(item.getData());
 
         int clubId = item.getClubId();
-        String clubName = item.getClubName(); // fallback por si lo quieres usar también
+        String clubName = item.getImatge(); // fallback por si lo quieres usar también
 
         boolean isFollowing = followedClubMap.containsKey(clubId);
         holder.btnFollow.setText(isFollowing ? "Dejar de seguir" : "Seguir");

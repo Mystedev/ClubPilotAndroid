@@ -1,11 +1,16 @@
 package com.example.clubpilot.PSP;
 
 import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Environment;
+import android.util.Log;
 
 import com.example.clubpilot.Fan.CardNew;
 import com.example.clubpilot.Fan.News;
 import com.example.clubpilot.Player.Event;
+import com.example.clubpilot.SQLite.DatabaseHelper;
+import com.example.clubpilot.SQLite.EventContract;
 
 import org.apache.commons.net.ftp.FTPClient;
 import org.w3c.dom.Document;
@@ -31,7 +36,6 @@ public class EsdevenimentXML implements Runnable{
     private static String password = "yyFRKtFk8nhx9";
     private final Context context;
 
-
     public EsdevenimentXML(Context context) {
         this.context = context;
     }
@@ -39,6 +43,7 @@ public class EsdevenimentXML implements Runnable{
     @Override
     public void run() {
         FTPClient ftpClient = new FTPClient();
+        boolean download = false;
         FileOutputStream fos = null;
 
         try {
@@ -54,10 +59,18 @@ public class EsdevenimentXML implements Runnable{
                 File file = new File(downloadsDir, "esdeveniment.xml");
 
                 fos = new FileOutputStream(file);
-                boolean download = ftpClient.retrieveFile("/htdocs/esdeveniment.xml", fos);
+                download = ftpClient.retrieveFile("/htdocs/esdeveniment.xml", fos);
 
                 if (download) {
                     System.out.println("File downloaded successfully!");
+
+                        List<Event> events = parseEsdevenimentsXML();
+                        DatabaseHelper dbHelper = new DatabaseHelper(context);
+                        dbHelper.clearTables(); // Opcional: Limpiar datos antiguos
+                        for (Event event : events) {
+                            dbHelper.insertEvent(event);
+                        }
+                    logDatabaseContents();
                 } else {
                     System.out.println("Error in downloading file!");
                 }
@@ -78,7 +91,27 @@ public class EsdevenimentXML implements Runnable{
             }
         }
     }
+    private void logDatabaseContents() {
+        DatabaseHelper dbHelper = new DatabaseHelper(context);
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+// En tu método logDatabaseContents():
+        Cursor cursor = db.rawQuery("SELECT * FROM " + EventContract.EventEntry.TABLE_NAME, null);
 
+        try {
+            int categoriaIndex = cursor.getColumnIndexOrThrow(EventContract.EventEntry.COLUMN_CATEGORIA);
+            int dataIndex = cursor.getColumnIndexOrThrow(EventContract.EventEntry.COLUMN_DATA);
+
+            while (cursor.moveToNext()) {
+                String categoria = cursor.getString(categoriaIndex);
+                String data = cursor.getString(dataIndex);
+                Log.d("DatabaseDebug", "Evento: " + categoria + " | Fecha: " + data);
+            }
+        } catch (IllegalArgumentException e) {
+            Log.e("DatabaseDebug", "Error: " + e.getMessage()); // Te dirá qué columna falta
+        } finally {
+            cursor.close();
+        }
+    }
     private static File getLocalFile() {
         File file = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
         File downDir = new File(file, "esdeveniment.xml");
@@ -106,12 +139,14 @@ public class EsdevenimentXML implements Runnable{
 
             for (int i = 0; i < nodeList.getLength(); i++) {
                 Element element = (Element) nodeList.item(i);
-
+                int id = Integer.parseInt(element.getElementsByTagName("id").item(0).getTextContent());
+                String titol = element.getElementsByTagName("titol").item(0).getTextContent();
+                String imatge = element.getElementsByTagName("imatge").item(0).getTextContent();
                 String categoria = element.getElementsByTagName("categoria").item(0).getTextContent();
                 String data = element.getElementsByTagName("ordre").item(0).getTextContent();
                 String nom = element.getElementsByTagName("descripcio").item(0).getTextContent();
 
-                eventList.add(new Event(categoria, data, nom));
+                eventList.add(new Event(id, categoria, data, nom, titol, imatge));
             }
         } catch (Exception e) {
             e.printStackTrace();

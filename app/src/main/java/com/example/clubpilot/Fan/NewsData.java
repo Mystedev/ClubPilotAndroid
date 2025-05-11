@@ -8,6 +8,7 @@ public class NewsData implements Serializable {
     private String data;
     private String descripcio;
     private String titol;
+    private String Imatge;
     private int clubId;          // 🔥 NUEVO
     private String clubName;     // 🔥 NUEVO
 
@@ -20,6 +21,17 @@ public class NewsData implements Serializable {
         this.autor = autor;
         this.titol = titol;
         this.descripcio = descripcio;
+    }
+
+    public NewsData(String id, String autor, String data, String descripcio, String titol, int clubId, String clubName,String imatge) {
+        this.id = id;
+        this.autor = autor;
+        this.data = data;
+        this.descripcio = descripcio;
+        this.titol = titol;
+        this.Imatge = imatge;
+        this.clubId = clubId;
+        this.clubName = clubName;
     }
 
     public String getId() {
@@ -48,5 +60,13 @@ public class NewsData implements Serializable {
 
     public String getClubName() {
         return clubName;
+    }
+
+    public String getImatge() {
+        return Imatge;
+    }
+
+    public void setImatge(String imatge) {
+        Imatge = imatge;
     }
 }
