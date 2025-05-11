@@ -1,15 +1,15 @@
 <androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardElevation="8dp"
-    app:cardCornerRadius="20dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:layout_marginTop="8dp"
     android:layout_marginHorizontal="10dp"
-    android:layout_width="match_parent"
-    android:animateLayoutChanges="true"
-    android:layout_height="wrap_content">
+    app:cardCornerRadius="20dp"
+    app:cardElevation="8dp"
+    android:animateLayoutChanges="true">
 
-    <RelativeLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="10dp">
@@ -18,56 +18,71 @@
             android:id="@+id/listItem"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:layout_alignParentStart="true"
             android:scaleType="centerCrop"
             android:src="@drawable/news_icon"
-            app:shapeAppearanceOverlay="@style/roundedImageView" />
-
-        <TextView
-            android:id="@+id/author"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/title"
-            android:layout_toEndOf="@id/listItem"
-            android:layout_marginStart="10dp"
-            android:textStyle="bold"
-            android:text="Autor"
-            android:textSize="14sp" />
-
-        <TextView
-            android:id="@+id/description"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/author"
-            android:layout_toEndOf="@id/listItem"
-            android:layout_marginStart="10dp"
-            android:textStyle="bold"
-            android:text="Descripció"
-            android:textSize="13sp" />
+            app:shapeAppearanceOverlay="@style/roundedImageView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/title"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_toEndOf="@id/listItem"
-            android:textStyle="bold"
-            android:layout_marginTop="20dp"
-            android:layout_marginStart="10dp"
             android:text="Títol"
+            android:textStyle="bold"
             android:textSize="18sp"
-             />
+            app:layout_constraintStart_toEndOf="@id/listItem"
+            app:layout_constraintTop_toTopOf="@id/listItem"
+            app:layout_constraintEnd_toStartOf="@id/date"
+            android:layout_marginStart="10dp" />
+
+        <TextView
+            android:id="@+id/author"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Autor"
+            android:textSize="14sp"
+            app:layout_constraintStart_toEndOf="@id/listItem"
+            app:layout_constraintTop_toBottomOf="@id/title"
+            android:layout_marginStart="10dp"
+            app:layout_constraintEnd_toStartOf="@id/date" />
+
+        <TextView
+            android:id="@+id/description"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Descripció"
+            android:textSize="13sp"
+            app:layout_constraintStart_toEndOf="@id/listItem"
+            app:layout_constraintTop_toBottomOf="@id/author"
+            android:layout_marginStart="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginBottom="8dp" />
 
         <TextView
             android:id="@+id/date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_marginBottom="8dp"
             android:text="Data"
+            android:textSize="14sp"
             android:textStyle="bold"
-            android:textSize="20sp"
-            android:textColor="?attr/colorPrimary"/>
+            android:textColor="?attr/colorPrimary"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/title" />
 
-    </RelativeLayout>
+        <TextView
+            android:id="@+id/btnFollow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Seguir"
+            android:textColor="@color/red_500"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/date"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="4dp"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.cardview.widget.CardView>

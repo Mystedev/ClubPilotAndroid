@@ -32,7 +32,6 @@ public class NewsRecyclerAdapter extends RecyclerView.Adapter<NewsRecyclerAdapte
         this.newsList = newsList;
         this.currentUsername = username;
         this.currentUserId = UserDAO.getUserId(username);
-        Toast.makeText(context, currentUserId + " " + currentUsername, Toast.LENGTH_SHORT).show();
         this.followedClubSet = new HashSet<>(UserDAO.getFollowedClubIds(currentUserId));
     }
 

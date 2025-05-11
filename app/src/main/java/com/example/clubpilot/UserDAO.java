@@ -7,26 +7,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserDAO extends Encriptator{
-    public static String getUserNameById(int userId) {
-        String name = null;
-        try (Connection conn = Conection.CONN()) {
-            if (conn != null) {
-                String query = "SELECT nom FROM usuari WHERE id = ?";
-                PreparedStatement stmt = conn.prepareStatement(query);
-                stmt.setInt(1, userId);
-                ResultSet rs = stmt.executeQuery();
-                if (rs.next()) {
-                    name = rs.getString("nom");
-                }
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return name;
-    }
-
     // Funcio per registrar un usuari
     public static int insertUserAndReturnId(String username,String password,String nom,String cognoms,String email) {
         int userId = -1;
@@ -288,7 +272,7 @@ public class UserDAO extends Encriptator{
     }
 
     public static int getUserId(String username) {
-        int userId = -1;
+        int userId = 0;
         try (Connection conn = Conection.CONN()) {
             if (conn != null) {
                 String query = "SELECT id FROM usuari WHERE username = ?";
@@ -303,6 +287,69 @@ public class UserDAO extends Encriptator{
             e.printStackTrace();
         }
         return userId;
+    }
+    public static String getUserNameById(int userId) {
+        String name = null;
+        try (Connection conn = Conection.CONN()) {
+            if (conn != null) {
+                String query = "SELECT nom FROM usuari WHERE id = ?";
+                PreparedStatement stmt = conn.prepareStatement(query);
+                stmt.setInt(1, userId);
+                ResultSet rs = stmt.executeQuery();
+                if (rs.next()) {
+                    name = rs.getString("nom");
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return name;
+    }
+
+    // Devuelve la lista de IDs de clubes que sigue el usuario
+    public static List<Integer> getFollowedClubIds(int userId) {
+        List<Integer> clubs = new ArrayList<>();
+
+        try (Connection conn = Conection.CONN()){
+            if (conn != null) {
+                String sql = "SELECT id_club FROM aficionat WHERE id_usuari = ?";
+                PreparedStatement stmt = conn.prepareStatement(sql);
+                    stmt.setInt(1, userId);
+                    ResultSet rs = stmt.executeQuery();
+                    while (rs.next()) {
+                        clubs.add(rs.getInt("id_club"));
+                    }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return clubs;
+    }
+
+    // Inserta una fila en aficionat (ignora si ya existe)
+    public static void followClub(int userId, int clubId) {
+        String sql = "INSERT INTO aficionat (id_usuari, id_club) VALUES (?, ?)";
+        try (Connection conn = Conection.CONN()){
+             PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, userId);
+            stmt.setInt(2, clubId);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    // Elimina la fila de aficionat
+    public static void unfollowClub(int userId, int clubId) {
+        String sql = "DELETE FROM aficionat WHERE id_usuari = ? AND id_club = ?";
+        try (Connection conn = Conection.CONN()){
+             PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, userId);
+            stmt.setInt(2, clubId);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
 }

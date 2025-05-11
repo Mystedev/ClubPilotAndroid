@@ -12,6 +12,7 @@ import android.view.animation.AnimationUtils;
 import android.view.animation.LayoutAnimationController;
 import android.widget.ListAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -55,12 +56,16 @@ public class News extends AppCompatActivity{
             Log.d("NEWS", "Tamaño de la lista: " + newsList.size());
         }
 
+        String currentUsername = getIntent().getStringExtra("username");
+
         // 2. Configurar el RecyclerView
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new NewsRecyclerAdapter(this, newsList);
+        adapter = new NewsRecyclerAdapter(this, newsList,currentUsername);
         recyclerView.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(android.view.Menu menu) {
